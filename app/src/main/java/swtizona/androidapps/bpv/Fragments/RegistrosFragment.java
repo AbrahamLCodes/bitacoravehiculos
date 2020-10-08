@@ -1,5 +1,7 @@
-package swtizona.androidapps.bpv;
+package swtizona.androidapps.bpv.Fragments;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import swtizona.androidapps.bpv.Activities.AutosActivity;
+import swtizona.androidapps.bpv.R;
 
 public class RegistrosFragment extends Fragment implements View.OnClickListener {
 
@@ -57,7 +62,8 @@ public class RegistrosFragment extends Fragment implements View.OnClickListener 
     }
 
     private void autos() {
-        Toast.makeText(getContext(), "Activity Autos en construcción", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), AutosActivity.class));
+        //getActivity().overridePendingTransition(R.anim.slide_in_left, R.anim.slide_out_right);
     }
 
     private void talleres() {

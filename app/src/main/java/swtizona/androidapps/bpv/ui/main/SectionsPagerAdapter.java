@@ -8,10 +8,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import swtizona.androidapps.bpv.HistoryFragment;
+import swtizona.androidapps.bpv.Fragments.HistoryFragment;
 import swtizona.androidapps.bpv.R;
-import swtizona.androidapps.bpv.RegistrosFragment;
-import swtizona.androidapps.bpv.ReminderFragment;
+import swtizona.androidapps.bpv.Fragments.RegistrosFragment;
+import swtizona.androidapps.bpv.Fragments.ReminderFragment;
 
 /**
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
