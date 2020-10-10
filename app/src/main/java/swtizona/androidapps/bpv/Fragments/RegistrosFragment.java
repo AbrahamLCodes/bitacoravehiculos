@@ -1,6 +1,5 @@
 package swtizona.androidapps.bpv.Fragments;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,10 +31,10 @@ public class RegistrosFragment extends Fragment implements View.OnClickListener 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        autos = (TextView) getActivity().findViewById(R.id.autosOpcion);
-        talleres = (TextView) getActivity().findViewById(R.id.talleresOpcion);
-        pp = (TextView) getActivity().findViewById(R.id.ppOpcion);
-        servicio = (TextView) getActivity().findViewById(R.id.servicioOpcion);
+        autos = getActivity().findViewById(R.id.autosOpcion);
+        talleres = getActivity().findViewById(R.id.talleresOpcion);
+        pp = getActivity().findViewById(R.id.ppOpcion);
+        servicio =  getActivity().findViewById(R.id.servicioOpcion);
 
         autos.setOnClickListener(this);
         talleres.setOnClickListener(this);
