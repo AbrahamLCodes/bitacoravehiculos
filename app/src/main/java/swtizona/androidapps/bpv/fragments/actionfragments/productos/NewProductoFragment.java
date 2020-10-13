@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Fragments.ActionFragments.talleres;
+package swtizona.androidapps.bpv.fragments.actionfragments.productos;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
 
-public class NewTallerFragment extends AppCompatDialogFragment implements View.OnClickListener{
+public class NewProductoFragment extends AppCompatDialogFragment implements View.OnClickListener{
 
     private EditText campos[];
     private TextView cancelar, registrar;
@@ -25,7 +25,7 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        return inflater.inflate(R.layout.fragment_new_taller, container, false);
+        return inflater.inflate(R.layout.fragment_new_producto, container, false);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
     public void onClick(View v) {
 
         switch (v.getId()){
-            case R.id.tallerNewBack:
+            case R.id.productoNewBack:
                 dismiss();
                 break;
             case R.id.tallerNewOk:
@@ -49,9 +49,9 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
     }
 
     private void initCampos(View v){
-        campos = new EditText[6];
-        cancelar = v.findViewById(R.id.tallerNewBack);
-        registrar = v.findViewById(R.id.tallerNewOk);
+        campos = new EditText[5];
+        cancelar = v.findViewById(R.id.productoNewBack);
+        registrar = v.findViewById(R.id.productoNewOk);
         initEditText(v);
 
         cancelar.setOnClickListener(this);
@@ -60,9 +60,9 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
 
     private void initEditText(View v){
         int i = 0;
-        while (i < 6) {
+        while (i < 5) {
             int res = getResources().getIdentifier(
-                    "tallerIn" + (i)
+                    "productoIn" + (i)
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = v.findViewById(res);

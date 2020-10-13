@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@layout/shape_servicio_dialog">
+
+    <!-- A blank view to force the layout to be full-width -->
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.1dp"
+        android:layout_gravity="fill_horizontal" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="Registrar Servicio"
+        android:textColor="#000000"
+        android:textSize="30sp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:layout_weight="4">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/servicioIn0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Servicio a aplicar"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/servicioIn1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Automovil a aplicar"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/servicioIn2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Fecha"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/servicioIn3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Taller"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/servicioIn4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Productos aplicados"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/servicioIn5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Comentario extra"
+                android:inputType="textPersonName"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/servicioNewBack"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="Cancelar"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/servicioNewOk"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="30dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/helvetica"
+            android:gravity="center"
+            android:text="Registrar"
+            android:textSize="20sp" />
+    </LinearLayout>
+</LinearLayout>

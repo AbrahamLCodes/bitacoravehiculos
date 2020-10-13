@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Activities;
+package swtizona.androidapps.bpv.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import swtizona.androidapps.bpv.Fragments.ActionFragments.talleres.InfoTallerFragment;
-import swtizona.androidapps.bpv.Fragments.ActionFragments.talleres.NewTallerFragment;
+import swtizona.androidapps.bpv.fragments.actionfragments.talleres.InfoTallerFragment;
+import swtizona.androidapps.bpv.fragments.actionfragments.talleres.NewTallerFragment;
 import swtizona.androidapps.bpv.R;
 
 public class TallerActivity extends AppCompatActivity implements
@@ -27,7 +27,7 @@ public class TallerActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_taller);
+        setContentView(R.layout.activity_talleres);
         initComponents();
     }
 

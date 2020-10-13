@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="swtizona.androidapps.bpv.Activities.ProductosActivity">
+    tools:context="swtizona.androidapps.bpv.activities.ProductosActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

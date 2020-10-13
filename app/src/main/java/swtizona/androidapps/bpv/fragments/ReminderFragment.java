@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Fragments;
+package swtizona.androidapps.bpv.fragments;
 
 import android.os.Bundle;
 

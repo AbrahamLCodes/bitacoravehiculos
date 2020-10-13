@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Fragments;
+package swtizona.androidapps.bpv.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +11,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import swtizona.androidapps.bpv.Activities.AutosActivity;
-import swtizona.androidapps.bpv.Activities.ProductosActivity;
-import swtizona.androidapps.bpv.Activities.TallerActivity;
+import swtizona.androidapps.bpv.activities.AutosActivity;
+import swtizona.androidapps.bpv.activities.ProductosActivity;
+import swtizona.androidapps.bpv.activities.ServiciosActivity;
+import swtizona.androidapps.bpv.activities.TallerActivity;
 import swtizona.androidapps.bpv.R;
 
 public class RegistrosFragment extends Fragment implements View.OnClickListener {
@@ -76,7 +76,7 @@ public class RegistrosFragment extends Fragment implements View.OnClickListener 
     }
 
     private void servicios() {
-        Toast.makeText(getContext(), "Activity Servicios en construcción", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), ServiciosActivity.class));
     }
 
 }

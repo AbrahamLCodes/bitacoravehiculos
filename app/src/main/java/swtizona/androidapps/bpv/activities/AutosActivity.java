@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Activities;
+package swtizona.androidapps.bpv.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,8 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import swtizona.androidapps.bpv.Fragments.ActionFragments.Autos.NewAutoFragment;
-import swtizona.androidapps.bpv.Fragments.ActionFragments.Autos.InfoAutoFragment;
+import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
+import swtizona.androidapps.bpv.fragments.actionfragments.autos.InfoAutoFragment;
 import swtizona.androidapps.bpv.R;
 
 public class AutosActivity extends AppCompatActivity implements

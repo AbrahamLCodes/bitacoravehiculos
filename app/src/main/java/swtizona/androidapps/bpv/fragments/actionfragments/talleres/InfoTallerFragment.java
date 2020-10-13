@@ -1,4 +1,4 @@
-package swtizona.androidapps.bpv.Fragments.ActionFragments.productos;
+package swtizona.androidapps.bpv.fragments.actionfragments.talleres;
 
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
 
-public class InfoProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
+public class InfoTallerFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private TextView regresar, buscar, editar, eliminar;
 
@@ -22,7 +22,7 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        return inflater.inflate(R.layout.fragment_info_producto, container, false);
+        return inflater.inflate(R.layout.fragment_info_taller, container, false);
     }
 
     @Override
@@ -34,13 +34,13 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.productoInfoRegresar:
+            case R.id.tallerInfoRegresar:
                 dismiss();
                 break;
-            case R.id.productoInfoBuscar:
+            case R.id.tallerInfoBuscar:
                 Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.productoInfoEditar:
+            case R.id.tallerInfoEditar:
                 openNewDialog();
                 dismiss();
                 break;
@@ -48,23 +48,22 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
                 Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
         }
+    }
 
+    private void openNewDialog(){
+        NewTallerFragment newTallerFragment = new NewTallerFragment();
+        newTallerFragment.show(getFragmentManager(),"Editar Taller");
     }
 
     private void initComponents(View v){
-        regresar = v.findViewById(R.id.productoInfoRegresar);
-        buscar = v.findViewById(R.id.productoInfoBuscar);
-        editar = v.findViewById(R.id.productoInfoEditar);
-        eliminar = v.findViewById(R.id.productoInfoEliminar);
+        regresar = v.findViewById(R.id.tallerInfoRegresar);
+        buscar = v.findViewById(R.id.tallerInfoBuscar);
+        editar = v.findViewById(R.id.tallerInfoEditar);
+        eliminar = v.findViewById(R.id.tallerInfoEliminar);
 
         regresar.setOnClickListener(this);
         buscar.setOnClickListener(this);
         editar.setOnClickListener(this);
         eliminar.setOnClickListener(this);
-    }
-
-    private void openNewDialog(){
-        NewProductoFragment newProductoFragment = new NewProductoFragment();
-        newProductoFragment.show(getFragmentManager(), "Editar producto");
     }
 }

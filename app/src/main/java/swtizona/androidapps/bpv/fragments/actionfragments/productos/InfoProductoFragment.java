@@ -1,6 +1,5 @@
-package swtizona.androidapps.bpv.Fragments.ActionFragments.Autos;
+package swtizona.androidapps.bpv.fragments.actionfragments.productos;
 
-import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,21 +14,15 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
 
-public class InfoAutoFragment extends AppCompatDialogFragment implements View.OnClickListener{
+public class InfoProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private TextView regresar, buscar, eliminar, editar;
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
-    }
+    private TextView regresar, buscar, editar, eliminar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        return inflater.inflate(R.layout.fragment_info_auto, container, false);
+        return inflater.inflate(R.layout.fragment_info_producto, container, false);
     }
 
     @Override
@@ -41,32 +34,37 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.autoInfoRegresar:
+            case R.id.productoInfoRegresar:
                 dismiss();
                 break;
-            case R.id.autoInfoBuscar:
+            case R.id.productoInfoBuscar:
                 Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.autoInfoEliminar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.autoInfoEditar:
-                NewAutoFragment newAutoFragment = new NewAutoFragment();
-                newAutoFragment.show(getFragmentManager(), " Aaaa");
+            case R.id.productoInfoEditar:
+                openNewDialog();
                 dismiss();
+                break;
+            case R.id.tallerInfoEliminar:
+                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
         }
+
     }
 
     private void initComponents(View v){
-        regresar = v.findViewById(R.id.autoInfoRegresar);
-        buscar = v.findViewById(R.id.autoInfoBuscar);
-        eliminar = v.findViewById(R.id.autoInfoEliminar);
-        editar = v.findViewById(R.id.autoInfoEditar);
+        regresar = v.findViewById(R.id.productoInfoRegresar);
+        buscar = v.findViewById(R.id.productoInfoBuscar);
+        editar = v.findViewById(R.id.productoInfoEditar);
+        eliminar = v.findViewById(R.id.productoInfoEliminar);
 
         regresar.setOnClickListener(this);
         buscar.setOnClickListener(this);
-        eliminar.setOnClickListener(this);
         editar.setOnClickListener(this);
+        eliminar.setOnClickListener(this);
+    }
+
+    private void openNewDialog(){
+        NewProductoFragment newProductoFragment = new NewProductoFragment();
+        newProductoFragment.show(getFragmentManager(), "Editar producto");
     }
 }
