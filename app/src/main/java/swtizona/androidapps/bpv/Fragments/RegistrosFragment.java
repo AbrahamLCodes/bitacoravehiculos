@@ -14,6 +14,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import swtizona.androidapps.bpv.Activities.AutosActivity;
+import swtizona.androidapps.bpv.Activities.ProductosActivity;
+import swtizona.androidapps.bpv.Activities.TallerActivity;
 import swtizona.androidapps.bpv.R;
 
 public class RegistrosFragment extends Fragment implements View.OnClickListener {
@@ -66,11 +68,11 @@ public class RegistrosFragment extends Fragment implements View.OnClickListener 
     }
 
     private void talleres() {
-        Toast.makeText(getContext(), "Activity Talleres en construcción", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), TallerActivity.class));
     }
 
     private void pp() {
-        Toast.makeText(getContext(), "Activity Piezas/Productos en construcción", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getActivity(), ProductosActivity.class));
     }
 
     private void servicios() {

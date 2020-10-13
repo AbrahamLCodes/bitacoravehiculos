@@ -1,12 +1,8 @@
 package swtizona.androidapps.bpv.Activities;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,7 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import swtizona.androidapps.bpv.Fragments.ActionFragments.FragmentNew;
+import swtizona.androidapps.bpv.Fragments.ActionFragments.Autos.NewAutoFragment;
+import swtizona.androidapps.bpv.Fragments.ActionFragments.Autos.InfoAutoFragment;
 import swtizona.androidapps.bpv.R;
 
 public class AutosActivity extends AppCompatActivity implements
@@ -25,7 +22,7 @@ public class AutosActivity extends AppCompatActivity implements
     private String[] autos = {"Ford Ranger 2007", "Dodge RAM 2003", "Mitsubishi Mirage 2017"};
     private ListView listAutos;
     private ImageView backButton;
-    private TextView nuevo, buscar, editar, eliminar;
+    private TextView nuevo, buscar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +50,14 @@ public class AutosActivity extends AppCompatActivity implements
             case R.id.autoBuscar:
                 Toast.makeText(this, "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.autoEditar:
-                Toast.makeText(this, "Accion en construccion", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.autoEliminar:
-                Toast.makeText(this, "Accion en construccion", Toast.LENGTH_SHORT).show();
-                break;
+
         }
     }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(this, "" + autos[position], Toast.LENGTH_SHORT).show();
+        openInfoDialog();
     }
 
     private void initComponents() {
@@ -81,17 +74,19 @@ public class AutosActivity extends AppCompatActivity implements
 
         nuevo = findViewById(R.id.autoNuevo);
         buscar = findViewById(R.id.autoBuscar);
-        editar = findViewById(R.id.autoEditar);
-        eliminar = findViewById(R.id.autoEliminar);
+
 
         nuevo.setOnClickListener(this);
         buscar.setOnClickListener(this);
-        editar.setOnClickListener(this);
-        eliminar.setOnClickListener(this);
     }
 
     private void openDialogFragment() {
-        FragmentNew fragmentNew = new FragmentNew();
-        fragmentNew.show(getSupportFragmentManager(), "Registrar auto");
+        NewAutoFragment newAutoFragment = new NewAutoFragment();
+        newAutoFragment.show(getSupportFragmentManager(), "Registrar auto");
+    }
+
+    private void openInfoDialog(){
+        InfoAutoFragment infoAutoFragment = new InfoAutoFragment();
+        infoAutoFragment.show(getSupportFragmentManager(), "Info Dialog");
     }
 }

@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.TalleresActivity"></activity>
+        <activity android:name=".Activities.ProductosActivity"></activity>
+        <activity android:name=".Activities.TallerActivity" />
+        <activity android:name=".Activities.TalleresActivity" />
         <activity android:name=".Activities.AutosActivity" />
         <activity
             android:name=".MainActivity"

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Carway</string>
+    <string name="app_name">Bitácora para vehículos</string>
     <string name="tab_text_1">Historial</string>
     <string name="tab_text_2">Recordatorios</string>
     <string name="tab_text_3">Registros</string>
