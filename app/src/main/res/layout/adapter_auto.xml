@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@layout/shape_auto_dialog">
+
+    <ImageView
+        android:id="@+id/autoAdapterImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/pickuptest"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/autoAdapterTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ford Ranger 2007"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:textColor="#000"/>
+        <TextView
+            android:id="@+id/autoAdapterEngine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Motor: 2.3L"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/autoAdapterPlate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Matricula: EB76787"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
+</LinearLayout>
