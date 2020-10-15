@@ -14,6 +14,8 @@ import android.widget.Toast;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.InfoTallerFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.NewTallerFragment;
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.modeladapter.TallerAdapter;
+import swtizona.androidapps.bpv.modeldata.Taller;
 
 public class TallerActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener
@@ -22,7 +24,37 @@ public class TallerActivity extends AppCompatActivity implements
     private TextView nuevo, buscar;
     private ListView lista;
     private ImageView back;
-    private String[] talleres = {"Alfredo Armendariz", "Carlos el carpa", "Gil electrico"};
+    //private String[] talleres = {"Alfredo Armendariz", "Carlos el carpa", "Gil electrico"};
+
+    private Taller[] talleres = {
+            new Taller(
+                    "Alfredo Armendáriz"
+                    , "Aldama"
+                    , "112"
+                    , "Centro"
+                    , "Camargo"
+                    , "Chihuahua"
+                    , "(648)122-7066"
+                    , "Es raterillos el wey"),
+            new Taller(
+                    "Carlos el carpa"
+                    , "Pablo Guinter"
+                    , "345"
+                    , "Arbol Grande"
+                    , "Camargo"
+                    , "Chihuahua"
+                    , "(648)109-0459"
+                    , "Sí le sabe a las Rangers"),
+            new Taller(
+                    "Perea Clutch y Embrague"
+                    , "José María Iglesias"
+                    , "504"
+                    , "Granjas"
+                    , "Chihuahua"
+                    , "Chihuahua"
+                    , "(614)140-4794"
+                    , "Es muy amable"),
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,9 +100,9 @@ public class TallerActivity extends AppCompatActivity implements
         lista.setOnItemClickListener(this);
         back.setOnClickListener(this);
 
-        lista.setAdapter(new ArrayAdapter<>(
-                getApplicationContext()
-                , android.R.layout.simple_list_item_1
+        lista.setAdapter(new TallerAdapter(
+                this
+                , R.layout.adapter_taller
                 , talleres));
     }
 

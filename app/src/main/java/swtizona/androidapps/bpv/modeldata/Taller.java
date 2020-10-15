@@ -2,16 +2,42 @@ package swtizona.androidapps.bpv.modeldata;
 
 public class Taller {
 
-    private String taller, calle, ncalle, colonia, telefono, comentario;
+    private String taller, calle, ncalle, colonia, ciudad, estado, telefono, comentario;
 
-    public Taller(String taller, String calle, String ncalle, String colonia
-            , String telefono, String comentario) {
+    /*
+
+        Alfredo Armendariz
+        Aldama 112 Col. Centro
+        6481227000
+
+    */
+
+    public Taller(String taller, String calle, String ncalle, String colonia, String ciudad
+            , String estado, String telefono, String comentario) {
         this.taller = taller;
         this.calle = calle;
         this.ncalle = ncalle;
         this.colonia = colonia;
         this.telefono = telefono;
         this.comentario = comentario;
+        this.ciudad = ciudad;
+        this.estado = estado;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getTaller() {
