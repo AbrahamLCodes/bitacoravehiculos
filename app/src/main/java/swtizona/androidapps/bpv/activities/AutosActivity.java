@@ -25,28 +25,28 @@ public class AutosActivity extends AppCompatActivity implements
 
     private Auto[] autos = {
             new Auto(
-              "Ford"
-              , "Ranger"
-              , "2007"
-              ,"2.3"
-              ,"EB44789"
-              ,"No comment"
-              , 3),
+                    "Ford"
+                    , "Ranger"
+                    , "2007"
+                    , "2.3"
+                    , "EB44789"
+                    , "No comment"
+                    , 3),
             new Auto(
                     "Dodge"
                     , "RAM"
                     , "2003"
-                    ,"4.7"
-                    ,"ENC4789"
-                    ,"Le falla mucho la bomba del agua"
+                    , "4.7"
+                    , "ENC4789"
+                    , "Le falla mucho la bomba del agua"
                     , 3),
             new Auto(
                     "Mitsubishi"
                     , "Mirage"
                     , "2017"
-                    ,"1.3"
-                    ,"LMC7725"
-                    ,"Esta chocado de enfrente"
+                    , "1.3"
+                    , "LMC7725"
+                    , "Esta chocado de enfrente"
                     , 3)
     };
 
@@ -86,7 +86,6 @@ public class AutosActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "" + autos[position], Toast.LENGTH_SHORT).show();
         openInfoDialog();
     }
 
@@ -116,7 +115,7 @@ public class AutosActivity extends AppCompatActivity implements
         newAutoFragment.show(getSupportFragmentManager(), "Registrar auto");
     }
 
-    private void openInfoDialog(){
+    private void openInfoDialog() {
         InfoAutoFragment infoAutoFragment = new InfoAutoFragment();
         infoAutoFragment.show(getSupportFragmentManager(), "Info Dialog");
     }

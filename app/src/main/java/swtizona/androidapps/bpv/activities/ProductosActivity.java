@@ -14,6 +14,8 @@ import android.widget.Toast;
 import swtizona.androidapps.bpv.fragments.actionfragments.productos.InfoProductoFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.productos.NewProductoFragment;
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.modeladapter.ProductoAdapter;
+import swtizona.androidapps.bpv.modeldata.Producto;
 
 public class ProductosActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener
@@ -22,7 +24,32 @@ public class ProductosActivity extends AppCompatActivity implements
     private TextView nuevo, buscar;
     private ListView lista;
     private ImageView back;
-    private String[] productos = {"Filtro Gasolina Ranger", "Filtro aceite Ranger", "Bujias Ka"};
+    //private String[] productos = {"Filtro Gasolina Ranger", "Filtro aceite Ranger", "Bujias Ka"};
+
+    private Producto[] productos = {
+            new Producto(
+                    "Filtro de gasolina",
+                    "Ford Ranger 2007",
+                    "15B789",
+                    "GHONER",
+                    "154678",
+                    "Es de 1 aguja"),
+            new Producto(
+                    "Filtro de aceite",
+                    "Ford Ka 2003",
+                    "14B457",
+                    "DURALAST",
+                    "1234789",
+                    "Es mejor en Autozone"),
+            new Producto(
+                    "Bujias",
+                    "Ford Ranger 1988",
+                    "457B23",
+                    "GHONER",
+                    "45987",
+                    "No comprar en Refaccin!")
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,12 +74,11 @@ public class ProductosActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, ""+productos[position], Toast.LENGTH_SHORT).show();
         InfoProductoFragment infoProductoFragment = new InfoProductoFragment();
         infoProductoFragment.show(getSupportFragmentManager(), "Producto Info");
     }
 
-    private void openNuevoDialog(){
+    private void openNuevoDialog() {
         NewProductoFragment newProductoFragment = new NewProductoFragment();
         newProductoFragment.show(getSupportFragmentManager(), "Producto Nuevo");
     }
@@ -68,9 +94,9 @@ public class ProductosActivity extends AppCompatActivity implements
         lista.setOnItemClickListener(this);
         back.setOnClickListener(this);
 
-        lista.setAdapter(new ArrayAdapter<>(
-                getApplicationContext()
-                , android.R.layout.simple_list_item_1
+        lista.setAdapter(new ProductoAdapter(
+                this
+                , R.layout.adapter_producto
                 , productos));
     }
 }

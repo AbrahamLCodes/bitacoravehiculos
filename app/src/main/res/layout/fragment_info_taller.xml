@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulo"
+        android:text="Automotriz del Norte"
         android:gravity="center"
         android:textSize="25sp"
         android:layout_margin="10dp"
@@ -125,7 +125,7 @@
                     android:background="#03A9F4"
                     android:fontFamily="@font/helvetica"
                     android:gravity="center"
-                    android:text="Buscar"
+                    android:text="Detalles"
                     android:textColor="#fff"
                     android:textSize="20sp"
                     android:textStyle="bold" />

@@ -49,7 +49,7 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
     }
 
     private void initCampos(View v){
-        campos = new EditText[5];
+        campos = new EditText[6];
         cancelar = v.findViewById(R.id.productoNewBack);
         registrar = v.findViewById(R.id.productoNewOk);
         initEditText(v);

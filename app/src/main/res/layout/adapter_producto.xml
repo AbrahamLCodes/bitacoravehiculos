@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="horizontal"
-    android:background="@layout/shape_auto_dialog"
+    android:background="@layout/shape_producto_dialog"
     android:layout_marginTop="5dp">
 
     <ImageView
-        android:id="@+id/autoAdapterImage"
+        android:id="@+id/productoAdapterImage"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_gravity="center"
-        android:src="@drawable/pickuptest"
+        android:src="@drawable/oil"
         android:layout_margin="10dp"/>
 
     <LinearLayout
@@ -21,29 +20,42 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
         <TextView
-            android:id="@+id/autoAdapterTitle"
+            android:id="@+id/productoAdapterName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ford Ranger 2007"
+            android:text="Filtro del aceite"
             android:textSize="20sp"
             android:layout_margin="10dp"
-            android:textColor="#000"/>
-        <TextView
-            android:id="@+id/autoAdapterEngine"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Motor: 2.3L"
-            android:textSize="12sp"
             android:textColor="#000"
-            android:layout_marginLeft="10dp"/>
+            android:fontFamily="@font/helvetica"/>
         <TextView
-            android:id="@+id/autoAdapterPlate"
+            android:id="@+id/productoAdapterMarca"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Matricula: EB76787"
+            android:text="Marca: Ghoner"
             android:textSize="12sp"
             android:textColor="#000"
             android:layout_marginLeft="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:fontFamily="@font/helvetica"/>
+        <TextView
+            android:id="@+id/productoAdapterModel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Modelo: 15B78"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/helvetica"/>
+        <TextView
+            android:id="@+id/productoAdapterVehicles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vehiculo(s): 2.3L"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/helvetica"/>
+
     </LinearLayout>
 </LinearLayout>

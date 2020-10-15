@@ -33,7 +33,6 @@ public class TallerActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, "" + talleres[position], Toast.LENGTH_SHORT).show();
         InfoTallerFragment infoTallerFragment = new InfoTallerFragment();
         infoTallerFragment.show(getSupportFragmentManager(), "Taller Info");
     }

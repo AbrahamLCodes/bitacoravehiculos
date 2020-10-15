@@ -17,7 +17,7 @@
         android:layout_margin="10dp"
         android:fontFamily="@font/helvetica"
         android:gravity="center"
-        android:text="Titulo"
+        android:text="Cambio de aceite"
         android:textColor="#000"
         android:textSize="25sp" />
 
@@ -129,7 +129,7 @@
                     android:background="#03A9F4"
                     android:fontFamily="@font/helvetica"
                     android:gravity="center"
-                    android:text="Buscar"
+                    android:text="Detalles"
                     android:textColor="#fff"
                     android:textSize="20sp"
                     android:textStyle="bold" />

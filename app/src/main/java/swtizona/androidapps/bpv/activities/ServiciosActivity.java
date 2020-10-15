@@ -49,7 +49,6 @@ public class ServiciosActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(this, ""+servicios[position], Toast.LENGTH_SHORT).show();
         InfoServicioFragment infoServicioFragment = new InfoServicioFragment();
         infoServicioFragment.show(getSupportFragmentManager(), "Producto Info");
     }

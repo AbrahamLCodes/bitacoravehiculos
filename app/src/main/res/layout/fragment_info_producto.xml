@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Titulo"
+        android:text="Filtro de gasolina"
         android:gravity="center"
         android:textSize="25sp"
         android:layout_margin="10dp"
@@ -36,7 +36,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Se aplica al automovil:"
+                    android:text="Se aplica al/los automovil(es):"
                     android:layout_weight="1"
                     android:textSize="17sp"
                     android:textColor="#000"
@@ -116,7 +116,7 @@
                     android:background="#03A9F4"
                     android:fontFamily="@font/helvetica"
                     android:gravity="center"
-                    android:text="Buscar"
+                    android:text="Detalles"
                     android:textColor="#fff"
                     android:textSize="20sp"
                     android:textStyle="bold" />
