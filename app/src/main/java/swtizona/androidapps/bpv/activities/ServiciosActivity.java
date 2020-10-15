@@ -14,15 +14,41 @@ import android.widget.Toast;
 import swtizona.androidapps.bpv.fragments.actionfragments.servicios.InfoServicioFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.servicios.NewServicioFragment;
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.modeladapter.ServicioAdapter;
+import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class ServiciosActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener
-        , View.OnClickListener{
+        , View.OnClickListener {
 
     private TextView nuevo, buscar;
     private ListView lista;
     private ImageView back;
-    private String[] servicios = {"Cambio de aceite a Ranger 2007", "Cambio de bujías a Ranger 1988", "Cambio de bomba de agua a Ford Ka"};
+    //private String[] servicios = {"Cambio de aceite a Ranger 2007", "Cambio de bujías a Ranger 1988", "Cambio de bomba de agua a Ford Ka"};
+
+    private Servicio[] servicios = {
+            new Servicio(
+                    "Cambio de aceite",
+                    "Ford Ranger 2007",
+                    "27 / Septiembre / 2020",
+                    "Automotriz del norte",
+                    "Filtro de Aceite Ghonner, Aceite Castrol 20w-20",
+                    "Sin comentarios"),
+            new Servicio(
+                    "Cambio de bujias",
+                    "Dodge RAM 2003",
+                    "15 / Agosto / 2019",
+                    "Carlos",
+                    "8 bujias duralast",
+                    "Sin comentarios"),
+            new Servicio(
+                    "Reparación de bomba del agua",
+                    "Ford Ka 2003",
+                    "10 / Julio / 2018",
+                    "Alfredo Armendariz",
+                    "Bomba de agua Duralast",
+                    "Es más fácil commprar en Autozone"),
+    };
 
 
     @Override
@@ -53,9 +79,9 @@ public class ServiciosActivity extends AppCompatActivity implements
         infoServicioFragment.show(getSupportFragmentManager(), "Producto Info");
     }
 
-    private void openNewDialog(){
+    private void openNewDialog() {
         NewServicioFragment newServicioFragment = new NewServicioFragment();
-        newServicioFragment.show(getSupportFragmentManager(),"Registar Servicio");
+        newServicioFragment.show(getSupportFragmentManager(), "Registar Servicio");
     }
 
     private void initComponents() {
@@ -69,9 +95,9 @@ public class ServiciosActivity extends AppCompatActivity implements
         lista.setOnItemClickListener(this);
         back.setOnClickListener(this);
 
-        lista.setAdapter(new ArrayAdapter<>(
-                getApplicationContext()
-                , android.R.layout.simple_list_item_1
+        lista.setAdapter(new ServicioAdapter(
+                this
+                , R.layout.adapter_servicio
                 , servicios));
     }
 }
