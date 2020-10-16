@@ -3,17 +3,15 @@ package swtizona.androidapps.bpv.modeldata;
 public class Auto {
 
     private String fabricante, modelo, ano, motor, matricula, comentario;
-    private int nservicios;
 
     public Auto(String fabricante, String modelo, String ano, String motor, String matricula
-            , String comentario, int nservicios) {
+            , String comentario) {
         this.fabricante = fabricante;
         this.modelo = modelo;
         this.ano = ano;
         this.motor = motor;
         this.matricula = matricula;
         this.comentario = comentario;
-        this.nservicios = nservicios;
     }
 
     public String getFabricante() {
@@ -64,11 +62,4 @@ public class Auto {
         this.comentario = comentario;
     }
 
-    public int getNservicios() {
-        return nservicios;
-    }
-
-    public void setNservicios(int nservicios) {
-        this.nservicios = nservicios;
-    }
 }

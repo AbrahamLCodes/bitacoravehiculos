@@ -37,12 +37,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fab.setOnClickListener(this);
 
-        db = new DataBaseController(getApplicationContext());
-        Toast.makeText(this, "Autos: " + db.getColumnCount("AUTOS"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Productos: " + db.getColumnCount("PRODUCTOS"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Talleres: " + db.getColumnCount("TALLERES"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Servicios: " + db.getColumnCount("SERVICIOS"), Toast.LENGTH_SHORT).show();
-        Toast.makeText(this, "Recordatorios: " + db.getColumnCount("RECORDATORIOS"), Toast.LENGTH_SHORT).show();
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -64,6 +58,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Para no mostrar el fab al inicio del programa
         initFab();
     }
+
+    private void initDataBase(){
+        DataBaseController db = new DataBaseController(getApplicationContext());
+        if(db != null){
+            initLists(db);
+        }
+    }
+
+    private void initLists(DataBaseController db){
+        if(db.getRowCount("AUTOS") > 0){
+            db.initList("AUTOS");
+        }
+        if(db.getRowCount("PRODUCTOS") > 0){
+            db.initList("PRODUCTOS");
+        }
+        if(db.getRowCount("TALLERES") > 0){
+            db.initList("TALLERES");
+        }
+        if(db.getRowCount("SERVICIOS") > 0){
+            db.initList("SERVICIOS");
+        }
+        if(db.getRowCount("RECORDATORIOS") > 0){
+            db.initList("RECORDATORIOS");
+        }
+    }
+
 
 
     private void switchTab(int pos) {

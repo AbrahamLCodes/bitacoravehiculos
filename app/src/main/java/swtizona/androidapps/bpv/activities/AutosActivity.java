@@ -30,24 +30,21 @@ public class AutosActivity extends AppCompatActivity implements
                     , "2007"
                     , "2.3"
                     , "EB44789"
-                    , "No comment"
-                    , 3),
+                    , "No comment"),
             new Auto(
                     "Dodge"
                     , "RAM"
                     , "2003"
                     , "4.7"
                     , "ENC4789"
-                    , "Le falla mucho la bomba del agua"
-                    , 3),
+                    , "Le falla mucho la bomba del agua"),
             new Auto(
                     "Mitsubishi"
                     , "Mirage"
                     , "2017"
                     , "1.3"
                     , "LMC7725"
-                    , "Esta chocado de enfrente"
-                    , 3)
+                    , "Esta chocado de enfrente")
     };
 
     private ListView listAutos;
