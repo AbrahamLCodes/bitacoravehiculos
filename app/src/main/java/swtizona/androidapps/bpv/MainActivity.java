@@ -12,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private FloatingActionButton fab;
     private TabLayout tabs;
+    private DataBaseController db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab = findViewById(R.id.fab);
 
         fab.setOnClickListener(this);
+
+        db = new DataBaseController(getApplicationContext());
+        Toast.makeText(this, "Autos: " + db.getColumnCount("AUTOS"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Productos: " + db.getColumnCount("PRODUCTOS"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Talleres: " + db.getColumnCount("TALLERES"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Servicios: " + db.getColumnCount("SERVICIOS"), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Recordatorios: " + db.getColumnCount("RECORDATORIOS"), Toast.LENGTH_SHORT).show();
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
