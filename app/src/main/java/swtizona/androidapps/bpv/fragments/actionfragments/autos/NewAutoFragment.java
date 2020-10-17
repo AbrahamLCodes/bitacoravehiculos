@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.activities.AutosActivity;
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
 
 public class NewAutoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
@@ -49,7 +52,7 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
                 dismiss();
                 break;
             case R.id.autoNewOk:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                actionOk();
                 break;
         }
     }
@@ -64,5 +67,51 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
             campos[i] = view.findViewById(res);
             i++;
         }
+    }
+
+    private void actionOk(){
+        int i = 0;
+        boolean flag = true;
+        while(i < 5){
+            if(campos[i].getText().length() == 0){
+                Toast.makeText(getContext(), "Introduce el/la "+campos[i].getHint(), Toast.LENGTH_SHORT).show();
+                flag = false;
+                break;
+            }
+
+            i++;
+        }
+        if(flag){
+            actionInsert();
+        }
+    }
+
+    private void actionInsert(){
+
+        DataBaseController db = new DataBaseController(getContext());
+        String [] rows = new String[6];
+        for(int i = 0 ; i < 6 ; i++){
+            if(i == 5){
+                if(campos[i].getText().length() == 0){
+                    rows[i] = " ";
+                }else{
+                    rows[i] = campos[i].getText().toString();
+                }
+            }else{
+                rows[i] = campos[i].getText().toString();
+            }
+        }
+
+        db.insert6Rows("AUTOS", rows);
+        updateRAM(db);
+    }
+
+    private void updateRAM(DataBaseController db){
+        //Updating RAM data
+        Lists.initLists();
+        db.initList("AUTOS");
+        db.close();
+        AutosActivity.updateUI();
+        dismiss();
     }
 }

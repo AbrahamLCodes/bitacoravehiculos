@@ -2,6 +2,8 @@ package swtizona.androidapps.bpv.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.database.TestOperations;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.InfoAutoFragment;
 import swtizona.androidapps.bpv.R;
@@ -22,39 +27,18 @@ public class AutosActivity extends AppCompatActivity implements
         , AdapterView.OnItemClickListener {
 
     //private String[] autos = {"Ford Ranger 2007", "Dodge RAM 2003", "Mitsubishi Mirage 2017"};
-
-    private Auto[] autos = {
-            new Auto(
-                    "Ford"
-                    , "Ranger"
-                    , "2007"
-                    , "2.3"
-                    , "EB44789"
-                    , "No comment"),
-            new Auto(
-                    "Dodge"
-                    , "RAM"
-                    , "2003"
-                    , "4.7"
-                    , "ENC4789"
-                    , "Le falla mucho la bomba del agua"),
-            new Auto(
-                    "Mitsubishi"
-                    , "Mirage"
-                    , "2017"
-                    , "1.3"
-                    , "LMC7725"
-                    , "Esta chocado de enfrente")
-    };
-
-    private ListView listAutos;
+    private static ListView listAutos;
     private ImageView backButton;
     private TextView nuevo, buscar;
+    private static Auto[] autos;
+    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_autos);
+
+        context = this;
         initComponents();
     }
 
@@ -83,7 +67,7 @@ public class AutosActivity extends AppCompatActivity implements
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        openInfoDialog();
+        openInfoDialog(position);
     }
 
     private void initComponents() {
@@ -91,10 +75,7 @@ public class AutosActivity extends AppCompatActivity implements
 
         listAutos = findViewById(R.id.listAutos);
 
-        listAutos.setAdapter(new AutoAdapter(
-                this
-                , R.layout.adapter_auto
-                , autos));
+        updateUI();
 
         backButton.setOnClickListener(this);
         listAutos.setOnItemClickListener(this);
@@ -107,13 +88,28 @@ public class AutosActivity extends AppCompatActivity implements
         buscar.setOnClickListener(this);
     }
 
+    private static void initArray() {
+        autos = new Auto[Lists.getAutoList().size()];
+        for (int i = 0; i < Lists.getAutoList().size(); i++) {
+            autos[i] = Lists.getAutoList().get(i);
+        }
+    }
+
     private void openDialogFragment() {
         NewAutoFragment newAutoFragment = new NewAutoFragment();
         newAutoFragment.show(getSupportFragmentManager(), "Registrar auto");
     }
 
-    private void openInfoDialog() {
-        InfoAutoFragment infoAutoFragment = new InfoAutoFragment();
+    public static void updateUI() {
+        initArray();
+        listAutos.setAdapter(new AutoAdapter(
+                context
+                , R.layout.adapter_auto
+                , autos));
+    }
+
+    private void openInfoDialog(int position) {
+        InfoAutoFragment infoAutoFragment = new InfoAutoFragment(position);
         infoAutoFragment.show(getSupportFragmentManager(), "Info Dialog");
     }
 }

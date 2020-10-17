@@ -51,9 +51,9 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
     /**
-      CRUD to SQLite. CREATE READ UPDATE & DELETE functions
+     CRUD to SQLite. CREATE READ UPDATE & DELETE functions
 
-      HOW TO USE THESE CLASS's METHODS
+     HOW TO USE THESE CLASS's METHODS
 
      1* If the database is empty, don't use initList(), instead use INSERT
      2* Use initList() when deleting, updating or inserting data in order to refresh RAM Memory variables
@@ -61,7 +61,7 @@ public class DataBaseController extends SQLiteOpenHelper {
 
 
     /**
-      INSERT with 4 rows
+     * INSERT with 4 rows
      */
     public void insert4Rows(String tableName, String[] rows) {
         SQLiteDatabase bd = getWritableDatabase();
@@ -76,7 +76,7 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
     /**
-      INSERT with 5 rows
+     * INSERT with 5 rows
      */
     public void insert5Rows(String tableName, String[] rows) {
         SQLiteDatabase bd = getWritableDatabase();
@@ -92,7 +92,7 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
     /**
-      INSERT with 6 rows
+     * INSERT with 6 rows
      */
     public void insert6Rows(String tableName, String[] rows) {
         SQLiteDatabase bd = getWritableDatabase();
@@ -110,9 +110,9 @@ public class DataBaseController extends SQLiteOpenHelper {
 
 
     /**
-      SELECT
+     * SELECT
      */
-    public void selectRows(String tableName) {
+    private void selectRows(String tableName) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
         addToList(tableName, cursor);
@@ -120,7 +120,7 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
 
-    public void addToList(String tableName, Cursor cursor) {
+    private void addToList(String tableName, Cursor cursor) {
         switch (tableName) {
             case "AUTOS":
                 if (cursor.moveToFirst()) {
@@ -133,58 +133,83 @@ public class DataBaseController extends SQLiteOpenHelper {
                                         , cursor.getString(3)
                                         , cursor.getString(4)
                                         , cursor.getString(5)));
+                    } while (cursor.moveToNext());
+                }
+                break;
+
+            case "PRODUCTOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        Lists.getProductoList().add(
+                                new Producto(
+                                        cursor.getString(0)
+                                        , cursor.getString(1)
+                                        , cursor.getString(2)
+                                        , cursor.getString(3)
+                                        , cursor.getString(4)
+                                        , cursor.getString(5)));
+                    } while (cursor.moveToNext());
+                }
+                break;
+
+            case "TALLERES":
+                if (cursor.moveToFirst()) {
+                    do {
+                        Lists.getTallerList().add(
+                                new Taller(
+                                        cursor.getString(0)
+                                        , cursor.getString(1)
+                                        , cursor.getString(2)
+                                        , cursor.getString(3)
+                                        , cursor.getString(4)
+                                        , cursor.getString(5)
+                                        , cursor.getString(6)
+                                        , cursor.getString(7)));
 
                     } while (cursor.moveToNext());
                 }
-            case "PRODUCTOS":
-                Lists.getProductoList().add(
-                        new Producto(
-                                cursor.getString(0)
-                                , cursor.getString(1)
-                                , cursor.getString(2)
-                                , cursor.getString(3)
-                                , cursor.getString(4)
-                                , cursor.getString(5)));
-            case "TALLERES":
-                Lists.getTallerList().add(
-                        new Taller(
-                                cursor.getString(0)
-                                , cursor.getString(1)
-                                , cursor.getString(2)
-                                , cursor.getString(3)
-                                , cursor.getString(4)
-                                , cursor.getString(5)
-                                , cursor.getString(6)
-                                , cursor.getString(7)));
+                break;
+
             case "SERVICIOS":
-                Lists.getServicioList().add(
-                        new Servicio(
-                                cursor.getString(0)
-                                , cursor.getString(1)
-                                , cursor.getString(2)
-                                , cursor.getString(3)
-                                , cursor.getString(4)
-                                , cursor.getString(5)));
+                if (cursor.moveToFirst()) {
+                    do {
+                        Lists.getServicioList().add(
+                                new Servicio(
+                                        cursor.getString(0)
+                                        , cursor.getString(1)
+                                        , cursor.getString(2)
+                                        , cursor.getString(3)
+                                        , cursor.getString(4)
+                                        , cursor.getString(5)));
+
+                    } while (cursor.moveToNext());
+                }
+                break;
             case "RECORDATORIOS":
-                Lists.getRecordatorioList().add(
-                        new Recordatorio(
-                                cursor.getInt(0)
-                                , cursor.getString(1)
-                                , cursor.getString(2)
-                                , cursor.getString(3)));
+                if (cursor.moveToFirst()) {
+                    do {
+                        Lists.getRecordatorioList().add(
+                                new Recordatorio(
+                                        cursor.getInt(0)
+                                        , cursor.getString(1)
+                                        , cursor.getString(2)
+                                        , cursor.getString(3)));
+
+                    } while (cursor.moveToNext());
+                }
+                break;
         }
     }
 
     /**
-      Allocate rows and columns in ram memory because of speed
+     * Allocate rows and columns in ram memory because of speed
      */
     public void initList(String tableName) {
         selectRows(tableName);
-
     }
 
     /**
-      UPDATE
+     * UPDATE
      */
     public void update(String tableName, String set, String where, String like) {
         SQLiteDatabase db = getReadableDatabase();
@@ -195,17 +220,19 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
     /**
-      DELETE
+     * DELETE
      */
     public void delete(String tableName, String where, String like) {
-        SQLiteDatabase db = getReadableDatabase();
+        SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
-            db.execSQL("DELETE FROM " + tableName + " WHERE " + where + " = " + like);
+            db.execSQL("DELETE FROM " + tableName + " WHERE " + where + " =  '" + like + "' ");
         }
     }
 
-    /** THESE ARE AUXILIAR FUNCTIONS TO HELP THE DEVELOPER DEBUG THE PROJECT WHEN CHANGING
-      DATABASE STRUCTURE */
+    /**
+     * THESE ARE AUXILIAR FUNCTIONS TO HELP THE DEVELOPER DEBUG THE PROJECT WHEN CHANGING
+     * DATABASE STRUCTURE
+     */
 
 
     //Auxiliar function to debug. Returns the row count of a table

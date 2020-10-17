@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.Toast;
 
 import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.database.TestOperations;
 import swtizona.androidapps.bpv.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -37,6 +39,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fab.setOnClickListener(this);
 
+        //Initing Lists
+        Lists.initLists();
+        initLists();
+
 
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -59,31 +65,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         initFab();
     }
 
-    private void initDataBase(){
+    private void initLists(){
         DataBaseController db = new DataBaseController(getApplicationContext());
-        if(db != null){
-            initLists(db);
-        }
-    }
-
-    private void initLists(DataBaseController db){
-        if(db.getRowCount("AUTOS") > 0){
+        if (db.getRowCount("AUTOS") > 0) {
             db.initList("AUTOS");
         }
-        if(db.getRowCount("PRODUCTOS") > 0){
+        if (db.getRowCount("PRODUCTOS") > 0) {
             db.initList("PRODUCTOS");
         }
-        if(db.getRowCount("TALLERES") > 0){
-            db.initList("TALLERES");
-        }
-        if(db.getRowCount("SERVICIOS") > 0){
-            db.initList("SERVICIOS");
-        }
-        if(db.getRowCount("RECORDATORIOS") > 0){
+        if (db.getRowCount("RECORDATORIOS") > 0) {
             db.initList("RECORDATORIOS");
         }
+        if (db.getRowCount("SERVICIOS") > 0) {
+            db.initList("SERVICIOS");
+        }
+        if (db.getRowCount("TALLERES") > 0) {
+            db.initList("TALLERES");
+        }
+        db.close();
     }
-
 
 
     private void switchTab(int pos) {

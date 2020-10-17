@@ -16,7 +16,7 @@ public class Lists {
     private static ArrayList<Servicio> servicioList;
     private static ArrayList<Taller> tallerList;
 
-    public void initLists(){
+    public static void initLists(){
         autoList = new ArrayList<>();
         productoList = new ArrayList<>();
         recordatorioList = new ArrayList<>();

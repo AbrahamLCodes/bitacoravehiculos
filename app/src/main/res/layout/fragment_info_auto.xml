@@ -11,7 +11,7 @@
         android:layout_gravity="fill_horizontal" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/tituloInfo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Ford Ranger 2007"
@@ -35,54 +35,60 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/auto0"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Fabricante:"
+                    android:text="Fabricante: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/auto1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Modelo:"
+                    android:text="Modelo: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/auto2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Año:"
+                    android:text="Año: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/auto3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Motor:"
+                    android:text="Motor: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/auto4"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Matricula:"
+                    android:text="Matricula: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/auto5"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Comentario:                     "
+                    android:text="Comentario: "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
