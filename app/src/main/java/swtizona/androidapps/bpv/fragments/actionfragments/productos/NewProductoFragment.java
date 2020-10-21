@@ -15,8 +15,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.activities.ProductosActivity;
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
 
-public class NewProductoFragment extends AppCompatDialogFragment implements View.OnClickListener{
+public class NewProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private EditText campos[];
     private TextView cancelar, registrar;
@@ -37,18 +40,18 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.productoNewBack:
                 dismiss();
                 break;
-            case R.id.tallerNewOk:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+            case R.id.productoNewOk:
+                actionOk();
                 break;
         }
 
     }
 
-    private void initCampos(View v){
+    private void initCampos(View v) {
         campos = new EditText[6];
         cancelar = v.findViewById(R.id.productoNewBack);
         registrar = v.findViewById(R.id.productoNewOk);
@@ -58,9 +61,68 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
         registrar.setOnClickListener(this);
     }
 
-    private void initEditText(View v){
+    private void actionOk() {
         int i = 0;
+        boolean flag = true;
+        //Show input alert
         while (i < 5) {
+            if (campos[i].getText().length() == 0) {
+                Toast.makeText(getContext(), "Introduce el/la " + campos[i].getHint(), Toast.LENGTH_SHORT).show();
+                flag = false;
+                break;
+            }
+
+            i++;
+        }
+        if (flag) {
+            actionInsert();
+        }
+    }
+
+    private void actionInsert() {
+
+        DataBaseController db = new DataBaseController(getContext());
+        String[] rows = new String[6];
+        //Get TextEdits values
+        for (int i = 0; i < 6; i++) {
+            if (i == 5) {
+                //Validate non extra coment
+                if (campos[i].getText().length() == 0) {
+                    rows[i] = " ";
+                } else {
+                    rows[i] = campos[i].getText().toString();
+                }
+            } else {
+                rows[i] = campos[i].getText().toString();
+            }
+        }
+        if (checkForeignKey(campos[1].getText().toString())) {
+            db.insert6Rows("PRODUCTOS", rows);
+            updateRAM(db);
+        } else {
+            Toast.makeText(getContext(), "El auto no existe", Toast.LENGTH_SHORT).show();
+            campos[1].requestFocus();
+        }
+
+    }
+
+    private boolean checkForeignKey(String like) {
+        DataBaseController db = new DataBaseController(getContext());
+        return db.isForeignKey("AUTOS", "MATRICULA", like);
+    }
+
+    private void updateRAM(DataBaseController db) {
+        //Updating RAM data
+        Lists.initLists();
+        db.updateLists();
+        db.close();
+        ProductosActivity.updateUI();
+        dismiss();
+    }
+
+    private void initEditText(View v) {
+        int i = 0;
+        while (i < 6) {
             int res = getResources().getIdentifier(
                     "productoIn" + (i)
                     , "id"

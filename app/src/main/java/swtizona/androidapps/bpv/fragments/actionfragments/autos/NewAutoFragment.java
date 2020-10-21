@@ -53,6 +53,7 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
                 break;
             case R.id.autoNewOk:
                 actionOk();
+                dismiss();
                 break;
         }
     }
@@ -109,9 +110,9 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
     private void updateRAM(DataBaseController db){
         //Updating RAM data
         Lists.initLists();
-        db.initList("AUTOS");
-        db.close();
+        db.updateLists();
         AutosActivity.updateUI();
-        dismiss();
+        db.close();
+
     }
 }

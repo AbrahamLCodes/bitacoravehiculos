@@ -11,6 +11,7 @@
         android:layout_gravity="fill_horizontal" />
 
     <TextView
+        android:id="@+id/tituloInfoProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Filtro de gasolina"
@@ -34,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/producto0"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Se aplica al/los automovil(es):"
@@ -43,6 +45,7 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/producto1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Modelo:"
@@ -52,6 +55,7 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/producto2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Marca:"
@@ -61,6 +65,7 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/producto3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="#Serie:"
@@ -70,6 +75,7 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/producto4"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Comentario:"

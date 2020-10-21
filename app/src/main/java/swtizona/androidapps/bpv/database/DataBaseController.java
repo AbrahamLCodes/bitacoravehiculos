@@ -105,7 +105,6 @@ public class DataBaseController extends SQLiteOpenHelper {
                     + rows[4] + "','"
                     + rows[5] + "')");
         }
-        bd.close();
     }
 
 
@@ -204,8 +203,16 @@ public class DataBaseController extends SQLiteOpenHelper {
     /**
      * Allocate rows and columns in ram memory because of speed
      */
-    public void initList(String tableName) {
+    private void initList(String tableName) {
         selectRows(tableName);
+    }
+
+    public void updateLists() {
+        initList("AUTOS");
+        initList("PRODUCTOS");
+        initList("TALLERES");
+        initList("SERVICIOS");
+        initList("RECORDATORIOS");
     }
 
     /**
@@ -227,6 +234,17 @@ public class DataBaseController extends SQLiteOpenHelper {
         if (db != null) {
             db.execSQL("DELETE FROM " + tableName + " WHERE " + where + " =  '" + like + "' ");
         }
+    }
+
+
+    /**
+     * Function to check if Foreign Key exists in a table
+     */
+    public boolean isForeignKey(String tableName, String where, String like) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName + " WHERE " + where + " =  '" + like + "' ",
+                null);
+        return cursor.moveToFirst();
     }
 
     /**

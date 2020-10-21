@@ -29,12 +29,6 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
         this.pos = position;
     }
 
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        return super.onCreateDialog(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -74,12 +68,13 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
         DataBaseController db = new DataBaseController(getContext());
         db.delete("AUTOS", "MATRICULA", Lists.getAutoList().get(pos).getMatricula());
         updateRAM(db);
+        db.close();
     }
 
     private void updateRAM(DataBaseController db){
         //Updating RAM data
         Lists.initLists();
-        db.initList("AUTOS");
+        db.updateLists();
         AutosActivity.updateUI();
     }
 
@@ -87,12 +82,11 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
         regresar = v.findViewById(R.id.autoInfoRegresar);
         buscar = v.findViewById(R.id.autoInfoBuscar);
         eliminar = v.findViewById(R.id.autoInfoEliminar);
-        titulo = v.findViewById(R.id.tituloInfo);
+        titulo = v.findViewById(R.id.tituloInfoAuto);
+        editar = v.findViewById(R.id.autoInfoEditar);
 
         initCampos(v);
         setCampos();
-
-        editar = v.findViewById(R.id.autoInfoEditar);
 
         regresar.setOnClickListener(this);
         buscar.setOnClickListener(this);

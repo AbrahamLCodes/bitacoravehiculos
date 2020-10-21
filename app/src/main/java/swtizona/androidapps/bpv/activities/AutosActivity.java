@@ -3,11 +3,9 @@ package swtizona.androidapps.bpv.activities;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,7 +13,6 @@ import android.widget.Toast;
 
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
-import swtizona.androidapps.bpv.database.TestOperations;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.InfoAutoFragment;
 import swtizona.androidapps.bpv.R;
@@ -26,10 +23,10 @@ public class AutosActivity extends AppCompatActivity implements
         View.OnClickListener
         , AdapterView.OnItemClickListener {
 
-    //private String[] autos = {"Ford Ranger 2007", "Dodge RAM 2003", "Mitsubishi Mirage 2017"};
     private static ListView listAutos;
     private ImageView backButton;
     private TextView nuevo, buscar;
+
     private static Auto[] autos;
     private static Context context;
 
@@ -72,20 +69,28 @@ public class AutosActivity extends AppCompatActivity implements
 
     private void initComponents() {
         backButton = findViewById(R.id.autosBack);
-
         listAutos = findViewById(R.id.listAutos);
-
-        updateUI();
-
-        backButton.setOnClickListener(this);
-        listAutos.setOnItemClickListener(this);
-
         nuevo = findViewById(R.id.autoNuevo);
         buscar = findViewById(R.id.autoBuscar);
 
+        Lists.initLists();
+        DataBaseController db = new DataBaseController(getApplicationContext());
+        db.updateLists();
+        updateUI();
+        db.close();
 
+        backButton.setOnClickListener(this);
+        listAutos.setOnItemClickListener(this);
         nuevo.setOnClickListener(this);
         buscar.setOnClickListener(this);
+    }
+
+    public static void updateUI() {
+        initArray();
+        listAutos.setAdapter(new AutoAdapter(
+                context
+                , R.layout.adapter_auto
+                , autos));
     }
 
     private static void initArray() {
@@ -95,17 +100,10 @@ public class AutosActivity extends AppCompatActivity implements
         }
     }
 
+
     private void openDialogFragment() {
         NewAutoFragment newAutoFragment = new NewAutoFragment();
         newAutoFragment.show(getSupportFragmentManager(), "Registrar auto");
-    }
-
-    public static void updateUI() {
-        initArray();
-        listAutos.setAdapter(new AutoAdapter(
-                context
-                , R.layout.adapter_auto
-                , autos));
     }
 
     private void openInfoDialog(int position) {

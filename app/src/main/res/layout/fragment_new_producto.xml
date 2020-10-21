@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    android:layout_height="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:background="@layout/shape_producto_dialog">
+    android:layout_height="match_parent"
+    android:background="@layout/shape_producto_dialog"
+    android:orientation="vertical">
 
     <!-- A blank view to force the layout to be full-width -->
     <View
@@ -23,8 +22,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
-        android:layout_weight="4">
+        android:layout_weight="4"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,7 +39,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="Nombre del Producto"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -55,7 +54,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="Placas del auto a asignar"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -70,7 +69,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="Modelo"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -85,7 +84,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="Marca"
-                android:inputType="number"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -100,7 +99,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="#Serie"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -115,7 +114,7 @@
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
                 android:hint="Comentario"
-                android:inputType="textPersonName"
+                android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"
                 android:textColorHint="#554E4E"
@@ -124,7 +123,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
     <LinearLayout

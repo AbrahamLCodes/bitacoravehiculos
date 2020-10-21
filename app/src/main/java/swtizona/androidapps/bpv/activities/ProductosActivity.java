@@ -2,6 +2,7 @@ package swtizona.androidapps.bpv.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,10 +12,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.actionfragments.productos.InfoProductoFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.productos.NewProductoFragment;
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.modeladapter.AutoAdapter;
 import swtizona.androidapps.bpv.modeladapter.ProductoAdapter;
+import swtizona.androidapps.bpv.modeldata.Auto;
 import swtizona.androidapps.bpv.modeldata.Producto;
 
 public class ProductosActivity extends AppCompatActivity implements
@@ -22,10 +27,10 @@ public class ProductosActivity extends AppCompatActivity implements
         , View.OnClickListener {
 
     private TextView nuevo, buscar;
-    private ListView lista;
+    private static ListView lista;
     private ImageView back;
-    //private String[] productos = {"Filtro Gasolina Ranger", "Filtro aceite Ranger", "Bujias Ka"};
 
+    /*
     private Producto[] productos = {
             new Producto(
                     "Filtro de gasolina",
@@ -49,12 +54,17 @@ public class ProductosActivity extends AppCompatActivity implements
                     "45987",
                     "No comprar en Refaccin!")
     };
+     */
+    private static Producto[] productos;
+    private static Context context;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_productos);
+
+        context = this;
         initComponents();
     }
 
@@ -65,6 +75,7 @@ public class ProductosActivity extends AppCompatActivity implements
                 openNuevoDialog();
                 break;
             case R.id.productoBuscar:
+                Toast.makeText(context, "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.productosBack:
                 onBackPressed();
@@ -72,16 +83,12 @@ public class ProductosActivity extends AppCompatActivity implements
         }
     }
 
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        InfoProductoFragment infoProductoFragment = new InfoProductoFragment();
-        infoProductoFragment.show(getSupportFragmentManager(), "Producto Info");
+        openInfoDialog(position);
     }
 
-    private void openNuevoDialog() {
-        NewProductoFragment newProductoFragment = new NewProductoFragment();
-        newProductoFragment.show(getSupportFragmentManager(), "Producto Nuevo");
-    }
 
     private void initComponents() {
         nuevo = findViewById(R.id.productoNuevo);
@@ -89,14 +96,42 @@ public class ProductosActivity extends AppCompatActivity implements
         lista = findViewById(R.id.listaProductos);
         back = findViewById(R.id.productosBack);
 
+        Lists.initLists();
+        DataBaseController db = new DataBaseController(getApplicationContext());
+        db.updateLists();
+        updateUI();
+        db.close();
+
         nuevo.setOnClickListener(this);
         buscar.setOnClickListener(this);
         lista.setOnItemClickListener(this);
         back.setOnClickListener(this);
 
+    }
+
+    public static void updateUI() {
+        initArray();
         lista.setAdapter(new ProductoAdapter(
-                this
+                context
                 , R.layout.adapter_producto
                 , productos));
+    }
+
+    private static void initArray() {
+        productos = new Producto[Lists.getProductoList().size()];
+        for (int i = 0; i < Lists.getProductoList().size(); i++) {
+            productos[i] = Lists.getProductoList().get(i);
+        }
+    }
+
+
+    private void openNuevoDialog() {
+        NewProductoFragment newProductoFragment = new NewProductoFragment();
+        newProductoFragment.show(getSupportFragmentManager(), "Producto Nuevo");
+    }
+
+    private void openInfoDialog(int pos) {
+        InfoProductoFragment infoProductoFragment = new InfoProductoFragment(pos);
+        infoProductoFragment.show(getSupportFragmentManager(), "Producto Info");
     }
 }
