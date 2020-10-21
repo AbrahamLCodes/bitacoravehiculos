@@ -30,31 +30,6 @@ public class ProductosActivity extends AppCompatActivity implements
     private static ListView lista;
     private ImageView back;
 
-    /*
-    private Producto[] productos = {
-            new Producto(
-                    "Filtro de gasolina",
-                    "Ford Ranger 2007",
-                    "15B789",
-                    "GHONER",
-                    "154678",
-                    "Es de 1 aguja"),
-            new Producto(
-                    "Filtro de aceite",
-                    "Ford Ka 2003",
-                    "14B457",
-                    "DURALAST",
-                    "1234789",
-                    "Es mejor en Autozone"),
-            new Producto(
-                    "Bujias",
-                    "Ford Ranger 1988",
-                    "457B23",
-                    "GHONER",
-                    "45987",
-                    "No comprar en Refaccin!")
-    };
-     */
     private static Producto[] productos;
     private static Context context;
 

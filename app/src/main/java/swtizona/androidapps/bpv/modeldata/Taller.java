@@ -12,16 +12,16 @@ public class Taller {
 
     */
 
-    public Taller(String taller, String calle, String ncalle, String colonia, String ciudad
-            , String estado, String telefono, String comentario) {
+    public Taller(String taller,  String telefono, String calle, String ncalle, String colonia, String ciudad
+            , String estado, String comentario) {
         this.taller = taller;
+        this.telefono = telefono;
         this.calle = calle;
         this.ncalle = ncalle;
         this.colonia = colonia;
-        this.telefono = telefono;
-        this.comentario = comentario;
         this.ciudad = ciudad;
         this.estado = estado;
+        this.comentario = comentario;
     }
 
     public String getCiudad() {

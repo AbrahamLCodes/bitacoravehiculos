@@ -25,10 +25,13 @@ public class Queries {
 
     public static final String createTalleres
             = "CREATE TABLE TALLERES ("
-            + "NOMBRE TEXT NOT NULL"
-            + ", CALLE TEXT NOT NULL"
-            + ", COLONIA TEXT NOT NULL"
+            + "  NOMBRE TEXT NOT NULL"
             + ", TELEFONO TEXT NOT NULL"
+            + ", CALLE TEXT NOT NULL"
+            + ", NCALLE TEXT NOT NULL"
+            + ", COLONIA TEXT NOT NULL"
+            + ", CIUDAD TEXT NOT NULL"
+            + ", ESTADO TEXT NOT NULL"
             + ", COMENTARIO TEXT)";
 
     public static final String createServicios

@@ -18,105 +18,142 @@
         android:textColor="#000000"
         android:textSize="30sp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
-        android:orientation="vertical">
+        android:fillViewport="true">
 
-
-        <EditText
-            android:id="@+id/tallerIn0"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="Nombre"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="20sp" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/tallerIn1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="Calle"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/tallerIn0"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Nombre"
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/tallerIn2"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="#"
-            android:inputType="number"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/tallerIn1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Telefono"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/tallerIn3"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="Colonia"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/tallerIn2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Calle"
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/tallerIn4"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="Teléfono"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="20sp" />
+            <EditText
+                android:id="@+id/tallerIn3"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="#Calle"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
 
-        <EditText
-            android:id="@+id/tallerIn5"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            android:layout_weight="1"
-            android:background="@layout/shape_input"
-            android:fontFamily="@font/helvetica"
-            android:hint="Comentario extra sobre el taller"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="#000"
-            android:textColorHint="#554E4E"
-            android:textSize="15sp" />
+            <EditText
+                android:id="@+id/tallerIn4"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Colonia"
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/tallerIn5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Ciudad"
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
+
+            <EditText
+                android:id="@+id/tallerIn6"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Estado: "
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="20sp" />
 
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/tallerIn7"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                android:layout_weight="1"
+                android:background="@layout/shape_input"
+                android:fontFamily="@font/helvetica"
+                android:hint="Comentario: "
+                android:inputType="textCapSentences"
+                android:padding="10dp"
+                android:textColor="#000"
+                android:textColorHint="#554E4E"
+                android:textSize="15sp" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -11,6 +11,7 @@
         android:layout_gravity="fill_horizontal" />
 
     <TextView
+        android:id="@+id/tituloInfoTaller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Automotriz del Norte"
@@ -34,6 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <TextView
+                    android:id="@+id/taller0"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:text="Nombre:"
@@ -43,49 +45,36 @@
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/taller1"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Calle:"
+                    android:text="Telefono:                     "
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/taller2"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="#Calle:"
+                    android:text="Direccion:"
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
                 <TextView
+                    android:id="@+id/taller3"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:text="Colonia:"
+                    android:text="Comentario:"
                     android:layout_weight="1"
                     android:textSize="20sp"
                     android:textColor="#000"
                     android:layout_margin="10dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Telefono:"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Comentario:                     "
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
 
             </LinearLayout>
         </ScrollView>

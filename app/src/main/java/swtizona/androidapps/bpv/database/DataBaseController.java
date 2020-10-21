@@ -107,6 +107,25 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
+    /**
+     * INSERT with 8 rows (For Talleres)
+     */
+
+    public void insert8Rows(String tableName, String[] rows) {
+        SQLiteDatabase bd = getWritableDatabase();
+        if (bd != null) {
+            bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
+                    "'" + rows[0] + "','"
+                    + rows[1] + "','"
+                    + rows[2] + "','"
+                    + rows[3] + "','"
+                    + rows[4] + "','"
+                    + rows[5] + "','"
+                    + rows[6] + "','"
+                    + rows[7] + "')");
+        }
+    }
+
 
     /**
      * SELECT
@@ -156,7 +175,7 @@ public class DataBaseController extends SQLiteOpenHelper {
                     do {
                         Lists.getTallerList().add(
                                 new Taller(
-                                        cursor.getString(0)
+                                          cursor.getString(0)
                                         , cursor.getString(1)
                                         , cursor.getString(2)
                                         , cursor.getString(3)
