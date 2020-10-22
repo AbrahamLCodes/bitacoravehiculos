@@ -27,38 +27,7 @@ public class TallerActivity extends AppCompatActivity implements
     private TextView nuevo, buscar;
     private static ListView lista;
     private ImageView back;
-    //private String[] talleres = {"Alfredo Armendariz", "Carlos el carpa", "Gil electrico"};
-    /*
-    private Taller[] talleres = {
-            new Taller(
-                    "Alfredo Armendáriz"
-                    , "Aldama"
-                    , "112"
-                    , "Centro"
-                    , "Camargo"
-                    , "Chihuahua"
-                    , "(648)122-7066"
-                    , "Es raterillos el wey"),
-            new Taller(
-                    "Carlos el carpa"
-                    , "Pablo Guinter"
-                    , "345"
-                    , "Arbol Grande"
-                    , "Camargo"
-                    , "Chihuahua"
-                    , "(648)109-0459"
-                    , "Sí le sabe a las Rangers"),
-            new Taller(
-                    "Perea Clutch y Embrague"
-                    , "José María Iglesias"
-                    , "504"
-                    , "Granjas"
-                    , "Chihuahua"
-                    , "Chihuahua"
-                    , "(614)140-4794"
-                    , "Es muy amable"),
-    };
-    */
+
 
     private static Taller[] talleres;
     private static Context context;

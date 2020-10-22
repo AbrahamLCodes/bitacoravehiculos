@@ -13,10 +13,20 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.activities.ProductosActivity;
+import swtizona.androidapps.bpv.activities.ServiciosActivity;
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
 
 public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener{
 
-    private TextView regresar, buscar, editar, eliminar;
+    private TextView regresar, buscar, editar, eliminar, titulo;
+    private TextView [] campos;
+    private int pos;
+
+    public InfoServicioFragment(int pos){
+        this.pos = pos;
+    }
 
     @Nullable
     @Override
@@ -28,6 +38,7 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        campos = new TextView[5];
         initComponents(view);
     }
 
@@ -45,10 +56,51 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
                 dismiss();
                 break;
             case R.id.servicioInfoEliminar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                delete();
+                dismiss();
                 break;
         }
 
+    }
+
+    private void delete() {
+        DataBaseController db = new DataBaseController(getContext());
+        db.delete("SERVICIOS", "SERVICIO", Lists.getServicioList().get(pos).getServicio());
+        updateRAM(db);
+        db.close();
+    }
+
+    private void updateRAM(DataBaseController db) {
+        Lists.initLists();
+        db.updateLists();
+        ServiciosActivity.updateUI();
+    }
+
+    private void openNewDialog(){
+        NewServicioFragment newServicioFragment = new NewServicioFragment();
+        newServicioFragment.show(getFragmentManager(), "Registrar Servicio");
+    }
+
+    private void initCampos(View view) {
+        int i = 0;
+        while (i < 5) {
+            int res = getResources().getIdentifier(
+                    "servicio" + (i)
+                    , "id"
+                    , getActivity().getPackageName());
+            campos[i] = view.findViewById(res);
+            i++;
+        }
+    }
+
+    private void setCampos() {
+        titulo.setText(Lists.getServicioList().get(pos).getServicio());
+
+        campos[0].setText(campos[0].getText() + " " + Lists.getServicioList().get(pos).getAutomovil());
+        campos[1].setText(campos[1].getText() + " " + Lists.getServicioList().get(pos).getFecha());
+        campos[2].setText(campos[2].getText() + " " + Lists.getServicioList().get(pos).getTaller());
+        campos[3].setText(campos[3].getText() + " " + Lists.getServicioList().get(pos).getProductos());
+        campos[4].setText(campos[4].getText() + " " + Lists.getServicioList().get(pos).getComentario());
     }
 
     private void initComponents(View v){
@@ -56,15 +108,14 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
         buscar = v.findViewById(R.id.servicioInfoBuscar);
         editar = v.findViewById(R.id.servicioInfoEditar);
         eliminar = v.findViewById(R.id.servicioInfoEliminar);
+        titulo = v.findViewById(R.id.servicioInfoTitulo);
+
+        initCampos(v);
+        setCampos();
 
         regresar.setOnClickListener(this);
         buscar.setOnClickListener(this);
         editar.setOnClickListener(this);
         eliminar.setOnClickListener(this);
-    }
-
-    private void openNewDialog(){
-        NewServicioFragment newServicioFragment = new NewServicioFragment();
-        newServicioFragment.show(getFragmentManager(), "Registrar Servicio");
     }
 }
