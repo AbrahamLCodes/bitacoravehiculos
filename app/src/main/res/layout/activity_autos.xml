@@ -35,7 +35,7 @@
             android:fontFamily="@font/helvetica"
             android:gravity="center"
             android:paddingRight="60dp"
-            android:text="Autos"
+            android:text="Automoviles"
             android:textColor="#FFFFFF"
             android:textSize="35sp"
             android:textStyle="bold" />
