@@ -104,10 +104,9 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
                 + Lists.getTallerList().get(pos).getCiudad() + " "
                 + Lists.getTallerList().get(pos).getEstado();
 
-        campos[0].setText(campos[0].getText() + " " + Lists.getTallerList().get(pos).getTaller());
-        campos[1].setText(campos[1].getText() + " " + Lists.getTallerList().get(pos).getTelefono());
-        campos[2].setText(direccion);
-        campos[3].setText(campos[3].getText() + " " + Lists.getTallerList().get(pos).getComentario());
+        campos[0].setText(campos[0].getText() + " " + Lists.getTallerList().get(pos).getTelefono());
+        campos[1].setText(campos[1].getText() + " " + direccion);
+        campos[2].setText(campos[2].getText() + " " + Lists.getTallerList().get(pos).getComentario());
     }
 
     private void initComponents(View v){

@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@layout/shape_taller_dialog">
+    android:background="@layout/shape_taller_dialog"
+    android:orientation="vertical">
     <!-- A blank view to force the layout to be full-width -->
     <View
         android:layout_width="wrap_content"
@@ -14,148 +14,140 @@
         android:id="@+id/tituloInfoTaller"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Automotriz del Norte"
-        android:gravity="center"
-        android:textSize="25sp"
         android:layout_margin="10dp"
+        android:fontFamily="@font/helvetica"
+        android:gravity="center"
+        android:text="Automotriz del Norte"
         android:textColor="#000"
-        android:fontFamily="@font/helvetica"/>
+        android:textSize="25sp" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
-        <ScrollView
+        android:fillViewport="true">
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="5"
-            android:fillViewport="true">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="6"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/taller0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Telefono:                     "
+                        android:textColor="#000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/taller1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Direccion:"
+                        android:textColor="#000"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/taller2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Comentario:"
+                        android:textColor="#000"
+                        android:textSize="20sp" />
+
+
+                </LinearLayout>
+            </ScrollView>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
-                    android:id="@+id/taller0"
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Nombre:"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/taller1"
+                    <TextView
+                        android:id="@+id/tallerInfoRegresar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:background="#009688"
+                        android:fontFamily="@font/helvetica"
+                        android:gravity="center"
+                        android:text="Regresar"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tallerInfoBuscar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:background="#03A9F4"
+                        android:fontFamily="@font/helvetica"
+                        android:gravity="center"
+                        android:text="Detalles"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Telefono:                     "
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/taller2"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Direccion:"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    <TextView
+                        android:id="@+id/tallerInfoEditar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:background="#FF9800"
+                        android:fontFamily="@font/helvetica"
+                        android:gravity="center"
+                        android:text="Editar"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/taller3"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:text="Comentario:"
-                    android:layout_weight="1"
-                    android:textSize="20sp"
-                    android:textColor="#000"
-                    android:layout_margin="10dp"/>
+                    <TextView
+                        android:id="@+id/tallerInfoEliminar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_margin="20dp"
+                        android:layout_weight="1"
+                        android:background="#FF5722"
+                        android:fontFamily="@font/helvetica"
+                        android:gravity="center"
+                        android:text="Eliminar"
+                        android:textColor="#fff"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-
-
-            </LinearLayout>
-        </ScrollView>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="vertical"
-            android:layout_weight="3">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tallerInfoRegresar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="#009688"
-                    android:fontFamily="@font/helvetica"
-                    android:gravity="center"
-                    android:text="Regresar"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tallerInfoBuscar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="#03A9F4"
-                    android:fontFamily="@font/helvetica"
-                    android:gravity="center"
-                    android:text="Detalles"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:orientation="horizontal"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/tallerInfoEditar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="#FF9800"
-                    android:fontFamily="@font/helvetica"
-                    android:gravity="center"
-                    android:text="Editar"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tallerInfoEliminar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_margin="20dp"
-                    android:layout_weight="1"
-                    android:background="#FF5722"
-                    android:fontFamily="@font/helvetica"
-                    android:gravity="center"
-                    android:text="Eliminar"
-                    android:textColor="#fff"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+    </ScrollView>
 </LinearLayout>

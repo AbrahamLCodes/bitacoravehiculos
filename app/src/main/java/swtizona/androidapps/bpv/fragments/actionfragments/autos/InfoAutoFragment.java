@@ -39,7 +39,7 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        campos = new TextView[6];
+        campos = new TextView[3];
         initComponents(view);
     }
 
@@ -96,7 +96,7 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
 
     private void initCampos(View view) {
         int i = 0;
-        while (i < 6) {
+        while (i < 3) {
             int res = getResources().getIdentifier(
                     "auto" + (i)
                     , "id"
@@ -114,12 +114,10 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
                         + " " +
                         Lists.getAutoList().get(pos).getAno());
 
-        campos[0].setText(campos[0].getText() + " " + Lists.getAutoList().get(pos).getFabricante());
-        campos[1].setText(campos[1].getText() + " " + Lists.getAutoList().get(pos).getModelo());
-        campos[2].setText(campos[2].getText() + " " + Lists.getAutoList().get(pos).getAno());
-        campos[3].setText(campos[3].getText() + " " + Lists.getAutoList().get(pos).getMotor());
-        campos[4].setText(campos[4].getText() + " " + Lists.getAutoList().get(pos).getMatricula());
-        campos[5].setText(campos[5].getText() + " " + Lists.getAutoList().get(pos).getComentario());
+        campos[0].setText(campos[0].getText() + " " + Lists.getAutoList().get(pos).getMotor());
+        campos[1].setText(campos[1].getText() + " " + Lists.getAutoList().get(pos).getMatricula());
+        campos[2].setText(campos[2].getText() + " " + Lists.getAutoList().get(pos).getComentario());
+
     }
 
 }
