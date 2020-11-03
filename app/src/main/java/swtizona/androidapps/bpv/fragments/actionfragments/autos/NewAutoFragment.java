@@ -24,6 +24,19 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
     private EditText campos[];
     private TextView cancelar, registrar;
 
+    //Variables to identify if user wants to insert a new car or update it
+    boolean insert;
+    String [] values;
+
+    public NewAutoFragment(boolean insert){
+        this.insert = insert;
+    }
+
+    public NewAutoFragment(boolean insert, String[] values){
+        this.insert = insert;
+        this.values = values;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -66,6 +79,9 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = view.findViewById(res);
+            if(!insert){
+                campos[i].setText(values[i]);
+            }
             i++;
         }
     }
@@ -103,7 +119,15 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
             }
         }
 
-        db.insert6Rows("AUTOS", rows);
+        if(insert){
+            db.insert6Rows("AUTOS", rows);
+        }else {
+            db.update(
+                    "AUTOS",
+                    "FABRICANTE = '" + rows[0] +"', MODELO = '"+rows[1]+"', ANO = '"+rows[2] +"', MOTOR = '"+rows[3]+"', MATRICULA = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                    "MATRICULA",
+                    "'"+values[4]+"'");
+        }
         updateRAM(db);
     }
 

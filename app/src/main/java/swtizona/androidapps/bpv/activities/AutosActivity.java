@@ -102,7 +102,7 @@ public class AutosActivity extends AppCompatActivity implements
 
 
     private void openDialogFragment() {
-        NewAutoFragment newAutoFragment = new NewAutoFragment();
+        NewAutoFragment newAutoFragment = new NewAutoFragment(true);
         newAutoFragment.show(getSupportFragmentManager(), "Registrar auto");
     }
 

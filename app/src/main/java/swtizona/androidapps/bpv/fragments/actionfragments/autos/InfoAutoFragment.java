@@ -22,6 +22,7 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
 
     private TextView regresar, buscar, eliminar, editar, titulo;
     private TextView[] campos;
+    String [] values;
 
     private int pos;
 
@@ -40,6 +41,7 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         campos = new TextView[3];
+        values = new String[6];
         initComponents(view);
     }
 
@@ -57,7 +59,7 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
                 dismiss();
                 break;
             case R.id.autoInfoEditar:
-                NewAutoFragment newAutoFragment = new NewAutoFragment();
+                NewAutoFragment newAutoFragment = new NewAutoFragment(false, values);
                 newAutoFragment.show(getFragmentManager(), " Aaaa");
                 dismiss();
                 break;
@@ -118,6 +120,12 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
         campos[1].setText(campos[1].getText() + " " + Lists.getAutoList().get(pos).getMatricula());
         campos[2].setText(campos[2].getText() + " " + Lists.getAutoList().get(pos).getComentario());
 
+        values[0] = Lists.getAutoList().get(pos).getFabricante();
+        values[1] = Lists.getAutoList().get(pos).getModelo();
+        values[2] = Lists.getAutoList().get(pos).getAno();
+        values[3] = Lists.getAutoList().get(pos).getMotor();
+        values[4] = Lists.getAutoList().get(pos).getMatricula();
+        values[5] = Lists.getAutoList().get(pos).getComentario();
     }
 
 }
