@@ -88,7 +88,7 @@ public class ServiciosActivity extends AppCompatActivity implements
     }
 
     private void openNewDialog() {
-        NewServicioFragment newServicioFragment = new NewServicioFragment();
+        NewServicioFragment newServicioFragment = new NewServicioFragment(true);
         newServicioFragment.show(getSupportFragmentManager(), "Registar Servicio");
     }
 

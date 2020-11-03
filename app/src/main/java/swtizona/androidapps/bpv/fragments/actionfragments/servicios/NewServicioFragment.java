@@ -24,6 +24,19 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
     private EditText campos[];
     private TextView cancelar, registrar;
 
+    //Variables to identify if user wants to insert a new car or update it
+    boolean insert;
+    String [] values;
+
+    public NewServicioFragment(boolean insert){
+        this.insert = insert;
+    }
+
+    public NewServicioFragment(boolean insert, String [] values){
+        this.insert = insert;
+        this.values = values;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -102,7 +115,15 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                 campos[1].getText().toString()
                 , campos[3].getText().toString()
                 , campos[4].getText().toString())) {
-            db.insert6Rows("SERVICIOS", rows);
+            if(insert){
+                db.insert6Rows("SERVICIOS", rows);
+            }else {
+                db.update(
+                        "SERVICIOS",
+                        "SERVICIO = '"+rows[0]+"', AUTO = '"+rows[1]+"', FECHA = '"+rows[2]+"', TALLER = '"+rows[3]+"', PRODUCTOS = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                        "SERVICIO",
+                        "'"+values[0]+"'");
+            }
             updateRAM(db);
         }
     }
@@ -147,6 +168,10 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = v.findViewById(res);
+            //Set textview content
+            if(!insert){
+                campos[i].setText(values[i]);
+            }
             i++;
         }
     }

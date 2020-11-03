@@ -20,7 +20,7 @@ public class Queries {
             + ", AUTO TEXT NOT NULL REFERENCES AUTOS(MATRICULA)"
             + ", MODELO TEXT PRIMARY KEY NOT NULL"
             + ", MARCA TEXT NOT NULL"
-            + ", NSERIE TEXT NOT NULL" 
+            + ", NSERIE TEXT NOT NULL"
             + ", COMENTARIO TEXT);";
 
     public static final String createTalleres
