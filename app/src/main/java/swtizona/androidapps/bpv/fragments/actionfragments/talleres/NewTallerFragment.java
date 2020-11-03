@@ -24,6 +24,19 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
     private EditText campos[];
     private TextView cancelar, registrar;
 
+    //Variables to identify if user wants to insert a new car or update it
+    boolean insert;
+    String [] values;
+
+    public NewTallerFragment(boolean insert){
+        this.insert = insert;
+    }
+
+    public NewTallerFragment(boolean insert, String[] values){
+        this.insert = insert;
+        this.values = values;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,7 +110,15 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
             }
         }
 
-        db.insert8Rows("TALLERES", rows);
+        if(insert){
+            db.insert8Rows("TALLERES", rows);
+        }else {
+            db.update("TALLERES",
+                    "NOMBRE = '"+rows[0]+"', TELEFONO = '"+rows[1]+"', CALLE = '"+rows[2]+"', NCALLE = '"+rows[3]+"', COLONIA = '"+rows[4]+"', CIUDAD = '"+rows[5]+"', ESTADO = '"+rows[6]+"', COMENTARIO = '"+rows[7]+"'",
+                    "TELEFONO",
+                    "'"+values[1]+"'");
+        }
+
         updateRAM(db);
     }
 
@@ -118,6 +139,9 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = v.findViewById(res);
+            if(!insert){
+                campos[i].setText(values[i]);
+            }
             i++;
         }
     }

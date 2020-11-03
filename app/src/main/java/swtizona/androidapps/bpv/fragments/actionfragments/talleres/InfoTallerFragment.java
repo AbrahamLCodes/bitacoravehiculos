@@ -24,6 +24,7 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
     private TextView regresar, buscar, editar, eliminar, titulo;
     private TextView[] campos;
     private int pos;
+    String [] values;
 
     public InfoTallerFragment(int pos){
         this.pos = pos;
@@ -40,6 +41,7 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         campos = new TextView[4];
+        values = new String[8];
         initComponents(view);
     }
 
@@ -77,7 +79,7 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
     }
 
     private void openNewDialog(){
-        NewTallerFragment newTallerFragment = new NewTallerFragment();
+        NewTallerFragment newTallerFragment = new NewTallerFragment(false, values);
         newTallerFragment.show(getFragmentManager(),"Editar Taller");
     }
 
@@ -107,6 +109,15 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
         campos[0].setText(campos[0].getText() + " " + Lists.getTallerList().get(pos).getTelefono());
         campos[1].setText(campos[1].getText() + " " + direccion);
         campos[2].setText(campos[2].getText() + " " + Lists.getTallerList().get(pos).getComentario());
+
+        values[0] = Lists.getTallerList().get(pos).getTaller();
+        values[1] = Lists.getTallerList().get(pos).getTelefono();
+        values[2] = Lists.getTallerList().get(pos).getCalle();
+        values[3] = Lists.getTallerList().get(pos).getNcalle();
+        values[4] = Lists.getTallerList().get(pos).getColonia();
+        values[5] = Lists.getTallerList().get(pos).getCiudad();
+        values[6] = Lists.getTallerList().get(pos).getEstado();
+        values[7] = Lists.getTallerList().get(pos).getComentario();
     }
 
     private void initComponents(View v){

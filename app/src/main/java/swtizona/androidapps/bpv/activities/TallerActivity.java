@@ -63,7 +63,7 @@ public class TallerActivity extends AppCompatActivity implements
     }
 
     private void openNuevoDialog() {
-        NewTallerFragment newTallerFragment = new NewTallerFragment();
+        NewTallerFragment newTallerFragment = new NewTallerFragment(true);
         newTallerFragment.show(getSupportFragmentManager(), "Nuevo Taller");
 
     }
