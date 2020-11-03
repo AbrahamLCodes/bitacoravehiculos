@@ -101,7 +101,7 @@ public class ProductosActivity extends AppCompatActivity implements
 
 
     private void openNuevoDialog() {
-        NewProductoFragment newProductoFragment = new NewProductoFragment();
+        NewProductoFragment newProductoFragment = new NewProductoFragment(true);
         newProductoFragment.show(getSupportFragmentManager(), "Producto Nuevo");
     }
 

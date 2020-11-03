@@ -18,9 +18,9 @@ public class Queries {
             = "CREATE TABLE PRODUCTOS("
             + "NOMBRE TEXT NOT NULL"
             + ", AUTO TEXT NOT NULL REFERENCES AUTOS(MATRICULA)"
-            + ", MODELO TEXT NOT NULL"
+            + ", MODELO TEXT PRIMARY KEY NOT NULL"
             + ", MARCA TEXT NOT NULL"
-            + ", NSERIE TEXT NOT NULL"
+            + ", NSERIE TEXT NOT NULL" 
             + ", COMENTARIO TEXT);";
 
     public static final String createTalleres

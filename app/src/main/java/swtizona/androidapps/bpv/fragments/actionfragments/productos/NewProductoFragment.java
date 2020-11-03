@@ -18,11 +18,25 @@ import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
 
 public class NewProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private EditText campos[];
     private TextView cancelar, registrar;
+
+    //Variables to identify if user wants to insert a new car or update it
+    boolean insert;
+    String [] values;
+
+    public NewProductoFragment(boolean insert){
+        this.insert = insert;
+    }
+
+    public NewProductoFragment(boolean insert, String[] values){
+        this.insert = insert;
+        this.values = values;
+    }
 
     @Nullable
     @Override
@@ -96,8 +110,17 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
                 rows[i] = campos[i].getText().toString();
             }
         }
+
         if (checkForeignKey(campos[1].getText().toString())) {
-            db.insert6Rows("PRODUCTOS", rows);
+            if(insert){
+                db.insert6Rows("PRODUCTOS", rows);
+            }else{
+                db.update("PRODUCTOS",
+                        "NOMBRE = '" + rows[0] +"', AUTO = '"+rows[1]+"', MODELO = '"+rows[2]+"', MARCA = '"+rows[3]+"', NSERIE = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                        "MODELO",
+                        "'"+values[2]+"'"
+                );
+            }
             updateRAM(db);
         } else {
             Toast.makeText(getContext(), "El auto no existe", Toast.LENGTH_SHORT).show();
@@ -128,6 +151,9 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = v.findViewById(res);
+            if(!insert){
+                campos[i].setText(values[i]);
+            }
             i++;
         }
     }

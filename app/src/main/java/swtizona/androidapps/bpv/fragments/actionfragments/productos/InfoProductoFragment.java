@@ -22,6 +22,7 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
     private TextView regresar, buscar, editar, eliminar, titulo;
     private TextView[] campos;
     private int pos;
+    String [] values;
 
     public InfoProductoFragment(int pos) {
         this.pos = pos;
@@ -38,6 +39,7 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         campos = new TextView[5];
+        values = new String[6];
         initComponents(view);
     }
 
@@ -111,10 +113,18 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
         campos[2].setText(campos[2].getText() + " " + Lists.getProductoList().get(pos).getMarca());
         campos[3].setText(campos[3].getText() + " " + Lists.getProductoList().get(pos).getNserie());
         campos[4].setText(campos[4].getText() + " " + Lists.getProductoList().get(pos).getComentario());
+
+        values[0] = Lists.getProductoList().get(pos).getNombre();
+        values[1] = Lists.getProductoList().get(pos).getAuto();
+        values[2] = Lists.getProductoList().get(pos).getModelo();
+        values[3] = Lists.getProductoList().get(pos).getMarca();
+        values[4] = Lists.getProductoList().get(pos).getNserie();
+        values[5] = Lists.getProductoList().get(pos).getComentario();
+
     }
 
     private void openNewDialog() {
-        NewProductoFragment newProductoFragment = new NewProductoFragment();
+        NewProductoFragment newProductoFragment = new NewProductoFragment(false, values);
         newProductoFragment.show(getFragmentManager(), "Editar producto");
     }
 }

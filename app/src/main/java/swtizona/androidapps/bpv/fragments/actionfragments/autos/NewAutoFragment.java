@@ -119,6 +119,7 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
             }
         }
 
+        //Check if there is a new insert or just an update
         if(insert){
             db.insert6Rows("AUTOS", rows);
         }else {
