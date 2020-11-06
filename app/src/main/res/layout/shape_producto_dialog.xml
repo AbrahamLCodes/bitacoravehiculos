@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <stroke
-        android:width="5dp"
+        android:width="3dp"
         android:color="#FF9800" />
 
     <solid android:color="#FFFFFF" />
@@ -15,6 +15,4 @@
         android:left="10dp"
         android:right="10dp"
         android:top="4dp" />
-
-    <corners android:radius="15dp" />
 </shape>
