@@ -52,7 +52,10 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
                 dismiss();
                 break;
             case R.id.productoInfoBuscar:
-                startActivity(new Intent(getActivity(), ProductosDetalleActivity.class));
+                Intent intent = new Intent(getActivity(), ProductosDetalleActivity.class);
+                intent.putExtra("id", Lists.getProductoList().get(pos).getModelo());
+                startActivity(intent);
+                dismiss();
                 break;
             case R.id.productoInfoEditar:
                 openNewDialog();

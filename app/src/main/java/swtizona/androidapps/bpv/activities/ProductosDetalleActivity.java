@@ -24,9 +24,9 @@ public class ProductosDetalleActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener
         , View.OnClickListener {
 
-    private TextView autos, servicios;
     private ListView lista;
     private ImageView back;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +38,7 @@ public class ProductosDetalleActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.productoDetalleAuto:
-                setListaAuto();
-                break;
-            case R.id.productoDetalleServicio:
-                setListaServicio();
-                break;
+        switch (v.getId()) {
             case R.id.detalleBack:
                 onBackPressed();
         }
@@ -55,34 +49,15 @@ public class ProductosDetalleActivity extends AppCompatActivity implements
 
     }
 
-    private void setListaAuto(){
 
-        DataBaseController db = new DataBaseController(getApplicationContext());
-
-        ArrayList<Auto> li = new ArrayList<>();
-        li = db.customSelect("AUTOS", "MATRICULA", "A", li);
-        Auto[] autos = new Auto[li.size()];
-
-        for (int i = 0 ; i < autos.length ; i++){
-            autos[i] = li.get(i);
-        }
-
-        lista.setAdapter(new AutoAdapter(
-                this,
-                R.layout.adapter_auto,
-                autos
-        ));
-        db.close();
-    }
-
-    private void setListaServicio(){
+    private void setListaServicio() {
         DataBaseController db = new DataBaseController(getApplicationContext());
 
         ArrayList<Servicio> li = new ArrayList<>();
-        li = db.customSelect("SERVICIOS", "PRODUCTOS", "12b", li);
+        li = db.customSelect("SERVICIOS", "PRODUCTOS", id, li);
         Servicio[] servicios = new Servicio[li.size()];
 
-        for (int i = 0 ; i < servicios.length ; i++){
+        for (int i = 0; i < servicios.length; i++) {
             servicios[i] = li.get(i);
         }
 
@@ -94,14 +69,11 @@ public class ProductosDetalleActivity extends AppCompatActivity implements
         db.close();
     }
 
-    private void initComponents(){
-        autos = findViewById(R.id.productoDetalleAuto);
-        servicios = findViewById(R.id.productoDetalleServicio);
+    private void initComponents() {
         lista = findViewById(R.id.productoDetalleList);
         back = findViewById(R.id.detalleBack);
-
-        autos.setOnClickListener(this);
-        servicios.setOnClickListener(this);
+        id = getIntent().getExtras().getString("id");
         back.setOnClickListener(this);
+        setListaServicio();
     }
 }

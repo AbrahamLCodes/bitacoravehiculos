@@ -54,7 +54,9 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
                 dismiss();
                 break;
             case R.id.tallerInfoBuscar:
-                startActivity(new Intent(getActivity(), TallerDetalleActivity.class));
+                Intent intent = new Intent(getActivity(), TallerDetalleActivity.class);
+                intent.putExtra("id", Lists.getTallerList().get(pos).getTelefono());
+                startActivity(intent);
                 dismiss();
                 break;
             case R.id.tallerInfoEditar:

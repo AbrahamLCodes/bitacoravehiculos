@@ -18,14 +18,14 @@ import swtizona.androidapps.bpv.activities.ServiciosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 
-public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener{
+public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private TextView regresar, buscar, editar, eliminar, titulo;
-    private TextView [] campos;
+    private TextView regresar, editar, eliminar, titulo;
+    private TextView[] campos;
     private int pos;
     String values[];
 
-    public InfoServicioFragment(int pos){
+    public InfoServicioFragment(int pos) {
         this.pos = pos;
     }
 
@@ -46,12 +46,9 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.servicioInfoRegresar:
                 dismiss();
-                break;
-            case R.id.servicioInfoBuscar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.servicioInfoEditar:
                 openNewDialog();
@@ -78,7 +75,7 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
         ServiciosActivity.updateUI();
     }
 
-    private void openNewDialog(){
+    private void openNewDialog() {
         NewServicioFragment newServicioFragment = new NewServicioFragment(false, values);
         newServicioFragment.show(getFragmentManager(), "Registrar Servicio");
     }
@@ -112,9 +109,8 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
         values[5] = Lists.getServicioList().get(pos).getComentario();
     }
 
-    private void initComponents(View v){
+    private void initComponents(View v) {
         regresar = v.findViewById(R.id.servicioInfoRegresar);
-        buscar = v.findViewById(R.id.servicioInfoBuscar);
         editar = v.findViewById(R.id.servicioInfoEditar);
         eliminar = v.findViewById(R.id.servicioInfoEliminar);
         titulo = v.findViewById(R.id.servicioInfoTitulo);
@@ -123,7 +119,6 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
         setCampos();
 
         regresar.setOnClickListener(this);
-        buscar.setOnClickListener(this);
         editar.setOnClickListener(this);
         eliminar.setOnClickListener(this);
     }

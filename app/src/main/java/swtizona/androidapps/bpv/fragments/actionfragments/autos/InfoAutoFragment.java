@@ -54,7 +54,9 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
                 dismiss();
                 break;
             case R.id.autoInfoBuscar:
-                startActivity(new Intent(getActivity(), AutoDetallesActivity.class));
+                Intent intent = new Intent(getActivity(), AutoDetallesActivity.class);
+                intent.putExtra("id",Lists.getAutoList().get(pos).getMatricula());
+                startActivity(intent);
                 dismiss();
                 break;
             case R.id.autoInfoEliminar:

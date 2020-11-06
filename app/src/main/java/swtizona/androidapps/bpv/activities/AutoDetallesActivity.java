@@ -22,6 +22,7 @@ public class AutoDetallesActivity extends AppCompatActivity implements View.OnCl
     private TextView productos, servicios;
     private ListView lista;
     private ImageView back;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +51,7 @@ public class AutoDetallesActivity extends AppCompatActivity implements View.OnCl
         DataBaseController db = new DataBaseController(getApplicationContext());
 
         ArrayList<Producto> li = new ArrayList<>();
-        li = db.customSelect("PRODUCTOS", "AUTO", "A", li);
+        li = db.customSelect("PRODUCTOS", "AUTO", id, li);
         Producto[] productos = new Producto[li.size()];
 
         for (int i = 0 ; i < productos.length ; i++){
@@ -69,7 +70,7 @@ public class AutoDetallesActivity extends AppCompatActivity implements View.OnCl
         DataBaseController db = new DataBaseController(getApplicationContext());
 
         ArrayList<Servicio> li = new ArrayList<>();
-        li = db.customSelect("SERVICIOS", "AUTO", "A", li);
+        li = db.customSelect("SERVICIOS", "AUTO", id, li);
         Servicio[] servicios = new Servicio[li.size()];
 
         for (int i = 0 ; i < servicios.length ; i++){
@@ -89,6 +90,7 @@ public class AutoDetallesActivity extends AppCompatActivity implements View.OnCl
         servicios = findViewById(R.id.autoDetalleServicio);
         lista = findViewById(R.id.autoDetalleList);
         back = findViewById(R.id.detalleBack);
+        id = getIntent().getExtras().getString("id");
 
         productos.setOnClickListener(this);
         servicios.setOnClickListener(this);

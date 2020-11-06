@@ -18,27 +18,22 @@ import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class TallerDetalleActivity extends AppCompatActivity implements
         AdapterView.OnItemClickListener
-        , View.OnClickListener{
+        , View.OnClickListener {
 
-    private TextView servicios;
     private ListView lista;
     private ImageView back;
+    private String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_taller_detalle);
-
         initComponents();
-
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case R.id.tallerDetalleServicio:
-                setListaServicio();
-                break;
+        switch (v.getId()) {
             case R.id.detalleBack:
                 onBackPressed();
                 break;
@@ -50,14 +45,14 @@ public class TallerDetalleActivity extends AppCompatActivity implements
 
     }
 
-    private void setListaServicio(){
+    private void setListaServicio() {
         DataBaseController db = new DataBaseController(getApplicationContext());
 
         ArrayList<Servicio> li = new ArrayList<>();
-        li = db.customSelect("SERVICIOS", "TALLER", "6481227055", li);
+        li = db.customSelect("SERVICIOS", "TALLER", id, li);
         Servicio[] servicios = new Servicio[li.size()];
 
-        for (int i = 0 ; i < servicios.length ; i++){
+        for (int i = 0; i < servicios.length; i++) {
             servicios[i] = li.get(i);
         }
 
@@ -69,12 +64,10 @@ public class TallerDetalleActivity extends AppCompatActivity implements
         db.close();
     }
 
-    private void initComponents(){
-        servicios = findViewById(R.id.tallerDetalleServicio);
+    private void initComponents() {
         lista = findViewById(R.id.tallerDetalleList);
         back = findViewById(R.id.detalleBack);
-
-        servicios.setOnClickListener(this);
+        id = getIntent().getExtras().getString("id");
         back.setOnClickListener(this);
         setListaServicio();
     }
