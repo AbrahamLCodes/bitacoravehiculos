@@ -9,7 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.ProductosDetalleActivity"></activity>
+        <activity android:name=".activities.TallerDetalleActivity"></activity>
+        <activity android:name=".activities.ServiciosDetalleActivity" />
+        <activity android:name=".activities.ProductosDetalleActivity" />
         <activity android:name=".activities.AutoDetallesActivity" />
         <activity android:name=".activities.ServiciosActivity" />
         <activity android:name=".activities.ProductosActivity" />

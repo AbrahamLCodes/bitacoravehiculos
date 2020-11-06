@@ -1,5 +1,6 @@
 package swtizona.androidapps.bpv.fragments.actionfragments.talleres;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.TallerActivity;
+import swtizona.androidapps.bpv.activities.TallerDetalleActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 
@@ -52,7 +54,8 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
                 dismiss();
                 break;
             case R.id.tallerInfoBuscar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), TallerDetalleActivity.class));
+                dismiss();
                 break;
             case R.id.tallerInfoEditar:
                 openNewDialog();
