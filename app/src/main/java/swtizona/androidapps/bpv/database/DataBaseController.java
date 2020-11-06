@@ -137,6 +137,74 @@ public class DataBaseController extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ArrayList customSelect(String tableName, String where, String like, ArrayList lista) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName + " WHERE " + where + " = '" + like + "'", null);
+
+        switch (tableName) {
+            case "AUTOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Auto(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "PRODUCTOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Producto(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "SERVICIOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Servicio(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "TALLERES":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Taller(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5)
+                                , cursor.getString(6)
+                                , cursor.getString(7))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+        }
+
+        return lista;
+    }
+
 
     private void addToList(String tableName, Cursor cursor) {
         switch (tableName) {
@@ -175,7 +243,7 @@ public class DataBaseController extends SQLiteOpenHelper {
                     do {
                         Lists.getTallerList().add(
                                 new Taller(
-                                          cursor.getString(0)
+                                        cursor.getString(0)
                                         , cursor.getString(1)
                                         , cursor.getString(2)
                                         , cursor.getString(3)

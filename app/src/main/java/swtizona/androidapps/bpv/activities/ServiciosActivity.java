@@ -27,33 +27,6 @@ public class ServiciosActivity extends AppCompatActivity implements
     private TextView nuevo, buscar;
     private static ListView lista;
     private ImageView back;
-    //private String[] servicios = {"Cambio de aceite a Ranger 2007", "Cambio de bujías a Ranger 1988", "Cambio de bomba de agua a Ford Ka"};
-
-    /*
-    private Servicio[] servicios = {
-            new Servicio(
-                    "Cambio de aceite",
-                    "Ford Ranger 2007",
-                    "27 / Septiembre / 2020",
-                    "Automotriz del norte",
-                    "Filtro de Aceite Ghonner, Aceite Castrol 20w-20",
-                    "Sin comentarios"),
-            new Servicio(
-                    "Cambio de bujias",
-                    "Dodge RAM 2003",
-                    "15 / Agosto / 2019",
-                    "Carlos",
-                    "8 bujias duralast",
-                    "Sin comentarios"),
-            new Servicio(
-                    "Reparación de bomba del agua",
-                    "Ford Ka 2003",
-                    "10 / Julio / 2018",
-                    "Alfredo Armendariz",
-                    "Bomba de agua Duralast",
-                    "Es más fácil commprar en Autozone"),
-    };
-    */
     private static Servicio[] servicios;
     private static Context context;
 

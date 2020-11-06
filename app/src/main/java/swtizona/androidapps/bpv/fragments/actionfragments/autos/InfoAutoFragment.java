@@ -1,6 +1,7 @@
 package swtizona.androidapps.bpv.fragments.actionfragments.autos;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.activities.AutoDetallesActivity;
 import swtizona.androidapps.bpv.activities.AutosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
@@ -52,7 +54,8 @@ public class InfoAutoFragment extends AppCompatDialogFragment implements View.On
                 dismiss();
                 break;
             case R.id.autoInfoBuscar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), AutoDetallesActivity.class));
+                dismiss();
                 break;
             case R.id.autoInfoEliminar:
                 delete();
