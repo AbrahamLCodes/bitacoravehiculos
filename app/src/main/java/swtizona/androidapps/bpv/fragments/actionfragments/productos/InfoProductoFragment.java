@@ -1,5 +1,6 @@
 package swtizona.androidapps.bpv.fragments.actionfragments.productos;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ProductosActivity;
+import swtizona.androidapps.bpv.activities.ProductosDetalleActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 
@@ -50,7 +52,7 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
                 dismiss();
                 break;
             case R.id.productoInfoBuscar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getActivity(), ProductosDetalleActivity.class));
                 break;
             case R.id.productoInfoEditar:
                 openNewDialog();
