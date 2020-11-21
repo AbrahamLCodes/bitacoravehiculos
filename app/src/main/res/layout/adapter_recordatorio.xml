@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@layout/shape_producto_dialog"
+    android:layout_marginTop="5dp">
+
+    <ImageView
+        android:id="@+id/productoAdapterImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:src="@drawable/smartphone"
+        android:layout_margin="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/recordatorioAdapterServicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cambio de aceite"
+            android:textSize="20sp"
+            android:layout_margin="10dp"
+            android:textColor="#000"
+            android:fontFamily="@font/helvetica"/>
+        <TextView
+            android:id="@+id/recordatorioAdapterFecha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8 de septiembre del 2020"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/helvetica"/>
+        <TextView
+            android:id="@+id/recordatorioAdapterHora"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hora: 4:20 p.m."
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:fontFamily="@font/helvetica"/>
+        <TextView
+            android:id="@+id/recordatorioAdapterAuto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vehiculo: Ford Ranger 2007 ID: A"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/helvetica"/>
+    </LinearLayout>
+</LinearLayout>

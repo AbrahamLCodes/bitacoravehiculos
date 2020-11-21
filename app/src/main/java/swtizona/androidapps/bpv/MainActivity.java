@@ -1,5 +1,6 @@
 package swtizona.androidapps.bpv;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -12,8 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import swtizona.androidapps.bpv.activities.RecordatorioActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.modeldata.Recordatorio;
 import swtizona.androidapps.bpv.ui.main.SectionsPagerAdapter;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -105,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fabRecordatorios() {
-        Toast.makeText(this, "fab Recordatorios en construcción", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(this, RecordatorioActivity.class));
     }
 
     private void initFab() {

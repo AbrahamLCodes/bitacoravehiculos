@@ -47,8 +47,11 @@ public class Queries {
             = "CREATE TABLE RECORDATORIOS("
             + "ID NUMERIC PRIMARY KEY NOT NULL"
             + ", AUTO TEXT NOT NULL REFERENCES AUTOS(MATRICULA)"
-            + ", FECHA TEXT NOT NULL"
-            + ", HORA TEXT NOT NULL)";
-
-
+            + ", DIA TEXT NOT NULL"
+            + ", MES TEXT NOT NULL"
+            + ", ANIO TEXT NOT NULL"
+            + ", HORA TEXT NOT NULL"
+            + ", MINUTO TEXT NOT NULL"
+            + ", AMPM TEXT NOT NULL"
+            + ", SERVICIO TEXT NOT NULL)";
 }

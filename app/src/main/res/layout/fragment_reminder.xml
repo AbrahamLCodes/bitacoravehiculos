@@ -1,26 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#30475e"
+    android:orientation="vertical"
     tools:context=".fragments.ReminderFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#30475e">
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Recordatorios"
+        android:textColor="#fff"
+        android:textSize="30sp"
+        android:padding="10dp"
+        app:fontFamily="@font/helvetica" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="Recordatorios"
-            android:textColor="#fff"
-            android:textSize="30sp"
-            app:fontFamily="@font/helvetica" />
+    <ListView
+        android:id="@+id/recordatorios"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    </LinearLayout>
-
-</FrameLayout>
+</LinearLayout>

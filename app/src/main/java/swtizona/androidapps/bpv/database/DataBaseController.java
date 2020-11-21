@@ -51,14 +51,29 @@ public class DataBaseController extends SQLiteOpenHelper {
     }
 
     /**
-     CRUD to SQLite. CREATE READ UPDATE & DELETE functions
-
-     HOW TO USE THESE CLASS's METHODS
-
-     1* If the database is empty, don't use initList(), instead use INSERT
-     2* Use initList() when deleting, updating or inserting data in order to refresh RAM Memory variables
+     * CRUD to SQLite. CREATE READ UPDATE & DELETE functions
+     * <p>
+     * HOW TO USE THESE CLASS's METHODS
+     * <p>
+     * 1* If the database is empty, don't use initList(), instead use INSERT
+     * 2* Use initList() when deleting, updating or inserting data in order to refresh RAM Memory variables
      */
 
+    public void insertRecordatorio(String[] rows) {
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            db.execSQL("INSERT INTO RECORDATORIOS VALUES (" +
+                    "'" + rows[0] + "','"
+                    + rows[1] + "','"
+                    + rows[2] + "','"
+                    + rows[3] + "','"
+                    + rows[4] + "','"
+                    + rows[5] + "','"
+                    + rows[6] + "','"
+                    + rows[7] + "','"
+                    + rows[8] + "')");
+        }
+    }
 
     /**
      * INSERT with 4 rows
@@ -137,6 +152,89 @@ public class DataBaseController extends SQLiteOpenHelper {
         db.close();
     }
 
+    public ArrayList ultimateAllSelect(String tableName, ArrayList lista){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM "+tableName, null);
+
+        switch (tableName) {
+            case "AUTOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Auto(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "PRODUCTOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Producto(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "SERVICIOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Servicio(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "TALLERES":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Taller(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5)
+                                , cursor.getString(6)
+                                , cursor.getString(7))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+            case "RECORDATORIOS":
+                if(cursor.moveToFirst()){
+                    do{
+                        lista.add(new Recordatorio(
+                                cursor.getString(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getString(6),
+                                cursor.getString(7),
+                                cursor.getString(8)
+                        ));
+                    }while (cursor.moveToNext());
+                }
+        }
+        return lista;
+    }
+
     public ArrayList customSelect(String tableName, String where, String like, ArrayList lista) {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + tableName + " WHERE " + where + " = '" + like + "'", null);
@@ -200,6 +298,22 @@ public class DataBaseController extends SQLiteOpenHelper {
                     } while (cursor.moveToNext());
                 }
                 break;
+            case "RECORDATORIOS":
+                if(cursor.moveToFirst()){
+                    do{
+                        lista.add(new Recordatorio(
+                                cursor.getString(0),
+                                cursor.getString(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getString(6),
+                                cursor.getString(7),
+                                cursor.getString(8)
+                        ));
+                    }while (cursor.moveToNext());
+                }
         }
 
         return lista;
@@ -276,10 +390,16 @@ public class DataBaseController extends SQLiteOpenHelper {
                     do {
                         Lists.getRecordatorioList().add(
                                 new Recordatorio(
-                                        cursor.getInt(0)
-                                        , cursor.getString(1)
-                                        , cursor.getString(2)
-                                        , cursor.getString(3)));
+                                        cursor.getString(0),
+                                        cursor.getString(1),
+                                        cursor.getString(2),
+                                        cursor.getString(3),
+                                        cursor.getString(4),
+                                        cursor.getString(5),
+                                        cursor.getString(6),
+                                        cursor.getString(7),
+                                        cursor.getString(8))
+                        );
 
                     } while (cursor.moveToNext());
                 }

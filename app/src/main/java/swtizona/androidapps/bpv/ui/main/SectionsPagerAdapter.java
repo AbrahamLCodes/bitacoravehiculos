@@ -36,7 +36,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 fragment = new HistoryFragment();
                 break;
             case 1:
-                fragment = new ReminderFragment();
+                fragment = new ReminderFragment(mContext);
                 break;
             case 2:
                 fragment = new RegistrosFragment();
