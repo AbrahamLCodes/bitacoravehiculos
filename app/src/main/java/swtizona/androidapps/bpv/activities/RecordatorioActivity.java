@@ -87,8 +87,6 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
 
         String ap = "";
 
-
-
         //Construyendo IDs
         int id = 0;
         long count = db.getRowCount("RECORDATORIOS");
@@ -103,7 +101,8 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         String matricula = "";
         int spinnerPos = spinner.getSelectedItemPosition();
         if(spinnerPos == 0){
-            //Hay error aqui
+            Toast.makeText(this, "Elige un vehiculo", Toast.LENGTH_SHORT).show();
+            spinner.requestFocus();
         }else {
            matricula = Lists.getAutoList().get(spinnerPos - 1).getMatricula();
         }
