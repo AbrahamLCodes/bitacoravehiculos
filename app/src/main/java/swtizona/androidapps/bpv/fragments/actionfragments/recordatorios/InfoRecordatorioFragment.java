@@ -1,5 +1,6 @@
 package swtizona.androidapps.bpv.fragments.actionfragments.recordatorios;
 
+import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
@@ -16,19 +17,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import swtizona.androidapps.bpv.R;
+import swtizona.androidapps.bpv.activities.RecordatorioActivity;
+import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.fragments.ReminderFragment;
+import swtizona.androidapps.bpv.modeldata.Recordatorio;
 
 
 public class InfoRecordatorioFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private TextView titulo, fecha, hora, auto;
     private TextView regresar, editar, eliminar;
-    private String t,f, h, a;
+    private Recordatorio recordatorio;
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+            "Octubre", "Noviembre", "Diciembre"};
+    String id,servicio,dia, me, anio, hor, minuto, aut, ap;
 
-    public InfoRecordatorioFragment(String t, String f, String h, String a){
-        this.t = t;
-        this.f = f;
-        this.h = h;
-        this.a = a;
+
+    public InfoRecordatorioFragment(Recordatorio recordatorio){
+        this.recordatorio = recordatorio;
     }
 
     @Nullable
@@ -51,12 +58,40 @@ public class InfoRecordatorioFragment extends AppCompatDialogFragment implements
                 dismiss();
                 break;
             case R.id.editar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                editar();
+                dismiss();
                 break;
             case R.id.eliminar:
-                Toast.makeText(getContext(), "Accion en construccion", Toast.LENGTH_SHORT).show();
+                eliminar();
+                dismiss();
                 break;
         }
+    }
+
+    private void editar(){
+        Intent intent = new Intent(getActivity(), RecordatorioActivity.class);
+
+        intent.putExtra("new", false);
+        intent.putExtra("id",id);
+        intent.putExtra("auto",aut);
+        intent.putExtra("dia",dia);
+        intent.putExtra("mes",me);
+        intent.putExtra("anio",anio);
+        intent.putExtra("hora",hor);
+        intent.putExtra("min",minuto);
+        intent.putExtra("ampm",ap);
+        intent.putExtra("servicio",servicio);
+
+        startActivity(intent);
+    }
+
+    private void eliminar(){
+        DataBaseController db = new DataBaseController(getContext());
+        db.delete("RECORDATORIOS","ID",id);
+        Lists.initLists();
+        db.updateLists();
+        ReminderFragment.updateUI();
+        db.close();
     }
 
     private void initComponents(View v){
@@ -68,6 +103,24 @@ public class InfoRecordatorioFragment extends AppCompatDialogFragment implements
         regresar = v.findViewById(R.id.regresar);
         editar = v.findViewById(R.id.editar);
         eliminar = v.findViewById(R.id.eliminar);
+
+         id = recordatorio.getId();
+         servicio = recordatorio.getServicio();
+         dia = recordatorio.getDia();
+         me = recordatorio.getMes();
+         anio = recordatorio.getAnio();
+         hor = recordatorio.getHora();
+         minuto = recordatorio.getMinuto();
+         aut = recordatorio.getAuto();
+         ap = recordatorio.getAmpm();
+
+        String t = servicio;
+        String f =
+                dia + " de "
+                        + meses[Integer.parseInt(me)] + " del " +
+                        anio;
+        String h = hor+":"+minuto;
+        String a = aut;
 
         titulo.setText(""+t);
         fecha.setText(""+f);

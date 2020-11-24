@@ -429,6 +429,7 @@ public class DataBaseController extends SQLiteOpenHelper {
         SQLiteDatabase db = getReadableDatabase();
         if (db != null) {
             db.execSQL("UPDATE " + tableName + " SET " + set + " WHERE " + where + " = " + like);
+            Log.d("debugeando sentencia", "UPDATE " + tableName + " SET " + set + " WHERE " + where + " = " + like);
             db.close();
         }
     }

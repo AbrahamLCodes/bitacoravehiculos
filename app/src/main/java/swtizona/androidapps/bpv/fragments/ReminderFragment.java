@@ -28,8 +28,7 @@ public class ReminderFragment extends Fragment implements AdapterView.OnItemClic
 
     private static ListView listView;
     private static Context con;
-    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
-            "Octubre", "Noviembre", "Diciembre"};
+
 
     public ReminderFragment(Context context) {
         this.con = context;
@@ -57,16 +56,7 @@ public class ReminderFragment extends Fragment implements AdapterView.OnItemClic
         ArrayList<Recordatorio> li = new ArrayList<>();
         li = db.ultimateAllSelect("RECORDATORIOS", li);
         Recordatorio recordatorio = li.get(position);
-
-        String titulo = recordatorio.getServicio();
-        String fecha =
-                recordatorio.getDia() + " de "
-                        + meses[Integer.parseInt(recordatorio.getMes())] + " del " +
-                        recordatorio.getAnio();
-        String hora = recordatorio.getHora()+":"+recordatorio.getMinuto();
-        String auto = recordatorio.getAuto();
-
-        InfoRecordatorioFragment ir = new InfoRecordatorioFragment(titulo, fecha, hora, auto);
+        InfoRecordatorioFragment ir = new InfoRecordatorioFragment(recordatorio);
         ir.show(getFragmentManager(), "Info");
     }
 

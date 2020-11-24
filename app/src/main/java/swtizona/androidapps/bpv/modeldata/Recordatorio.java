@@ -4,7 +4,8 @@ public class Recordatorio {
 
     private String id, auto, dia, mes, anio, hora, minuto, ampm, servicio;
 
-    public Recordatorio(String id, String auto, String dia, String mes, String anio, String hora, String minuto, String ampm, String servicio) {
+    public Recordatorio(String id, String auto, String dia, String mes, String anio, String hora,
+                        String minuto, String ampm, String servicio) {
         this.id = id;
         this.auto = auto;
         this.dia = dia;

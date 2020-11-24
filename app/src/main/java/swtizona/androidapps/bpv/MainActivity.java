@@ -108,7 +108,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void fabRecordatorios() {
-        startActivity(new Intent(this, RecordatorioActivity.class));
+        Intent intent = new Intent(this, RecordatorioActivity.class);
+        intent.putExtra("new",true);
+        startActivity(intent);
     }
 
     private void initFab() {
