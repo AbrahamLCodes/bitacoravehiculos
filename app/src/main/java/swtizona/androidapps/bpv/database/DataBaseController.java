@@ -75,36 +75,6 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
-    /**
-     * INSERT with 4 rows
-     */
-    public void insert4Rows(String tableName, String[] rows) {
-        SQLiteDatabase bd = getWritableDatabase();
-        if (bd != null) {
-            bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
-                    "'" + rows[0] + "','"
-                    + rows[1] + "','"
-                    + rows[2] + "','"
-                    + rows[3] + "')");
-        }
-        bd.close();
-    }
-
-    /**
-     * INSERT with 5 rows
-     */
-    public void insert5Rows(String tableName, String[] rows) {
-        SQLiteDatabase bd = getWritableDatabase();
-        if (bd != null) {
-            bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
-                    "'" + rows[0] + "','"
-                    + rows[1] + "','"
-                    + rows[2] + "','"
-                    + rows[3] + "','"
-                    + rows[4] + "')");
-        }
-        bd.close();
-    }
 
     /**
      * INSERT with 6 rows
@@ -152,9 +122,9 @@ public class DataBaseController extends SQLiteOpenHelper {
         db.close();
     }
 
-    public ArrayList ultimateAllSelect(String tableName, ArrayList lista){
+    public ArrayList ultimateAllSelect(String tableName, ArrayList lista) {
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM "+tableName, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
 
         switch (tableName) {
             case "AUTOS":
@@ -216,8 +186,8 @@ public class DataBaseController extends SQLiteOpenHelper {
                 }
                 break;
             case "RECORDATORIOS":
-                if(cursor.moveToFirst()){
-                    do{
+                if (cursor.moveToFirst()) {
+                    do {
                         lista.add(new Recordatorio(
                                 cursor.getString(0),
                                 cursor.getString(1),
@@ -229,7 +199,7 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 cursor.getString(7),
                                 cursor.getString(8)
                         ));
-                    }while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
                 }
         }
         return lista;
@@ -299,8 +269,8 @@ public class DataBaseController extends SQLiteOpenHelper {
                 }
                 break;
             case "RECORDATORIOS":
-                if(cursor.moveToFirst()){
-                    do{
+                if (cursor.moveToFirst()) {
+                    do {
                         lista.add(new Recordatorio(
                                 cursor.getString(0),
                                 cursor.getString(1),
@@ -312,13 +282,35 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 cursor.getString(7),
                                 cursor.getString(8)
                         ));
-                    }while (cursor.moveToNext());
+                    } while (cursor.moveToNext());
                 }
         }
 
         return lista;
     }
 
+    public ArrayList orderBySelect(String tableName, String column, String asc, ArrayList lista) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName + " ORDER BY " + column + " " + asc + "", null);
+
+        switch (tableName) {
+            case "SERVICIOS":
+                if (cursor.moveToFirst()) {
+                    do {
+                        lista.add(new Servicio(
+                                cursor.getString(0)
+                                , cursor.getString(1)
+                                , cursor.getString(2)
+                                , cursor.getString(3)
+                                , cursor.getString(4)
+                                , cursor.getString(5))
+                        );
+                    } while (cursor.moveToNext());
+                }
+                break;
+        }
+        return lista;
+    }
 
     private void addToList(String tableName, Cursor cursor) {
         switch (tableName) {

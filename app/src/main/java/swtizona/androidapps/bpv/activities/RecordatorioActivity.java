@@ -214,7 +214,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
     }
 
     private void initSpinner(Boolean nuevo, String id) {
-        List<String> spinnerArray = new ArrayList<String>();
+        List<String> spinnerArray = new ArrayList<>();
         int index = 0;
 
         spinnerArray.add("Elige el auto");
@@ -228,7 +228,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         }
 
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
                 spinnerArray
