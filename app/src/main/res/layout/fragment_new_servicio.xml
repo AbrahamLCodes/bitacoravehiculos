@@ -62,20 +62,14 @@
                 android:textColorHint="#554E4E"
                 android:textSize="20sp" />
 
-            <EditText
+            <DatePicker
                 android:id="@+id/servicioIn2"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@layout/shape_input"
-                android:fontFamily="@font/helvetica"
-                android:hint="Fecha"
-                android:inputType="textCapSentences"
-                android:padding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#554E4E"
-                android:textSize="20sp" />
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                />
 
             <EditText
                 android:id="@+id/servicioIn3"

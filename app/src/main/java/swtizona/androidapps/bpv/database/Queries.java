@@ -36,9 +36,11 @@ public class Queries {
 
     public static final String createServicios
             = "CREATE TABLE SERVICIOS("
-            + "SERVICIO TEXT PRIMAY KEY NOT NULL"
+            + "SERVICIO TEXT PRIMARY KEY NOT NULL"
             + ", AUTO TEXT NOT NULL REFERENCES AUTOS(MATRICULA)"
-            + ", FECHA TEXT NOT NULL"
+            + ", DIA TEXT NOT NULL"
+            + ", MES TEXT NOT NULL"
+            + ", ANIO TEXT NOT NULL"
             + ", TALLER TEXT NOT NULL REFERENCES TALLERES (TELEFONO)"
             + ", PRODUCTOS TEXT NOT NULL REFERENCES PRODUCTOS (MODELO)"
             + ", COMENTARIO TEXT)";

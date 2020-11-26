@@ -17,6 +17,7 @@ import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.activities.ServiciosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
@@ -24,6 +25,8 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     private TextView[] campos;
     private int pos;
     String values[];
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+            "Octubre", "Noviembre", "Diciembre"};
 
     public InfoServicioFragment(int pos) {
         this.pos = pos;
@@ -40,7 +43,7 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         campos = new TextView[5];
-        values = new String[6];
+        values = new String[8];
         initComponents(view);
     }
 
@@ -95,18 +98,26 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     private void setCampos() {
         titulo.setText(Lists.getServicioList().get(pos).getServicio());
 
-        campos[0].setText(campos[0].getText() + " " + Lists.getServicioList().get(pos).getAutomovil());
-        campos[1].setText(campos[1].getText() + " " + Lists.getServicioList().get(pos).getFecha());
-        campos[2].setText(campos[2].getText() + " " + Lists.getServicioList().get(pos).getTaller());
-        campos[3].setText(campos[3].getText() + " " + Lists.getServicioList().get(pos).getProductos());
-        campos[4].setText(campos[4].getText() + " " + Lists.getServicioList().get(pos).getComentario());
+        Servicio servicio = Lists.getServicioList().get(pos);
+        String fecha =
+                servicio.getDia() + "/" +
+                        meses[Integer.parseInt(servicio.getMes())]+"/"+
+                        servicio.getAnio();
 
-        values[0] = Lists.getServicioList().get(pos).getServicio();
-        values[1] = Lists.getServicioList().get(pos).getAutomovil();
-        values[2] = Lists.getServicioList().get(pos).getFecha();
-        values[3] = Lists.getServicioList().get(pos).getTaller();
-        values[4] = Lists.getServicioList().get(pos).getProductos();
-        values[5] = Lists.getServicioList().get(pos).getComentario();
+                campos[0].setText(campos[0].getText() + " " + servicio.getAutomovil());
+        campos[1].setText(campos[1].getText() + " " + fecha);
+        campos[2].setText(campos[2].getText() + " " + servicio.getTaller());
+        campos[3].setText(campos[3].getText() + " " + servicio.getProductos());
+        campos[4].setText(campos[4].getText() + " " + servicio.getComentario());
+
+        values[0] = servicio.getServicio();
+        values[1] = servicio.getAutomovil();
+        values[2] = servicio.getDia();
+        values[3] = servicio.getMes();
+        values[4] = servicio.getAnio();
+        values[5] = servicio.getTaller();
+        values[6] = servicio.getProductos();
+        values[7] = servicio.getComentario();
     }
 
     private void initComponents(View v) {

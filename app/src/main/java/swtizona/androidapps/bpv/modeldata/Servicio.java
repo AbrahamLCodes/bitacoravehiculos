@@ -2,12 +2,14 @@ package swtizona.androidapps.bpv.modeldata;
 
 public class Servicio {
 
-    private String servicio, automovil, fecha, taller, productos, comentario;
+    private String servicio, automovil, dia, mes, anio, taller, productos, comentario;
 
-    public Servicio(String servicio, String automovil, String fecha, String taller, String productos, String comentario) {
+    public Servicio(String servicio, String automovil, String dia, String mes, String anio, String taller, String productos, String comentario) {
         this.servicio = servicio;
         this.automovil = automovil;
-        this.fecha = fecha;
+        this.dia = dia;
+        this.mes = mes;
+        this.anio = anio;
         this.taller = taller;
         this.productos = productos;
         this.comentario = comentario;
@@ -29,12 +31,28 @@ public class Servicio {
         this.automovil = automovil;
     }
 
-    public String getFecha() {
-        return fecha;
+    public String getDia() {
+        return dia;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setDia(String dia) {
+        this.dia = dia;
+    }
+
+    public String getMes() {
+        return mes;
+    }
+
+    public void setMes(String mes) {
+        this.mes = mes;
+    }
+
+    public String getAnio() {
+        return anio;
+    }
+
+    public void setAnio(String anio) {
+        this.anio = anio;
     }
 
     public String getTaller() {

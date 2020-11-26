@@ -164,7 +164,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5))
+                                , cursor.getString(5)
+                                , cursor.getString(6)
+                                , cursor.getString(7))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -247,7 +249,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5))
+                                , cursor.getString(5)
+                                , cursor.getString(6)
+                                , cursor.getString(7))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -303,7 +307,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5))
+                                , cursor.getString(5)
+                                , cursor.getString(6)
+                                , cursor.getString(7))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -372,7 +378,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                         , cursor.getString(2)
                                         , cursor.getString(3)
                                         , cursor.getString(4)
-                                        , cursor.getString(5)));
+                                        , cursor.getString(5)
+                                        , cursor.getString(6)
+                                        , cursor.getString(7)));
 
                     } while (cursor.moveToNext());
                 }

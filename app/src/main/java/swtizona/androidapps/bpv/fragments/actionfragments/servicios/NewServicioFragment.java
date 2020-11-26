@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,16 +24,17 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
 
     private EditText campos[];
     private TextView cancelar, registrar;
+    private DatePicker datePicker;
 
     //Variables to identify if user wants to insert a new car or update it
     boolean insert;
-    String [] values;
+    String[] values;
 
-    public NewServicioFragment(boolean insert){
+    public NewServicioFragment(boolean insert) {
         this.insert = insert;
     }
 
-    public NewServicioFragment(boolean insert, String [] values){
+    public NewServicioFragment(boolean insert, String[] values) {
         this.insert = insert;
         this.values = values;
     }
@@ -68,6 +70,7 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
         campos = new EditText[6];
         cancelar = v.findViewById(R.id.servicioNewBack);
         registrar = v.findViewById(R.id.servicioNewOk);
+        datePicker = v.findViewById(R.id.servicioIn2);
         initEditText(v);
 
         cancelar.setOnClickListener(this);
@@ -79,13 +82,13 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
         boolean flag = true;
         //Show input alert
         while (i < 6) {
-
-            if (campos[i].getText().length() == 0) {
-                Toast.makeText(getContext(), "Introduce el/la " + campos[i].getHint(), Toast.LENGTH_SHORT).show();
-                flag = false;
-                break;
+            if (i != 2) {
+                if (campos[i].getText().length() == 0) {
+                    Toast.makeText(getContext(), "Introduce el/la " + campos[i].getHint(), Toast.LENGTH_SHORT).show();
+                    flag = false;
+                    break;
+                }
             }
-
             i++;
         }
         if (flag) {
@@ -96,33 +99,41 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
     private void actionInsert() {
 
         DataBaseController db = new DataBaseController(getContext());
-        String[] rows = new String[6];
+        String[] rows = new String[8];
         //Get TextEdits values
-        for (int i = 0; i < 6; i++) {
-            if (i == 5) {
-                //Validate non extra coment
-                if (campos[i].getText().length() == 0) {
-                    rows[i] = " ";
-                } else {
-                    rows[i] = campos[i].getText().toString();
-                }
-            } else {
-                rows[i] = campos[i].getText().toString();
-            }
+
+        rows[0] = campos[0].getText().toString();
+        rows[1] = campos[1].getText().toString();
+        rows[2] = ""+datePicker.getDayOfMonth();
+        rows[3] = ""+datePicker.getMonth();
+        rows[4] = ""+datePicker.getYear();
+        rows[5] = campos[3].getText().toString();
+        rows[6] = campos[4].getText().toString();
+        if (campos[5].getText().length() == 0) {
+            rows[7] = " ";
+        } else {
+            rows[7] = campos[5].getText().toString();
         }
 
         if (checkForeignKey(
                 campos[1].getText().toString()
                 , campos[3].getText().toString()
                 , campos[4].getText().toString())) {
-            if(insert){
-                db.insert6Rows("SERVICIOS", rows);
-            }else {
+            if (insert) {
+                db.insert8Rows("SERVICIOS", rows);
+            } else {
                 db.update(
                         "SERVICIOS",
-                        "SERVICIO = '"+rows[0]+"', AUTO = '"+rows[1]+"', FECHA = '"+rows[2]+"', TALLER = '"+rows[3]+"', PRODUCTOS = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                        "SERVICIO = '" + rows[0] + "', " +
+                                "AUTO = '" + rows[1] + "', " +
+                                "DIA = '" + rows[2] + "', " +
+                                "MES = '" + rows[3] + "', " +
+                                "ANIO = '" + rows[4] + "', " +
+                                "TALLER = '" + rows[5] + "', " +
+                                "PRODUCTOS = '" + rows[6] + "', " +
+                                "COMENTARIO = '" + rows[7] + "'",
                         "SERVICIO",
-                        "'"+values[0]+"'");
+                        "'" + values[0] + "'");
             }
             updateRAM(db);
         }
@@ -163,14 +174,24 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
     private void initEditText(View v) {
         int i = 0;
         while (i < 6) {
-            int res = getResources().getIdentifier(
-                    "servicioIn" + (i)
-                    , "id"
-                    , getActivity().getPackageName());
-            campos[i] = v.findViewById(res);
-            //Set textview content
-            if(!insert){
-                campos[i].setText(values[i]);
+            //To avoid datePicker
+            if (i != 2) {
+                int res = getResources().getIdentifier(
+                        "servicioIn" + (i)
+                        , "id"
+                        , getActivity().getPackageName());
+                campos[i] = v.findViewById(res);
+                //Set textview content
+                if (!insert) {
+                    campos[i].setText(values[i]);
+                }
+            }else{
+                if(!insert){
+                    int dia = Integer.parseInt(values[2]);
+                    int mes = Integer.parseInt(values[3]);
+                    int anio = Integer.parseInt(values[4]);
+                    datePicker.updateDate(anio, mes, dia);
+                }
             }
             i++;
         }

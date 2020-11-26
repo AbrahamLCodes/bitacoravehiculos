@@ -19,6 +19,8 @@ public class ServicioAdapter extends ArrayAdapter <Servicio> {
     private Servicio[] objects;
     private Context context;
     private int resource;
+    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
+            "Octubre", "Noviembre", "Diciembre"};
 
     public ServicioAdapter(@NonNull Context context, int resource, @NonNull Servicio[] objects){
         super(context, resource, objects);
@@ -78,7 +80,10 @@ public class ServicioAdapter extends ArrayAdapter <Servicio> {
         String auto = servicio.getAutomovil();
 
         //Fecha
-        String fecha = servicio.getFecha();
+        String d = servicio.getDia();
+        String m = meses[Integer.parseInt(servicio.getMes())];
+        String a = servicio.getAnio();
+        String fecha = d + "/" + m + "/" + a;
 
         //Taller
         String taller = servicio.getTaller();
