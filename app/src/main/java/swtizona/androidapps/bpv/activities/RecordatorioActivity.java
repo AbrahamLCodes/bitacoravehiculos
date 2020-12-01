@@ -23,6 +23,7 @@ import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.ReminderFragment;
+import swtizona.androidapps.bpv.modeladapter.SpinnerDropAdapter;
 import swtizona.androidapps.bpv.modeldata.Auto;
 import swtizona.androidapps.bpv.modeldata.Recordatorio;
 
@@ -43,7 +44,6 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordatorio);
-
         initComponents();
     }
 
@@ -218,26 +218,37 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         int index = 0;
 
         spinnerArray.add("Elige el auto");
+
         for (int i = 0; i < Lists.getAutoList().size(); i++) {
+
             Auto auto = Lists.getAutoList().get(i);
             String autoItem = auto.getFabricante() + " " + auto.getModelo() + " " + auto.getAno() + " ID: " + auto.getMatricula();
             spinnerArray.add(autoItem);
-            if (recordatorio.getAuto().equals(auto.getMatricula())) {
-                index = i + 1;
+
+            if (!nuevo) {
+                //Configurar el Spinner para posicionarlo en el item del auto
+                // guradado
+                if (recordatorio.getAuto().equals(auto.getMatricula())) {
+                    index = i + 1;
+                }
             }
+
         }
 
+        String [] items = new String[spinnerArray.size()];
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
+        for (int i = 0 ; i < items.length ; i++){
+            items[i] = spinnerArray.get(i);
+        }
+
+        SpinnerDropAdapter sda = new SpinnerDropAdapter(
                 this,
-                android.R.layout.simple_spinner_item,
-                spinnerArray
+                items,
+                Color.parseColor("#635B5B")
         );
+        spinner.setAdapter(sda);
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        //En caso de que hall que editar
+        //En caso de que halla que editar
         if (!nuevo) {
             spinner.setSelection(index);
         }
@@ -282,8 +293,9 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         if (!bundle.getBoolean("new")) {
             setEditText(bundle);
         }
-        initSpinner(bundle.getBoolean("new"), bundle.getString("auto"));
         isAm();
+        initSpinner(bundle.getBoolean("new"), bundle.getString("auto"));
+
     }
 
     private void setEditText(Bundle bundle) {

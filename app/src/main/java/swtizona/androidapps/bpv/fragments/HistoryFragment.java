@@ -1,5 +1,6 @@
 package swtizona.androidapps.bpv.fragments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,21 +17,25 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.stream.Stream;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.modeladapter.RecordatorioAdapter;
 import swtizona.androidapps.bpv.modeladapter.ServicioAdapter;
+import swtizona.androidapps.bpv.modeladapter.SpinnerDropAdapter;
 import swtizona.androidapps.bpv.modeldata.Servicio;
 
 
-public class HistoryFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemClickListener,
+public class HistoryFragment extends Fragment implements AdapterView.OnItemClickListener,
         AdapterView.OnItemSelectedListener {
 
     private Spinner spinner;
-    private TextView buscar;
     private ListView lista;
 
     @Override
@@ -45,26 +50,26 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, A
         initComponents(view);
     }
 
-    @Override
-    public void onClick(View v) {
-        if (v.getId() == R.id.buscar) {
-            Toast.makeText(getContext(), "Construyendo accion", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), ""+position, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "" + position, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         switch (position) {
             case 0:
-                setListaAdapter("AUTO","ASC");
+                setListaAdapter("AUTO", "ASC");
                 break;
             case 1:
-                setListaAdapter("AUTO","DESC");
+                setListaAdapter("AUTO", "DESC");
+                break;
+            case 2:
+
+                break;
+            case 3:
+
                 break;
 
         }
@@ -75,13 +80,34 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, A
 
     }
 
+    private void dateAsc() {
+
+        DataBaseController db = new DataBaseController(getContext());
+        ArrayList<Servicio> arrayList = new ArrayList<>();
+
+        arrayList = db.ultimateAllSelect("SERVICIOS", arrayList);
+        Servicio[] servicios = new Servicio[arrayList.size()];
+
+        Date[] dates = new Date[servicios.length];
+
+        for (int i = 0; i < servicios.length; i++) {
+            servicios[i] = arrayList.get(i);
+            int d = Integer.parseInt(servicios[i].getDia());
+            int m = Integer.parseInt(servicios[i].getMes());
+            int a = Integer.parseInt(servicios[i].getAnio());
+        }
+    }
+
+    private void dateDesc() {
+
+    }
+
     private void setListaAdapter(String columna, String asc) {
         DataBaseController db = new DataBaseController(getContext());
         ArrayList<Servicio> arrayList = new ArrayList<>();
 
         arrayList = db.orderBySelect("SERVICIOS", columna, asc, arrayList);
         Servicio[] servicios = new Servicio[arrayList.size()];
-
 
         for (int i = 0; i < arrayList.size(); i++) {
             servicios[i] = arrayList.get(i);
@@ -95,31 +121,28 @@ public class HistoryFragment extends Fragment implements View.OnClickListener, A
     }
 
     private void initSpinner() {
-        List<String> spinnerArray = new ArrayList<>();
 
+        String [] items = {
+                "Por auto ascendente",
+                "Por auto descendente",
+                "Del más nuevo al maś antiguo",
+                "Del más antiguo al más nuevo"};
 
-        spinnerArray.add("Por auto ascendente");
-        spinnerArray.add("Por auto descendente");
+        SpinnerDropAdapter sda = new SpinnerDropAdapter(
+                getActivity(),
+                items,
+                Color.parseColor("#635B5B"));
+        spinner.setAdapter(sda);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-                getContext(),
-                android.R.layout.simple_spinner_item,
-                spinnerArray
-        );
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
     }
 
     private void initComponents(View v) {
         spinner = v.findViewById(R.id.spinner);
-        buscar = v.findViewById(R.id.buscar);
         lista = v.findViewById(R.id.lista);
 
-        buscar.setOnClickListener(this);
         lista.setOnItemClickListener(this);
-        setListaAdapter("AUTO","ASC");
+        setListaAdapter("AUTO", "ASC");
         initSpinner();
     }
 }
