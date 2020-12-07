@@ -111,6 +111,21 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
+    public void insert9Rows(String tableName, String[] rows) {
+        SQLiteDatabase bd = getWritableDatabase();
+        if (bd != null) {
+            bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
+                    "'" + rows[0] + "','"
+                    + rows[1] + "','"
+                    + rows[2] + "','"
+                    + rows[3] + "','"
+                    + rows[4] + "','"
+                    + rows[5] + "','"
+                    + rows[6] + "','"
+                    + rows[7] + "','"
+                    + rows[8] + "')");
+        }
+    }
 
     /**
      * SELECT
@@ -164,9 +179,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5)
                                 , cursor.getString(6)
-                                , cursor.getString(7))
+                                , cursor.getString(7)
+                                , cursor.getString(8))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -249,9 +264,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5)
                                 , cursor.getString(6)
-                                , cursor.getString(7))
+                                , cursor.getString(7)
+                                , cursor.getString(8))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -307,9 +322,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                 , cursor.getString(2)
                                 , cursor.getString(3)
                                 , cursor.getString(4)
-                                , cursor.getString(5)
                                 , cursor.getString(6)
-                                , cursor.getString(7))
+                                , cursor.getString(7)
+                                , cursor.getString(8))
                         );
                     } while (cursor.moveToNext());
                 }
@@ -378,9 +393,9 @@ public class DataBaseController extends SQLiteOpenHelper {
                                         , cursor.getString(2)
                                         , cursor.getString(3)
                                         , cursor.getString(4)
-                                        , cursor.getString(5)
                                         , cursor.getString(6)
-                                        , cursor.getString(7)));
+                                        , cursor.getString(7)
+                                        , cursor.getString(8)));
 
                     } while (cursor.moveToNext());
                 }

@@ -99,20 +99,33 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
     private void actionInsert() {
 
         DataBaseController db = new DataBaseController(getContext());
-        String[] rows = new String[8];
+        String[] rows = new String[9];
         //Get TextEdits values
 
         rows[0] = campos[0].getText().toString();
         rows[1] = campos[1].getText().toString();
+
         rows[2] = ""+datePicker.getDayOfMonth();
         rows[3] = ""+datePicker.getMonth();
         rows[4] = ""+datePicker.getYear();
-        rows[5] = campos[3].getText().toString();
-        rows[6] = campos[4].getText().toString();
+
+        String d = rows[2];
+        String m = rows[3];
+
+        if(Integer.parseInt(d) < 10){
+            d = "0"+datePicker.getDayOfMonth();
+        }
+        if(Integer.parseInt(m) < 10){
+            m = "0"+datePicker.getMonth();
+        }
+
+        rows[5] = rows[4]+"-"+m+"-"+d;
+        rows[6] = campos[3].getText().toString();
+        rows[7] = campos[4].getText().toString();
         if (campos[5].getText().length() == 0) {
-            rows[7] = " ";
+            rows[8] = " ";
         } else {
-            rows[7] = campos[5].getText().toString();
+            rows[8] = campos[5].getText().toString();
         }
 
         if (checkForeignKey(
@@ -120,7 +133,7 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                 , campos[3].getText().toString()
                 , campos[4].getText().toString())) {
             if (insert) {
-                db.insert8Rows("SERVICIOS", rows);
+                db.insert9Rows("SERVICIOS", rows);
             } else {
                 db.update(
                         "SERVICIOS",
@@ -129,9 +142,9 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                                 "DIA = '" + rows[2] + "', " +
                                 "MES = '" + rows[3] + "', " +
                                 "ANIO = '" + rows[4] + "', " +
-                                "TALLER = '" + rows[5] + "', " +
-                                "PRODUCTOS = '" + rows[6] + "', " +
-                                "COMENTARIO = '" + rows[7] + "'",
+                                "TALLER = '" + rows[6] + "', " +
+                                "PRODUCTOS = '" + rows[7] + "', " +
+                                "COMENTARIO = '" + rows[8] + "'",
                         "SERVICIO",
                         "'" + values[0] + "'");
             }
@@ -183,7 +196,11 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                 campos[i] = v.findViewById(res);
                 //Set textview content
                 if (!insert) {
-                    campos[i].setText(values[i]);
+                    if(i > 2){
+                        campos[i].setText(values[i + 2]);
+                    }else{
+                        campos[i].setText(values[i]);
+                    }
                 }
             }else{
                 if(!insert){

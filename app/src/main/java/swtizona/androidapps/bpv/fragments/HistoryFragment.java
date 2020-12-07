@@ -17,7 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -37,6 +38,9 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
 
     private Spinner spinner;
     private ListView lista;
+    private static final SimpleDateFormat dateFormat
+            = new SimpleDateFormat("dd/MM/yyyy");
+    private static final Date invalidDate = new Date(0);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,10 +70,10 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
                 setListaAdapter("AUTO", "DESC");
                 break;
             case 2:
-
+                setListaAdapter("FECHA", "DESC");
                 break;
             case 3:
-
+                setListaAdapter("FECHA", "ASC");
                 break;
 
         }
@@ -77,28 +81,6 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
-    }
-
-    private void dateAsc() {
-
-        DataBaseController db = new DataBaseController(getContext());
-        ArrayList<Servicio> arrayList = new ArrayList<>();
-
-        arrayList = db.ultimateAllSelect("SERVICIOS", arrayList);
-        Servicio[] servicios = new Servicio[arrayList.size()];
-
-        Date[] dates = new Date[servicios.length];
-
-        for (int i = 0; i < servicios.length; i++) {
-            servicios[i] = arrayList.get(i);
-            int d = Integer.parseInt(servicios[i].getDia());
-            int m = Integer.parseInt(servicios[i].getMes());
-            int a = Integer.parseInt(servicios[i].getAnio());
-        }
-    }
-
-    private void dateDesc() {
 
     }
 

@@ -41,6 +41,7 @@ public class Queries {
             + ", DIA TEXT NOT NULL"
             + ", MES TEXT NOT NULL"
             + ", ANIO TEXT NOT NULL"
+            + ", FECHA TEXT NOT NULL"
             + ", TALLER TEXT NOT NULL REFERENCES TALLERES (TELEFONO)"
             + ", PRODUCTOS TEXT NOT NULL REFERENCES PRODUCTOS (MODELO)"
             + ", COMENTARIO TEXT)";
