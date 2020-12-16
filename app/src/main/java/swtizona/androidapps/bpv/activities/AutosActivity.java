@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
@@ -23,9 +25,10 @@ public class AutosActivity extends AppCompatActivity implements
         View.OnClickListener
         , AdapterView.OnItemClickListener {
 
-    private static ListView listAutos;
-    private ImageView backButton;
     private TextView nuevo, buscar;
+    private static ListView lista;
+    private ImageView back;
+
 
     private static Auto[] autos;
     private static Context context;
@@ -67,37 +70,24 @@ public class AutosActivity extends AppCompatActivity implements
         openInfoDialog(position);
     }
 
-    private void initComponents() {
-        backButton = findViewById(R.id.autosBack);
-        listAutos = findViewById(R.id.listAutos);
-        nuevo = findViewById(R.id.autoNuevo);
-        buscar = findViewById(R.id.autoBuscar);
-
-        Lists.initLists();
-        DataBaseController db = new DataBaseController(getApplicationContext());
-        db.updateLists();
-        updateUI();
-        db.close();
-
-        backButton.setOnClickListener(this);
-        listAutos.setOnItemClickListener(this);
-        nuevo.setOnClickListener(this);
-        buscar.setOnClickListener(this);
-    }
-
     public static void updateUI() {
         initArray();
-        listAutos.setAdapter(new AutoAdapter(
+        lista.setAdapter(new AutoAdapter(
                 context
                 , R.layout.adapter_auto
                 , autos));
     }
 
     private static void initArray() {
-        autos = new Auto[Lists.getAutoList().size()];
-        for (int i = 0; i < Lists.getAutoList().size(); i++) {
-            autos[i] = Lists.getAutoList().get(i);
+        DataBaseController db = new DataBaseController(context);
+        ArrayList<Auto> li = new ArrayList<>();
+        li = db.ultimateAllSelect("AUTOS", li);
+        autos = new Auto[li.size()];
+
+        for (int i = 0; i < li.size(); i++) {
+            autos[i] = li.get(i);
         }
+        db.close();
     }
 
 
@@ -109,5 +99,18 @@ public class AutosActivity extends AppCompatActivity implements
     private void openInfoDialog(int position) {
         InfoAutoFragment infoAutoFragment = new InfoAutoFragment(position);
         infoAutoFragment.show(getSupportFragmentManager(), "Info Dialog");
+    }
+
+    private void initComponents() {
+        back = findViewById(R.id.autosBack);
+        lista = findViewById(R.id.listAutos);
+        nuevo = findViewById(R.id.autoNuevo);
+        buscar = findViewById(R.id.autoBuscar);
+
+        updateUI();
+        back.setOnClickListener(this);
+        lista.setOnItemClickListener(this);
+        nuevo.setOnClickListener(this);
+        buscar.setOnClickListener(this);
     }
 }

@@ -17,8 +17,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
-import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
+
 
 public class NewProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
@@ -27,13 +26,13 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
 
     //Variables to identify if user wants to insert a new car or update it
     boolean insert;
-    String [] values;
+    String[] values;
 
-    public NewProductoFragment(boolean insert){
+    public NewProductoFragment(boolean insert) {
         this.insert = insert;
     }
 
-    public NewProductoFragment(boolean insert, String[] values){
+    public NewProductoFragment(boolean insert, String[] values) {
         this.insert = insert;
         this.values = values;
     }
@@ -112,16 +111,16 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
         }
 
         if (checkForeignKey(campos[1].getText().toString())) {
-            if(insert){
+            if (insert) {
                 db.insert6Rows("PRODUCTOS", rows);
-            }else{
+            } else {
                 db.update("PRODUCTOS",
-                        "NOMBRE = '" + rows[0] +"', AUTO = '"+rows[1]+"', MODELO = '"+rows[2]+"', MARCA = '"+rows[3]+"', NSERIE = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                        "NOMBRE = '" + rows[0] + "', AUTO = '" + rows[1] + "', MODELO = '" + rows[2] + "', MARCA = '" + rows[3] + "', NSERIE = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
                         "MODELO",
-                        "'"+values[2]+"'"
+                        "'" + values[2] + "'"
                 );
             }
-            updateRAM(db);
+            updateRAM();
         } else {
             Toast.makeText(getContext(), "El auto no existe", Toast.LENGTH_SHORT).show();
             campos[1].requestFocus();
@@ -134,11 +133,8 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
         return db.isForeignKey("AUTOS", "MATRICULA", like);
     }
 
-    private void updateRAM(DataBaseController db) {
+    private void updateRAM() {
         //Updating RAM data
-        Lists.initLists();
-        db.updateLists();
-        db.close();
         ProductosActivity.updateUI();
         dismiss();
     }
@@ -151,7 +147,7 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = v.findViewById(res);
-            if(!insert){
+            if (!insert) {
                 campos[i].setText(values[i]);
             }
             i++;

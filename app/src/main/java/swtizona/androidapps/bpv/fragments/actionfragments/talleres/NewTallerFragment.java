@@ -119,14 +119,11 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
                     "'"+values[1]+"'");
         }
 
-        updateRAM(db);
+        updateRAM();
     }
 
-    private void updateRAM(DataBaseController db) {
+    private void updateRAM() {
         //Updating RAM data
-        Lists.initLists();
-        db.updateLists();
-        db.close();
         TallerActivity.updateUI();
         dismiss();
     }

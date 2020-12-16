@@ -26,13 +26,13 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
 
     //Variables to identify if user wants to insert a new car or update it
     boolean insert;
-    String [] values;
+    String[] values;
 
-    public NewAutoFragment(boolean insert){
+    public NewAutoFragment(boolean insert) {
         this.insert = insert;
     }
 
-    public NewAutoFragment(boolean insert, String[] values){
+    public NewAutoFragment(boolean insert, String[] values) {
         this.insert = insert;
         this.values = values;
     }
@@ -79,65 +79,56 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
                     , "id"
                     , getActivity().getPackageName());
             campos[i] = view.findViewById(res);
-            if(!insert){
+            if (!insert) {
                 campos[i].setText(values[i]);
             }
             i++;
         }
     }
 
-    private void actionOk(){
+    private void actionOk() {
         int i = 0;
         boolean flag = true;
-        while(i < 5){
-            if(campos[i].getText().length() == 0){
-                Toast.makeText(getContext(), "Introduce el/la "+campos[i].getHint(), Toast.LENGTH_SHORT).show();
+        while (i < 5) {
+            if (campos[i].getText().length() == 0) {
+                Toast.makeText(getContext(), "Introduce el/la " + campos[i].getHint(), Toast.LENGTH_SHORT).show();
                 flag = false;
                 break;
             }
-
             i++;
         }
-        if(flag){
+        if (flag) {
             actionInsert();
         }
     }
 
-    private void actionInsert(){
+    private void actionInsert() {
 
         DataBaseController db = new DataBaseController(getContext());
-        String [] rows = new String[6];
-        for(int i = 0 ; i < 6 ; i++){
-            if(i == 5){
-                if(campos[i].getText().length() == 0){
+        String[] rows = new String[6];
+        for (int i = 0; i < 6; i++) {
+            if (i == 5) {
+                if (campos[i].getText().length() == 0) {
                     rows[i] = " ";
-                }else{
+                } else {
                     rows[i] = campos[i].getText().toString();
                 }
-            }else{
+            } else {
                 rows[i] = campos[i].getText().toString();
             }
         }
 
         //Check if there is a new insert or just an update
-        if(insert){
+        if (insert) {
             db.insert6Rows("AUTOS", rows);
-        }else {
+        } else {
             db.update(
                     "AUTOS",
-                    "FABRICANTE = '" + rows[0] +"', MODELO = '"+rows[1]+"', ANO = '"+rows[2] +"', MOTOR = '"+rows[3]+"', MATRICULA = '"+rows[4]+"', COMENTARIO = '"+rows[5]+"'",
+                    "FABRICANTE = '" + rows[0] + "', MODELO = '" + rows[1] + "', ANO = '" + rows[2] + "', MOTOR = '" + rows[3] + "', MATRICULA = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
                     "MATRICULA",
-                    "'"+values[4]+"'");
+                    "'" + values[4] + "'");
         }
-        updateRAM(db);
-    }
-
-    private void updateRAM(DataBaseController db){
         //Updating RAM data
-        Lists.initLists();
-        db.updateLists();
         AutosActivity.updateUI();
-        db.close();
-
     }
 }

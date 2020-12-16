@@ -148,7 +148,7 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                         "SERVICIO",
                         "'" + values[0] + "'");
             }
-            updateRAM(db);
+            updateRAM();
         }
     }
 
@@ -175,11 +175,8 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
 
     }
 
-    private void updateRAM(DataBaseController db) {
+    private void updateRAM() {
         //Updating RAM data
-        Lists.initLists();
-        db.updateLists();
-        db.close();
         ServiciosActivity.updateUI();
         dismiss();
     }

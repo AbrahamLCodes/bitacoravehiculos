@@ -50,14 +50,7 @@ public class DataBaseController extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    /**
-     * CRUD to SQLite. CREATE READ UPDATE & DELETE functions
-     * <p>
-     * HOW TO USE THESE CLASS's METHODS
-     * <p>
-     * 1* If the database is empty, don't use initList(), instead use INSERT
-     * 2* Use initList() when deleting, updating or inserting data in order to refresh RAM Memory variables
-     */
+    //CRUD To SQLite
 
     public void insertRecordatorio(String[] rows) {
         SQLiteDatabase db = getWritableDatabase();
@@ -75,10 +68,6 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
-
-    /**
-     * INSERT with 6 rows
-     */
     public void insert6Rows(String tableName, String[] rows) {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
@@ -125,16 +114,6 @@ public class DataBaseController extends SQLiteOpenHelper {
                     + rows[7] + "','"
                     + rows[8] + "')");
         }
-    }
-
-    /**
-     * SELECT
-     */
-    private void selectRows(String tableName) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + tableName, null);
-        addToList(tableName, cursor);
-        db.close();
     }
 
     public ArrayList ultimateAllSelect(String tableName, ArrayList lista) {
@@ -331,110 +310,6 @@ public class DataBaseController extends SQLiteOpenHelper {
                 break;
         }
         return lista;
-    }
-
-    private void addToList(String tableName, Cursor cursor) {
-        switch (tableName) {
-            case "AUTOS":
-                if (cursor.moveToFirst()) {
-                    do {
-                        Lists.getAutoList().add(
-                                new Auto(
-                                        cursor.getString(0)
-                                        , cursor.getString(1)
-                                        , cursor.getString(2)
-                                        , cursor.getString(3)
-                                        , cursor.getString(4)
-                                        , cursor.getString(5)));
-                    } while (cursor.moveToNext());
-                }
-                break;
-
-            case "PRODUCTOS":
-                if (cursor.moveToFirst()) {
-                    do {
-                        Lists.getProductoList().add(
-                                new Producto(
-                                        cursor.getString(0)
-                                        , cursor.getString(1)
-                                        , cursor.getString(2)
-                                        , cursor.getString(3)
-                                        , cursor.getString(4)
-                                        , cursor.getString(5)));
-                    } while (cursor.moveToNext());
-                }
-                break;
-
-            case "TALLERES":
-                if (cursor.moveToFirst()) {
-                    do {
-                        Lists.getTallerList().add(
-                                new Taller(
-                                        cursor.getString(0)
-                                        , cursor.getString(1)
-                                        , cursor.getString(2)
-                                        , cursor.getString(3)
-                                        , cursor.getString(4)
-                                        , cursor.getString(5)
-                                        , cursor.getString(6)
-                                        , cursor.getString(7)));
-
-                    } while (cursor.moveToNext());
-                }
-                break;
-
-            case "SERVICIOS":
-                if (cursor.moveToFirst()) {
-                    do {
-                        Lists.getServicioList().add(
-                                new Servicio(
-                                        cursor.getString(0)
-                                        , cursor.getString(1)
-                                        , cursor.getString(2)
-                                        , cursor.getString(3)
-                                        , cursor.getString(4)
-                                        , cursor.getString(6)
-                                        , cursor.getString(7)
-                                        , cursor.getString(8)));
-
-                    } while (cursor.moveToNext());
-                }
-                break;
-            case "RECORDATORIOS":
-                if (cursor.moveToFirst()) {
-                    do {
-                        Lists.getRecordatorioList().add(
-                                new Recordatorio(
-                                        cursor.getString(0),
-                                        cursor.getString(1),
-                                        cursor.getString(2),
-                                        cursor.getString(3),
-                                        cursor.getString(4),
-                                        cursor.getString(5),
-                                        cursor.getString(6),
-                                        cursor.getString(7),
-                                        cursor.getString(8))
-                        );
-
-                    } while (cursor.moveToNext());
-                }
-                break;
-        }
-    }
-
-    /**
-     * Allocate rows and columns in ram memory because of speed
-     */
-    private void initList(String tableName) {
-        selectRows(tableName);
-    }
-
-    public void updateLists() {
-        initList("AUTOS");
-        initList("PRODUCTOS");
-        initList("TALLERES");
-        initList("SERVICIOS");
-        initList("RECORDATORIOS");
     }
 
     /**

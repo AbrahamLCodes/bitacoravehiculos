@@ -88,8 +88,6 @@ public class InfoRecordatorioFragment extends AppCompatDialogFragment implements
     private void eliminar(){
         DataBaseController db = new DataBaseController(getContext());
         db.delete("RECORDATORIOS","ID",id);
-        Lists.initLists();
-        db.updateLists();
         ReminderFragment.updateUI();
         db.close();
     }

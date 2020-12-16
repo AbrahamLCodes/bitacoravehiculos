@@ -12,11 +12,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.util.ArrayList;
+
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.activities.ServiciosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.modeldata.Producto;
 import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener {
@@ -24,6 +27,8 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     private TextView regresar, editar, eliminar, titulo;
     private TextView[] campos;
     private int pos;
+    private Servicio servicio;
+    private ArrayList<Servicio> li = new ArrayList<>();
     String values[];
     private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
             "Octubre", "Noviembre", "Diciembre"};
@@ -67,15 +72,9 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
 
     private void delete() {
         DataBaseController db = new DataBaseController(getContext());
-        db.delete("SERVICIOS", "SERVICIO", Lists.getServicioList().get(pos).getServicio());
-        updateRAM(db);
-        db.close();
-    }
-
-    private void updateRAM(DataBaseController db) {
-        Lists.initLists();
-        db.updateLists();
+        db.delete("SERVICIOS", "SERVICIO", servicio.getServicio());
         ServiciosActivity.updateUI();
+        db.close();
     }
 
     private void openNewDialog() {
@@ -96,9 +95,7 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
     }
 
     private void setCampos() {
-        titulo.setText(Lists.getServicioList().get(pos).getServicio());
-
-        Servicio servicio = Lists.getServicioList().get(pos);
+        titulo.setText(servicio.getServicio());
         String fecha =
                 servicio.getDia() + "/" +
                         meses[Integer.parseInt(servicio.getMes())]+"/"+
@@ -125,6 +122,10 @@ public class InfoServicioFragment extends AppCompatDialogFragment implements Vie
         editar = v.findViewById(R.id.servicioInfoEditar);
         eliminar = v.findViewById(R.id.servicioInfoEliminar);
         titulo = v.findViewById(R.id.servicioInfoTitulo);
+
+        DataBaseController db = new DataBaseController(getContext());
+        li = db.ultimateAllSelect("SERVICIOS", li);
+        servicio = li.get(pos);
 
         initCampos(v);
         setCampos();

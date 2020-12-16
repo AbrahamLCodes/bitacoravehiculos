@@ -13,18 +13,23 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.util.ArrayList;
+
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.activities.ProductosDetalleActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.modeldata.Producto;
 
 public class InfoProductoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private TextView regresar, buscar, editar, eliminar, titulo;
     private TextView[] campos;
+    private Producto producto;
+    private ArrayList<Producto> li = new ArrayList<>();
     private int pos;
-    String [] values;
+    String[] values;
 
     public InfoProductoFragment(int pos) {
         this.pos = pos;
@@ -53,12 +58,13 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
                 break;
             case R.id.productoInfoBuscar:
                 Intent intent = new Intent(getActivity(), ProductosDetalleActivity.class);
-                intent.putExtra("id", Lists.getProductoList().get(pos).getModelo());
+                intent.putExtra("id", producto.getModelo());
                 startActivity(intent);
                 dismiss();
                 break;
             case R.id.productoInfoEditar:
-                openNewDialog();
+                NewProductoFragment newProductoFragment = new NewProductoFragment(false, values);
+                newProductoFragment.show(getFragmentManager(), "Editar producto");
                 dismiss();
                 break;
             case R.id.productoInfoEliminar:
@@ -71,15 +77,9 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
 
     private void delete() {
         DataBaseController db = new DataBaseController(getContext());
-        db.delete("PRODUCTOS", "NSERIE", Lists.getProductoList().get(pos).getNserie());
-        updateRAM(db);
-        db.close();
-    }
-
-    private void updateRAM(DataBaseController db) {
-        Lists.initLists();
-        db.updateLists();
+        db.delete("PRODUCTOS", "NSERIE", producto.getNserie());
         ProductosActivity.updateUI();
+        db.close();
     }
 
     private void initComponents(View v) {
@@ -88,6 +88,10 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
         editar = v.findViewById(R.id.productoInfoEditar);
         eliminar = v.findViewById(R.id.productoInfoEliminar);
         titulo = v.findViewById(R.id.tituloInfoProducto);
+
+        DataBaseController db = new DataBaseController(getContext());
+        li = db.ultimateAllSelect("PRODUCTOS", li);
+        producto = li.get(pos);
 
         initCampos(v);
         setCampos();
@@ -111,25 +115,20 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
     }
 
     private void setCampos() {
-        titulo.setText(Lists.getProductoList().get(pos).getNombre());
+        titulo.setText(producto.getNombre());
 
-        campos[0].setText(campos[0].getText() + " " + Lists.getProductoList().get(pos).getAuto());
-        campos[1].setText(campos[1].getText() + " " + Lists.getProductoList().get(pos).getModelo());
-        campos[2].setText(campos[2].getText() + " " + Lists.getProductoList().get(pos).getMarca());
-        campos[3].setText(campos[3].getText() + " " + Lists.getProductoList().get(pos).getNserie());
-        campos[4].setText(campos[4].getText() + " " + Lists.getProductoList().get(pos).getComentario());
+        campos[0].setText(campos[0].getText() + " " + producto.getAuto());
+        campos[1].setText(campos[1].getText() + " " + producto.getModelo());
+        campos[2].setText(campos[2].getText() + " " + producto.getMarca());
+        campos[3].setText(campos[3].getText() + " " + producto.getNserie());
+        campos[4].setText(campos[4].getText() + " " + producto.getComentario());
 
-        values[0] = Lists.getProductoList().get(pos).getNombre();
-        values[1] = Lists.getProductoList().get(pos).getAuto();
-        values[2] = Lists.getProductoList().get(pos).getModelo();
-        values[3] = Lists.getProductoList().get(pos).getMarca();
-        values[4] = Lists.getProductoList().get(pos).getNserie();
-        values[5] = Lists.getProductoList().get(pos).getComentario();
+        values[0] = producto.getNombre();
+        values[1] = producto.getAuto();
+        values[2] = producto.getModelo();
+        values[3] = producto.getMarca();
+        values[4] = producto.getNserie();
+        values[5] = producto.getComentario();
 
-    }
-
-    private void openNewDialog() {
-        NewProductoFragment newProductoFragment = new NewProductoFragment(false, values);
-        newProductoFragment.show(getFragmentManager(), "Editar producto");
     }
 }

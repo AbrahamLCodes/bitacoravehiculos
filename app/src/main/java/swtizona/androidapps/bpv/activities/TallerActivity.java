@@ -12,12 +12,15 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.InfoTallerFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.NewTallerFragment;
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.modeladapter.TallerAdapter;
+import swtizona.androidapps.bpv.modeldata.Producto;
 import swtizona.androidapps.bpv.modeldata.Taller;
 
 public class TallerActivity extends AppCompatActivity implements
@@ -74,11 +77,7 @@ public class TallerActivity extends AppCompatActivity implements
         lista = findViewById(R.id.listaTalleres);
         back = findViewById(R.id.talleresBack);
 
-        Lists.initLists();
-        DataBaseController db = new DataBaseController(getApplicationContext());
-        db.updateLists();
         updateUI();
-        db.close();
 
         nuevo.setOnClickListener(this);
         buscar.setOnClickListener(this);
@@ -100,9 +99,14 @@ public class TallerActivity extends AppCompatActivity implements
     }
 
     private static void initArray() {
-        talleres = new Taller[Lists.getTallerList().size()];
-        for (int i = 0; i < Lists.getTallerList().size(); i++) {
-            talleres[i] = Lists.getTallerList().get(i);
+
+        DataBaseController db = new DataBaseController(context);
+        ArrayList<Taller> li = new ArrayList<>();
+        li = db.ultimateAllSelect("TALLERES", li);
+        talleres = new Taller[li.size()];
+
+        for (int i = 0; i < li.size(); i++) {
+            talleres[i] = li.get(i);
         }
     }
 

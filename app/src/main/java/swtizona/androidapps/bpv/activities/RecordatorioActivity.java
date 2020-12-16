@@ -39,12 +39,16 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
             "Octubre", "Noviembre", "Diciembre"};
     private Recordatorio recordatorio;
     private Bundle bundle;
+    private ArrayList<Auto> li;
+    private ArrayList<Recordatorio> li2;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recordatorio);
         initComponents();
+
     }
 
     @Override
@@ -89,6 +93,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         int year = datePicker.getYear();
         DataBaseController db = new DataBaseController(getApplicationContext());
 
+
         String ap = "";
 
         //Obteniendo el ID del vehiculo segun el combobox
@@ -98,7 +103,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
             Toast.makeText(this, "Elige un vehiculo", Toast.LENGTH_SHORT).show();
             spinner.requestFocus();
         } else {
-            matricula = Lists.getAutoList().get(spinnerPos - 1).getMatricula();
+            matricula = li.get(spinnerPos - 1).getMatricula();
         }
 
         //Definiendo AM o PM
@@ -116,7 +121,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
             if (count == 0) {
                 id = 0;
             } else {
-                int ultimo = Integer.parseInt(Lists.getRecordatorioList().get(Lists.getRecordatorioList().size() - 1).getId());
+                int ultimo = Integer.parseInt(li2.get(li2.size() - 1).getId());
                 id = ultimo + 1;
             }
 
@@ -140,9 +145,6 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
             db.update("RECORDATORIOS", set, "ID", recordatorio.getId());
         }
 
-
-        Lists.initLists();
-        db.updateLists();
         ReminderFragment.updateUI();
         db.close();
     }
@@ -219,9 +221,9 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
 
         spinnerArray.add("Elige el auto");
 
-        for (int i = 0; i < Lists.getAutoList().size(); i++) {
+        for (int i = 0; i < li.size(); i++) {
 
-            Auto auto = Lists.getAutoList().get(i);
+            Auto auto = li.get(i);
             String autoItem = auto.getFabricante() + " " + auto.getModelo() + " " + auto.getAno() + " ID: " + auto.getMatricula();
             spinnerArray.add(autoItem);
 
@@ -277,6 +279,13 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         spinner = findViewById(R.id.spinner);
 
         servicio = findViewById(R.id.recordatorioServicio);
+
+        DataBaseController db = new DataBaseController(getApplicationContext());
+        li = new ArrayList<>();
+        li2 = new ArrayList<>();
+        li = db.ultimateAllSelect("AUTOS", li);
+        li2 = db.ultimateAllSelect("RECORDATORIOS", li2);
+        db.close();
 
         aceptar.setOnClickListener(this);
         cancelar.setOnClickListener(this);

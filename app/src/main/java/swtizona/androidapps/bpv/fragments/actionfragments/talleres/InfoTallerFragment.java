@@ -7,28 +7,30 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.TallerActivity;
 import swtizona.androidapps.bpv.activities.TallerDetalleActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.database.Lists;
+import swtizona.androidapps.bpv.modeldata.Taller;
 
 public class InfoTallerFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
     private TextView regresar, buscar, editar, eliminar, titulo;
     private TextView[] campos;
     private int pos;
-    String [] values;
+    private Taller taller;
+    private ArrayList<Taller> li = new ArrayList<>();
+    String[] values;
 
-    public InfoTallerFragment(int pos){
+    public InfoTallerFragment(int pos) {
         this.pos = pos;
     }
 
@@ -49,13 +51,13 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.tallerInfoRegresar:
                 dismiss();
                 break;
             case R.id.tallerInfoBuscar:
                 Intent intent = new Intent(getActivity(), TallerDetalleActivity.class);
-                intent.putExtra("id", Lists.getTallerList().get(pos).getTelefono());
+                intent.putExtra("id", taller.getTelefono());
                 startActivity(intent);
                 dismiss();
                 break;
@@ -72,20 +74,14 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
 
     private void delete() {
         DataBaseController db = new DataBaseController(getContext());
-        db.delete("TALLERES", "TELEFONO", Lists.getTallerList().get(pos).getTelefono());
-        updateRAM(db);
+        db.delete("TALLERES", "TELEFONO", taller.getTelefono());
+        TallerActivity.updateUI();
         db.close();
     }
 
-    private void updateRAM(DataBaseController db) {
-        Lists.initLists();
-        db.updateLists();
-        TallerActivity.updateUI();
-    }
-
-    private void openNewDialog(){
+    private void openNewDialog() {
         NewTallerFragment newTallerFragment = new NewTallerFragment(false, values);
-        newTallerFragment.show(getFragmentManager(),"Editar Taller");
+        newTallerFragment.show(getFragmentManager(), "Editar Taller");
     }
 
     private void initCampos(View view) {
@@ -101,36 +97,40 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
     }
 
     private void setCampos() {
-        titulo.setText(Lists.getTallerList().get(pos).getTaller());
+        titulo.setText(taller.getTaller());
 
         //Building address String
         String direccion = campos[2].getText().toString() + " "
-                + Lists.getTallerList().get(pos).getCalle() +" #"
-                + Lists.getTallerList().get(pos).getNcalle() + "\nColonia "
-                + Lists.getTallerList().get(pos).getColonia()+", "
-                + Lists.getTallerList().get(pos).getCiudad() + " "
-                + Lists.getTallerList().get(pos).getEstado();
+                + taller.getCalle() + " #"
+                + taller.getNcalle() + "\nColonia "
+                + taller.getColonia() + ", "
+                + taller.getCiudad() + " "
+                + taller.getEstado();
 
-        campos[0].setText(campos[0].getText() + " " + Lists.getTallerList().get(pos).getTelefono());
+        campos[0].setText(campos[0].getText() + " " + taller.getTelefono());
         campos[1].setText(campos[1].getText() + " " + direccion);
-        campos[2].setText(campos[2].getText() + " " + Lists.getTallerList().get(pos).getComentario());
+        campos[2].setText(campos[2].getText() + " " + taller.getComentario());
 
-        values[0] = Lists.getTallerList().get(pos).getTaller();
-        values[1] = Lists.getTallerList().get(pos).getTelefono();
-        values[2] = Lists.getTallerList().get(pos).getCalle();
-        values[3] = Lists.getTallerList().get(pos).getNcalle();
-        values[4] = Lists.getTallerList().get(pos).getColonia();
-        values[5] = Lists.getTallerList().get(pos).getCiudad();
-        values[6] = Lists.getTallerList().get(pos).getEstado();
-        values[7] = Lists.getTallerList().get(pos).getComentario();
+        values[0] = taller.getTaller();
+        values[1] = taller.getTelefono();
+        values[2] = taller.getCalle();
+        values[3] = taller.getNcalle();
+        values[4] = taller.getColonia();
+        values[5] = taller.getCiudad();
+        values[6] = taller.getEstado();
+        values[7] = taller.getComentario();
     }
 
-    private void initComponents(View v){
+    private void initComponents(View v) {
         regresar = v.findViewById(R.id.tallerInfoRegresar);
         buscar = v.findViewById(R.id.tallerInfoBuscar);
         editar = v.findViewById(R.id.tallerInfoEditar);
         eliminar = v.findViewById(R.id.tallerInfoEliminar);
         titulo = v.findViewById(R.id.tituloInfoTaller);
+
+        DataBaseController db = new DataBaseController(getContext());
+        li = db.ultimateAllSelect("TALLERES", li);
+        taller = li.get(pos);
 
         initCampos(v);
         setCampos();
@@ -140,6 +140,4 @@ public class InfoTallerFragment extends AppCompatDialogFragment implements View.
         editar.setOnClickListener(this);
         eliminar.setOnClickListener(this);
     }
-
-
 }

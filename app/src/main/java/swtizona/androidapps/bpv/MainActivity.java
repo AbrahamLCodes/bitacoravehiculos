@@ -41,11 +41,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         fab.setOnClickListener(this);
 
-        //Initing Lists
-        Lists.initLists();
-        initLists();
-
-
         tabs.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -66,13 +61,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //Para no mostrar el fab al inicio del programa
         initFab();
     }
-
-    private void initLists(){
-        DataBaseController db = new DataBaseController(getApplicationContext());
-        db.updateLists();
-        db.close();
-    }
-
 
     private void switchTab(int pos) {
         switch (pos) {
