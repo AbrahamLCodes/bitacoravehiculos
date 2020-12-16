@@ -11,23 +11,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Date;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
-import java.util.stream.Stream;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.modeladapter.RecordatorioAdapter;
 import swtizona.androidapps.bpv.modeladapter.ServicioAdapter;
 import swtizona.androidapps.bpv.modeladapter.SpinnerDropAdapter;
 import swtizona.androidapps.bpv.modeldata.Servicio;
@@ -113,7 +106,7 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
         SpinnerDropAdapter sda = new SpinnerDropAdapter(
                 getActivity(),
                 items,
-                Color.parseColor("#635B5B"));
+                Color.parseColor("#28282C"));
         spinner.setAdapter(sda);
 
         spinner.setOnItemSelectedListener(this);

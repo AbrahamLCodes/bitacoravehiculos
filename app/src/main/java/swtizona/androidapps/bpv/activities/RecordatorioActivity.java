@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -15,13 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.ReminderFragment;
 import swtizona.androidapps.bpv.modeladapter.SpinnerDropAdapter;
 import swtizona.androidapps.bpv.modeldata.Auto;
@@ -153,8 +149,8 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         String m = min.getText().toString();
         int n = Integer.parseInt(m);
 
-        if (n < 60) {
-            n++;
+        if (n < 50) {
+            n+=10;
             if (n < 10) {
                 min.setText("0" + n);
             } else {
@@ -168,7 +164,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         int n = Integer.parseInt(m);
 
         if (n > 0) {
-            n--;
+            n-=10;
             if (n < 10) {
                 min.setText("0" + n);
             } else {

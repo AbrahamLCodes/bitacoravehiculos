@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,11 +14,8 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import java.util.ArrayList;
 
 import swtizona.androidapps.bpv.R;
-import swtizona.androidapps.bpv.activities.ProductosActivity;
 import swtizona.androidapps.bpv.activities.ServiciosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
-import swtizona.androidapps.bpv.modeldata.Producto;
 import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class InfoServicioFragment extends AppCompatDialogFragment implements View.OnClickListener {

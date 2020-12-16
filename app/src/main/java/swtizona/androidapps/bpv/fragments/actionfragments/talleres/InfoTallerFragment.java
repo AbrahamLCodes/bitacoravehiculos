@@ -18,7 +18,6 @@ import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.TallerActivity;
 import swtizona.androidapps.bpv.activities.TallerDetalleActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.modeldata.Taller;
 
 public class InfoTallerFragment extends AppCompatDialogFragment implements View.OnClickListener {

@@ -6,7 +6,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -15,12 +14,10 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.InfoTallerFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.talleres.NewTallerFragment;
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.modeladapter.TallerAdapter;
-import swtizona.androidapps.bpv.modeldata.Producto;
 import swtizona.androidapps.bpv.modeldata.Taller;
 
 public class TallerActivity extends AppCompatActivity implements

@@ -12,11 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import swtizona.androidapps.bpv.MainActivity;
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.database.DataBaseController;
 import swtizona.androidapps.bpv.fragments.actionfragments.recordatorios.InfoRecordatorioFragment;

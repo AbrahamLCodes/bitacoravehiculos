@@ -5,16 +5,13 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import swtizona.androidapps.bpv.R;
-import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.modeldata.Recordatorio;
-import swtizona.androidapps.bpv.modeldata.Servicio;
 
 public class RecordatorioAdapter extends ArrayAdapter<Recordatorio> {
 

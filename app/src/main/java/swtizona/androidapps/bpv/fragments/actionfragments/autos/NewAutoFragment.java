@@ -17,7 +17,6 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.AutosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
 
 public class NewAutoFragment extends AppCompatDialogFragment implements View.OnClickListener {
 

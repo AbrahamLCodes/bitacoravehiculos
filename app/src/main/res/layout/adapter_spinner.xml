@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="#635B5B">
+    android:background="#28282C">
 
     <TextView
         android:id="@+id/spinnerDropItem"

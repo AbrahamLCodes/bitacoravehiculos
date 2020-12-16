@@ -14,7 +14,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import swtizona.androidapps.bpv.database.DataBaseController;
-import swtizona.androidapps.bpv.database.Lists;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.NewAutoFragment;
 import swtizona.androidapps.bpv.fragments.actionfragments.autos.InfoAutoFragment;
 import swtizona.androidapps.bpv.R;
