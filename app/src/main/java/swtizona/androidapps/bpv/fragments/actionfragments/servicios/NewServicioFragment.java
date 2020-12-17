@@ -91,7 +91,7 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                 //Configurar el Spinner para posicionarlo en el item del auto
                 // guradado
                 if (values[1].equals(auto.getMatricula())) {
-                    index = i + 2;
+                    index = i + 1;
                 }
             }
         }

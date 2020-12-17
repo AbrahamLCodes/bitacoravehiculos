@@ -2,9 +2,6 @@ package swtizona.androidapps.bpv.database;
 
 public class Queries {
 
-    public Queries() {
-    }
-
     public static final String createAutos
             = "CREATE TABLE AUTOS ("
             + "FABRICANTE TEXT NOT NULL"
