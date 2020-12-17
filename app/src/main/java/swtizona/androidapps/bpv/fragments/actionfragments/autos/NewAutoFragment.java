@@ -3,6 +3,7 @@ package swtizona.androidapps.bpv.fragments.actionfragments.autos;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -119,13 +120,24 @@ public class NewAutoFragment extends AppCompatDialogFragment implements View.OnC
 
         //Check if there is a new insert or just an update
         if (insert) {
-            db.insert6Rows("AUTOS", rows);
+            try {
+                db.insert6Rows("AUTOS", rows);
+            } catch (Exception e) {
+                Toast.makeText(getContext(), "Error al Insertar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("INSERT ERROR","ERROR: "+e.getMessage());
+            }
         } else {
-            db.update(
-                    "AUTOS",
-                    "FABRICANTE = '" + rows[0] + "', MODELO = '" + rows[1] + "', ANO = '" + rows[2] + "', MOTOR = '" + rows[3] + "', MATRICULA = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
-                    "MATRICULA",
-                    "'" + values[4] + "'");
+            try{
+                db.update(
+                        "AUTOS",
+                        "FABRICANTE = '" + rows[0] + "', MODELO = '" + rows[1] + "', ANO = '" + rows[2] + "', MOTOR = '" + rows[3] + "', MATRICULA = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
+                        "MATRICULA",
+                        "'" + values[4] + "'");
+            }catch (Exception e){
+                Toast.makeText(getContext(), "Error al actualizar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("UPDATE ERROR","ERRROR:"+e.getMessage());
+            }
+
         }
         //Updating RAM data
         AutosActivity.updateUI();

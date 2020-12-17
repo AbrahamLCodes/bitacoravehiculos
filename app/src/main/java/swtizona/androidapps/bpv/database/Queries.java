@@ -18,15 +18,16 @@ public class Queries {
             = "CREATE TABLE PRODUCTOS("
             + "NOMBRE TEXT NOT NULL"
             + ", AUTO TEXT NOT NULL REFERENCES AUTOS(MATRICULA)"
-            + ", MODELO TEXT PRIMARY KEY NOT NULL"
+            + ", MODELO TEXT NOT NULL"
             + ", MARCA TEXT NOT NULL"
             + ", NSERIE TEXT NOT NULL"
-            + ", COMENTARIO TEXT);";
+            + ", COMENTARIO TEXT"
+            + ", PRIMARY KEY (MODELO, NSERIE));";
 
     public static final String createTalleres
             = "CREATE TABLE TALLERES ("
             + "  NOMBRE TEXT NOT NULL"
-            + ", TELEFONO TEXT NOT NULL"
+            + ", TELEFONO TEXT PRIMARY KEY NOT NULL"
             + ", CALLE TEXT NOT NULL"
             + ", NCALLE TEXT NOT NULL"
             + ", COLONIA TEXT NOT NULL"

@@ -3,6 +3,7 @@ package swtizona.androidapps.bpv.fragments.actionfragments.talleres;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,14 +111,25 @@ public class NewTallerFragment extends AppCompatDialogFragment implements View.O
         }
 
         if(insert){
-            db.insert8Rows("TALLERES", rows);
-        }else {
-            db.update("TALLERES",
-                    "NOMBRE = '"+rows[0]+"', TELEFONO = '"+rows[1]+"', CALLE = '"+rows[2]+"', NCALLE = '"+rows[3]+"', COLONIA = '"+rows[4]+"', CIUDAD = '"+rows[5]+"', ESTADO = '"+rows[6]+"', COMENTARIO = '"+rows[7]+"'",
-                    "TELEFONO",
-                    "'"+values[1]+"'");
-        }
 
+            try {
+                db.insert8Rows("TALLERES", rows);
+            }catch (Exception e){
+                Toast.makeText(getContext(), "Error al insertar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("INSERT ERROR","ERROR:"+e.getMessage());
+            }
+
+        }else {
+            try {
+                db.update("TALLERES",
+                        "NOMBRE = '"+rows[0]+"', TELEFONO = '"+rows[1]+"', CALLE = '"+rows[2]+"', NCALLE = '"+rows[3]+"', COLONIA = '"+rows[4]+"', CIUDAD = '"+rows[5]+"', ESTADO = '"+rows[6]+"', COMENTARIO = '"+rows[7]+"'",
+                        "TELEFONO",
+                        "'"+values[1]+"'");
+            }catch (Exception e){
+                Toast.makeText(getContext(), "Error al actualizar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("UPDATE ERROR","ERROR:"+e.getMessage());
+            }
+        }
         updateRAM();
     }
 

@@ -33,7 +33,7 @@
 
 
             <EditText
-                android:id="@+id/servicioIn0"
+                android:id="@+id/servicio"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
@@ -47,23 +47,14 @@
                 android:textColorHint="#554E4E"
                 android:textSize="17sp" />
 
-            <EditText
-                android:id="@+id/servicioIn1"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_margin="10dp"
-                android:layout_weight="1"
-                android:background="@layout/shape_input"
-                android:fontFamily="@font/helvetica"
-                android:hint="Automovil a aplicar"
-                android:inputType="textCapSentences"
+            <Spinner
+                android:id="@+id/spinner"
                 android:padding="10dp"
-                android:textColor="#000"
-                android:textColorHint="#554E4E"
-                android:textSize="20sp" />
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <DatePicker
-                android:id="@+id/servicioIn2"
+                android:id="@+id/datepicker"
                 android:layout_gravity="center"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -72,7 +63,7 @@
                 />
 
             <EditText
-                android:id="@+id/servicioIn3"
+                android:id="@+id/taller"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
@@ -87,7 +78,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/servicioIn4"
+                android:id="@+id/productos"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
@@ -102,7 +93,7 @@
                 android:textSize="20sp" />
 
             <EditText
-                android:id="@+id/servicioIn5"
+                android:id="@+id/comentario"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"

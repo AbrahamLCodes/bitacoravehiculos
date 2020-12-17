@@ -81,7 +81,7 @@
             android:background="@layout/shape_input"
             android:fontFamily="@font/helvetica"
             android:hint="Motor (Ej: 2.3 sólo numeros)"
-            android:inputType="number"
+            android:inputType="textCapSentences"
             android:padding="10dp"
             android:textColor="#000"
             android:textColorHint="#554E4E"

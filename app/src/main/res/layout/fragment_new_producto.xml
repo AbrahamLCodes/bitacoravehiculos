@@ -53,7 +53,7 @@
                 android:layout_weight="1"
                 android:background="@layout/shape_input"
                 android:fontFamily="@font/helvetica"
-                android:hint="Placas del auto a asignar"
+                android:hint="ID del auto a asignar"
                 android:inputType="textCapSentences"
                 android:padding="10dp"
                 android:textColor="#000"

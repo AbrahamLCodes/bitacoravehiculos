@@ -3,6 +3,7 @@ package swtizona.androidapps.bpv.fragments.actionfragments.productos;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -112,13 +113,24 @@ public class NewProductoFragment extends AppCompatDialogFragment implements View
 
         if (checkForeignKey(campos[1].getText().toString())) {
             if (insert) {
-                db.insert6Rows("PRODUCTOS", rows);
+                try{
+                    db.insert6Rows("PRODUCTOS", rows);
+                }catch (Exception e){
+                    Toast.makeText(getContext(), "Error al insertar datos. Revisa bien tus datos.", Toast.LENGTH_SHORT).show();
+                    Log.wtf("INSERT ERROR","ERROR: "+e.getMessage());
+                }
             } else {
-                db.update("PRODUCTOS",
-                        "NOMBRE = '" + rows[0] + "', AUTO = '" + rows[1] + "', MODELO = '" + rows[2] + "', MARCA = '" + rows[3] + "', NSERIE = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
-                        "MODELO",
-                        "'" + values[2] + "'"
-                );
+                try {
+                    db.updateProducto(
+                            "NOMBRE = '" + rows[0] + "', AUTO = '" + rows[1] + "', MODELO = '" + rows[2] + "', MARCA = '" + rows[3] + "', NSERIE = '" + rows[4] + "', COMENTARIO = '" + rows[5] + "'",
+                            "'" + values[2] + "'",
+                            "'" + values[4] + "'"
+                    );
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Error al actualizar. Revisa bien tus datos", Toast.LENGTH_SHORT).show();
+                    Log.wtf("UPDATE ERROR" , "ERROR: "+ e.getMessage());
+                }
+
             }
             updateRAM();
         } else {

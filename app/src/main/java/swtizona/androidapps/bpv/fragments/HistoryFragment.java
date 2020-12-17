@@ -49,9 +49,7 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
 
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(getContext(), "" + position, Toast.LENGTH_SHORT).show();
-    }
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) { }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,7 +99,7 @@ public class HistoryFragment extends Fragment implements AdapterView.OnItemClick
                 "Por auto ascendente",
                 "Por auto descendente",
                 "Del más nuevo al maś antiguo",
-                "Del más antiguo al más nuevo"};
+                "Del más antiguo al maś nuevo"};
 
         SpinnerDropAdapter sda = new SpinnerDropAdapter(
                 getActivity(),

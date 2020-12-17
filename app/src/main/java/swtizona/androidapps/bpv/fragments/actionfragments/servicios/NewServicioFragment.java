@@ -3,11 +3,13 @@ package swtizona.androidapps.bpv.fragments.actionfragments.servicios;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,15 +17,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import swtizona.androidapps.bpv.R;
 import swtizona.androidapps.bpv.activities.ServiciosActivity;
 import swtizona.androidapps.bpv.database.DataBaseController;
+import swtizona.androidapps.bpv.modeladapter.SpinnerDropAdapter;
+import swtizona.androidapps.bpv.modeldata.Auto;
 
 public class NewServicioFragment extends AppCompatDialogFragment implements View.OnClickListener {
 
-    private EditText campos[];
+    private EditText servicio, taller, productos, comentario;
     private TextView cancelar, registrar;
     private DatePicker datePicker;
+    private Spinner spinner;
 
     //Variables to identify if user wants to insert a new car or update it
     boolean insert;
@@ -48,7 +56,7 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initCampos(view);
+        initComponents(view);
     }
 
     @Override
@@ -62,34 +70,67 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
                 actionOk();
                 break;
         }
-
     }
 
-    private void initCampos(View v) {
-        campos = new EditText[6];
-        cancelar = v.findViewById(R.id.servicioNewBack);
-        registrar = v.findViewById(R.id.servicioNewOk);
-        datePicker = v.findViewById(R.id.servicioIn2);
-        initEditText(v);
+    private void initSpinner(Boolean nuevo) {
+        List<String> spinnerArray = new ArrayList<>();
+        DataBaseController db = new DataBaseController(getContext());
+        ArrayList<Auto> li = new ArrayList<>();
+        li = db.ultimateAllSelect("AUTOS", li);
+        db.close();
 
-        cancelar.setOnClickListener(this);
-        registrar.setOnClickListener(this);
+        int index = 0;
+        spinnerArray.add("Elige el auto");
+
+        for (int i = 0; i < li.size(); i++) {
+            Auto auto = li.get(i);
+            String autoItem = auto.getFabricante() + " " + auto.getModelo() + " " + auto.getAno() + " ID: " + auto.getMatricula();
+            spinnerArray.add(autoItem);
+
+            if (!nuevo) {
+                //Configurar el Spinner para posicionarlo en el item del auto
+                // guradado
+                if (values[1].equals(auto.getMatricula())) {
+                    index = i + 2;
+                }
+            }
+        }
+
+        //Hacer un arreglo de Autos para el SpinnerAdapter
+        String[] items = new String[spinnerArray.size()];
+        for (int i = 0; i < items.length; i++) {
+            items[i] = spinnerArray.get(i);
+        }
+
+        SpinnerDropAdapter sda = new SpinnerDropAdapter(
+                getActivity(),
+                items,
+                Color.parseColor("#28282C")
+        );
+        spinner.setAdapter(sda);
+
+        //En caso de que halla que editar
+        if (!nuevo) {
+            spinner.setSelection(index);
+        }
     }
 
     private void actionOk() {
-        int i = 0;
         boolean flag = true;
         //Show input alert
-        while (i < 6) {
-            if (i != 2) {
-                if (campos[i].getText().length() == 0) {
-                    Toast.makeText(getContext(), "Introduce el/la " + campos[i].getHint(), Toast.LENGTH_SHORT).show();
-                    flag = false;
-                    break;
-                }
-            }
-            i++;
+        if (servicio.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Introduce el servicio", Toast.LENGTH_SHORT).show();
+            flag = false;
         }
+        if (taller.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Introduce el taller", Toast.LENGTH_SHORT).show();
+            flag = false;
+        }
+        if (productos.getText().toString().isEmpty()) {
+            Toast.makeText(getContext(), "Introduce el producto", Toast.LENGTH_SHORT).show();
+            flag = false;
+        }
+
         if (flag) {
             actionInsert();
         }
@@ -101,51 +142,77 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
         String[] rows = new String[9];
         //Get TextEdits values
 
-        rows[0] = campos[0].getText().toString();
-        rows[1] = campos[1].getText().toString();
+        //Servicio
+        rows[0] = servicio.getText().toString();
 
-        rows[2] = ""+datePicker.getDayOfMonth();
-        rows[3] = ""+datePicker.getMonth();
-        rows[4] = ""+datePicker.getYear();
+        //Obteniendo el ID del vehiculo segun el Spinner
+        String matricula = "";
+        ArrayList<Auto> li = new ArrayList<>();
+        li = db.ultimateAllSelect("AUTOS", li);
+
+        int spinnerPos = spinner.getSelectedItemPosition();
+        if (spinnerPos == 0) {
+            Toast.makeText(getContext(), "Elige un vehiculo", Toast.LENGTH_SHORT).show();
+            spinner.requestFocus();
+        } else {
+            rows[1] = li.get(spinnerPos - 1).getMatricula();
+        }
+
+        rows[2] = "" + datePicker.getDayOfMonth();
+        rows[3] = "" + datePicker.getMonth();
+        rows[4] = "" + datePicker.getYear();
 
         String d = rows[2];
         String m = rows[3];
 
-        if(Integer.parseInt(d) < 10){
-            d = "0"+datePicker.getDayOfMonth();
+        if (Integer.parseInt(d) < 10) {
+            d = "0" + datePicker.getDayOfMonth();
         }
-        if(Integer.parseInt(m) < 10){
-            m = "0"+datePicker.getMonth();
+        if (Integer.parseInt(m) < 10) {
+            m = "0" + datePicker.getMonth();
         }
 
-        rows[5] = rows[4]+"-"+m+"-"+d;
-        rows[6] = campos[3].getText().toString();
-        rows[7] = campos[4].getText().toString();
-        if (campos[5].getText().length() == 0) {
+        rows[5] = rows[4] + "-" + m + "-" + d;
+
+        //taller
+        rows[6] = taller.getText().toString();
+        //productos
+        rows[7] = productos.getText().toString();
+        if (comentario.getText().length() == 0) {
             rows[8] = " ";
         } else {
-            rows[8] = campos[5].getText().toString();
+            rows[8] = comentario.getText().toString();
         }
 
         if (checkForeignKey(
-                campos[1].getText().toString()
-                , campos[3].getText().toString()
-                , campos[4].getText().toString())) {
+                li.get(spinnerPos - 1).getMatricula()
+                , taller.getText().toString()
+                , productos.getText().toString())) {
             if (insert) {
-                db.insert9Rows("SERVICIOS", rows);
+                try {
+                    db.insert9Rows("SERVICIOS", rows);
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Error al insertar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                    Log.wtf("INSERT ERROR", "ERROR: " + e.getMessage());
+                }
             } else {
-                db.update(
-                        "SERVICIOS",
-                        "SERVICIO = '" + rows[0] + "', " +
-                                "AUTO = '" + rows[1] + "', " +
-                                "DIA = '" + rows[2] + "', " +
-                                "MES = '" + rows[3] + "', " +
-                                "ANIO = '" + rows[4] + "', " +
-                                "TALLER = '" + rows[6] + "', " +
-                                "PRODUCTOS = '" + rows[7] + "', " +
-                                "COMENTARIO = '" + rows[8] + "'",
-                        "SERVICIO",
-                        "'" + values[0] + "'");
+                try {
+                    db.update(
+                            "SERVICIOS",
+                            "SERVICIO = '" + rows[0] + "', " +
+                                    "AUTO = '" + rows[1] + "', " +
+                                    "DIA = '" + rows[2] + "', " +
+                                    "MES = '" + rows[3] + "', " +
+                                    "ANIO = '" + rows[4] + "', " +
+                                    "TALLER = '" + rows[6] + "', " +
+                                    "PRODUCTOS = '" + rows[7] + "', " +
+                                    "COMENTARIO = '" + rows[8] + "'",
+                            "SERVICIO",
+                            "'" + values[0] + "'");
+                } catch (Exception e) {
+                    Toast.makeText(getContext(), "Error al insertar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                    Log.wtf("UPDATE ERROR", "ERROR: " + e.getMessage());
+                }
             }
             updateRAM();
         }
@@ -180,33 +247,32 @@ public class NewServicioFragment extends AppCompatDialogFragment implements View
         dismiss();
     }
 
-    private void initEditText(View v) {
-        int i = 0;
-        while (i < 6) {
-            //To avoid datePicker
-            if (i != 2) {
-                int res = getResources().getIdentifier(
-                        "servicioIn" + (i)
-                        , "id"
-                        , getActivity().getPackageName());
-                campos[i] = v.findViewById(res);
-                //Set textview content
-                if (!insert) {
-                    if(i > 2){
-                        campos[i].setText(values[i + 2]);
-                    }else{
-                        campos[i].setText(values[i]);
-                    }
-                }
-            }else{
-                if(!insert){
-                    int dia = Integer.parseInt(values[2]);
-                    int mes = Integer.parseInt(values[3]);
-                    int anio = Integer.parseInt(values[4]);
-                    datePicker.updateDate(anio, mes, dia);
-                }
-            }
-            i++;
+    private void initComponents(View v) {
+        cancelar = v.findViewById(R.id.servicioNewBack);
+        registrar = v.findViewById(R.id.servicioNewOk);
+        cancelar.setOnClickListener(this);
+        registrar.setOnClickListener(this);
+
+        servicio = v.findViewById(R.id.servicio);
+        spinner = v.findViewById(R.id.spinner);
+        datePicker = v.findViewById(R.id.datepicker);
+        taller = v.findViewById(R.id.taller);
+        productos = v.findViewById(R.id.productos);
+        comentario = v.findViewById(R.id.comentario);
+
+        initSpinner(insert);
+
+        if (!insert) {
+            servicio.setText(values[0]);
+
+            int dia = Integer.parseInt(values[2]);
+            int mes = Integer.parseInt(values[3]);
+            int anio = Integer.parseInt(values[4]);
+            datePicker.updateDate(anio, mes, dia);
+
+            taller.setText(values[5]);
+            productos.setText(values[6]);
+            comentario.setText(values[7]);
         }
     }
 }

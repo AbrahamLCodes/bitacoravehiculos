@@ -31,8 +31,6 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
     private Spinner spinner;
     private boolean ampm;
     private DatePicker datePicker;
-    private String[] meses = {"Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre",
-            "Octubre", "Noviembre", "Diciembre"};
     private Recordatorio recordatorio;
     private Bundle bundle;
     private ArrayList<Auto> li;
@@ -132,13 +130,25 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
                     ap,
                     servicio.getText().toString()
             };
-            db.insertRecordatorio(rows);
+
+            try {
+                db.insertRecordatorio(rows);
+            } catch (Exception e) {
+                Toast.makeText(this, "Error al insertar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("INSERT ERROR", "ERROR:" + e.getMessage());
+            }
+
         } else {
 
-            String set = "AUTO ='" + matricula + "', DIA = '" + dd + "', MES = '" + mm + "', ANIO = '" + year +
-                    "', HORA = '" + hour.getText().toString() + "', MINUTO = '" + min.getText().toString() + "', AMPM ='" + ap + "', SERVICIO = '" + servicio.getText().toString() + "'";
-            Log.d("DEBUGEANDO STRING", set);
-            db.update("RECORDATORIOS", set, "ID", recordatorio.getId());
+            try {
+                String set = "AUTO ='" + matricula + "', DIA = '" + dd + "', MES = '" + mm + "', ANIO = '" + year +
+                        "', HORA = '" + hour.getText().toString() + "', MINUTO = '" + min.getText().toString() + "', AMPM ='" + ap + "', SERVICIO = '" + servicio.getText().toString() + "'";
+                Log.d("DEBUGEANDO STRING", set);
+                db.update("RECORDATORIOS", set, "ID", recordatorio.getId());
+            } catch (Exception e) {
+                Toast.makeText(this, "Error al actualizar datos. Checa bien tus datos", Toast.LENGTH_SHORT).show();
+                Log.wtf("UPDATE ERROR", "ERROR:" + e.getMessage());
+            }
         }
 
         ReminderFragment.updateUI();
@@ -150,7 +160,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         int n = Integer.parseInt(m);
 
         if (n < 50) {
-            n+=10;
+            n += 10;
             if (n < 10) {
                 min.setText("0" + n);
             } else {
@@ -164,7 +174,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         int n = Integer.parseInt(m);
 
         if (n > 0) {
-            n-=10;
+            n -= 10;
             if (n < 10) {
                 min.setText("0" + n);
             } else {
@@ -211,7 +221,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void initSpinner(Boolean nuevo, String id) {
+    private void initSpinner(Boolean nuevo) {
         List<String> spinnerArray = new ArrayList<>();
         int index = 0;
 
@@ -233,9 +243,9 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
 
         }
 
-        String [] items = new String[spinnerArray.size()];
+        String[] items = new String[spinnerArray.size()];
 
-        for (int i = 0 ; i < items.length ; i++){
+        for (int i = 0; i < items.length; i++) {
             items[i] = spinnerArray.get(i);
         }
 
@@ -299,7 +309,7 @@ public class RecordatorioActivity extends AppCompatActivity implements View.OnCl
             setEditText(bundle);
         }
         isAm();
-        initSpinner(bundle.getBoolean("new"), bundle.getString("auto"));
+        initSpinner(bundle.getBoolean("new"));
 
     }
 

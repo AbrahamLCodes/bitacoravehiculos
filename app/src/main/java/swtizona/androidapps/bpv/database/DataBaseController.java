@@ -3,6 +3,7 @@ package swtizona.androidapps.bpv.database;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -52,7 +53,7 @@ public class DataBaseController extends SQLiteOpenHelper {
 
     //CRUD To SQLite
 
-    public void insertRecordatorio(String[] rows) {
+    public void insertRecordatorio(String[] rows) throws Exception {
         SQLiteDatabase db = getWritableDatabase();
         if (db != null) {
             db.execSQL("INSERT INTO RECORDATORIOS VALUES (" +
@@ -68,7 +69,7 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
-    public void insert6Rows(String tableName, String[] rows) {
+    public void insert6Rows(String tableName, String[] rows) throws Exception {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
             bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
@@ -85,7 +86,7 @@ public class DataBaseController extends SQLiteOpenHelper {
      * INSERT with 8 rows (For Talleres)
      */
 
-    public void insert8Rows(String tableName, String[] rows) {
+    public void insert8Rows(String tableName, String[] rows)throws Exception {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
             bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
@@ -100,7 +101,7 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
-    public void insert9Rows(String tableName, String[] rows) {
+    public void insert9Rows(String tableName, String[] rows)throws Exception {
         SQLiteDatabase bd = getWritableDatabase();
         if (bd != null) {
             bd.execSQL("INSERT INTO " + tableName + " VALUES (" +
@@ -315,11 +316,19 @@ public class DataBaseController extends SQLiteOpenHelper {
     /**
      * UPDATE
      */
-    public void update(String tableName, String set, String where, String like) {
+    public void update(String tableName, String set, String where, String like) throws Exception {
         SQLiteDatabase db = getReadableDatabase();
         if (db != null) {
             db.execSQL("UPDATE " + tableName + " SET " + set + " WHERE " + where + " = " + like);
             Log.d("debugeando sentencia", "UPDATE " + tableName + " SET " + set + " WHERE " + where + " = " + like);
+            db.close();
+        }
+    }
+
+    public void updateProducto(String set, String modelo, String nserie) throws Exception {
+        SQLiteDatabase db = getReadableDatabase();
+        if (db != null) {
+            db.execSQL("UPDATE PRODUCTOS SET " + set + " WHERE MODELO = " + modelo +" AND NSERIE = "+nserie);
             db.close();
         }
     }
@@ -334,6 +343,12 @@ public class DataBaseController extends SQLiteOpenHelper {
         }
     }
 
+    public void deleteProducto (String modelo, String nserie){
+        SQLiteDatabase db = getWritableDatabase();
+        if (db != null) {
+            db.execSQL("DELETE FROM PRODUCTOS WHERE MODELO =  '" + modelo + "' AND NSERIE = '"+ nserie +"' ");
+        }
+    }
 
     /**
      * Function to check if Foreign Key exists in a table

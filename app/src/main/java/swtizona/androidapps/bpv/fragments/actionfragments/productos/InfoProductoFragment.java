@@ -75,7 +75,7 @@ public class InfoProductoFragment extends AppCompatDialogFragment implements Vie
 
     private void delete() {
         DataBaseController db = new DataBaseController(getContext());
-        db.delete("PRODUCTOS", "NSERIE", producto.getNserie());
+        db.deleteProducto(producto.getModelo(), producto.getNserie());
         ProductosActivity.updateUI();
         db.close();
     }
